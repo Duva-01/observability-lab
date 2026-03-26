@@ -64,10 +64,7 @@ validate_helm:
     - if: '$CI_COMMIT_BRANCH == "main"'
   script:
     - mkdir -p /kaniko/.docker
-    - >
-      cat > /kaniko/.docker/config.json <<EOF
-      {"auths":{"$CI_REGISTRY":{"username":"$CI_REGISTRY_USER","password":"$CI_REGISTRY_PASSWORD"}}}
-      EOF
+    - printf '{"auths":{"%s":{"username":"%s","password":"%s"}}}' "$CI_REGISTRY" "$CI_REGISTRY_USER" "$CI_REGISTRY_PASSWORD" > /kaniko/.docker/config.json
     - >
       /kaniko/executor
       --context "${CI_PROJECT_DIR}"
@@ -96,6 +93,18 @@ build_product_service_image:
   variables:
     SERVICE: "product-service"
 
+deploy_minikube:
+  stage: deploy
+  image: alpine/helm:3.17.3
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: manual
+  before_script:
+    - apk add --no-cache curl bash
+    - curl -LO "https://dl.k8s.io/release/v1.32.2/bin/linux/amd64/kubectl"
+    - install -m 0755 kubectl /usr/local/bin/kubectl
+    - kubectl version --client
+    - helm version
   script:
     - helm upgrade --install postgres deploy/helm/postgres --namespace default -f deploy/environments/minikube/postgres-values.yaml
     - >
@@ -126,4 +135,3 @@ build_product_service_image:
     - kubectl rollout status deployment/product-service -n default --timeout=180s
     - kubectl rollout status deployment/order-service -n default --timeout=180s
     - kubectl rollout status deployment/api-gateway -n default --timeout=180s
-
