@@ -14,6 +14,10 @@ spec:
       labels:
         app: {{ .Chart.Name }}
     spec:
+      {{- with .Values.image.pullSecrets }}
+      imagePullSecrets:
+{{ toYaml . | indent 8 }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -36,4 +40,3 @@ spec:
               port: {{ .Values.containerPort }}
             initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds }}
             periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
-

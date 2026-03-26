@@ -1,5 +1,7 @@
 image:
-  pullPolicy: Never
+  pullPolicy: IfNotPresent
+  pullSecrets:
+    - name: gitlab-registry-creds
 
 service:
   type: NodePort
@@ -12,4 +14,3 @@ env:
     value: http://product-service:8080
   - name: ORDER_SERVICE_URL
     value: http://order-service:8080
-

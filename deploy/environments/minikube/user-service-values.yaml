@@ -1,5 +1,7 @@
 image:
-  pullPolicy: Never
+  pullPolicy: IfNotPresent
+  pullSecrets:
+    - name: gitlab-registry-creds
 
 env:
   - name: SPRING_DATASOURCE_URL

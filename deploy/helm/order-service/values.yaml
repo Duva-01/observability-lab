@@ -4,6 +4,7 @@ image:
   repository: mercadona/order-service
   tag: 0.0.1-SNAPSHOT
   pullPolicy: IfNotPresent
+  pullSecrets: []
 
 containerPort: 8083
 
@@ -24,4 +25,3 @@ probes:
     periodSeconds: 15
 
 env: []
-

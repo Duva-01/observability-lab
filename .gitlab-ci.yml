@@ -114,24 +114,32 @@ deploy_minikube:
       -f deploy/environments/minikube/user-service-values.yaml
       --set image.repository="${CI_REGISTRY_IMAGE}/user-service"
       --set image.tag="${CI_COMMIT_SHORT_SHA}"
+      --set image.pullPolicy="IfNotPresent"
+      --set image.pullSecrets[0].name="gitlab-registry-creds"
     - >
       helm upgrade --install product-service deploy/helm/product-service
       --namespace default
       -f deploy/environments/minikube/product-service-values.yaml
       --set image.repository="${CI_REGISTRY_IMAGE}/product-service"
       --set image.tag="${CI_COMMIT_SHORT_SHA}"
+      --set image.pullPolicy="IfNotPresent"
+      --set image.pullSecrets[0].name="gitlab-registry-creds"
     - >
       helm upgrade --install order-service deploy/helm/order-service
       --namespace default
       -f deploy/environments/minikube/order-service-values.yaml
       --set image.repository="${CI_REGISTRY_IMAGE}/order-service"
       --set image.tag="${CI_COMMIT_SHORT_SHA}"
+      --set image.pullPolicy="IfNotPresent"
+      --set image.pullSecrets[0].name="gitlab-registry-creds"
     - >
       helm upgrade --install api-gateway deploy/helm/api-gateway
       --namespace default
       -f deploy/environments/minikube/api-gateway-values.yaml
       --set image.repository="${CI_REGISTRY_IMAGE}/api-gateway"
       --set image.tag="${CI_COMMIT_SHORT_SHA}"
+      --set image.pullPolicy="IfNotPresent"
+      --set image.pullSecrets[0].name="gitlab-registry-creds"
     - kubectl rollout status deployment/user-service -n default --timeout=180s
     - kubectl rollout status deployment/product-service -n default --timeout=180s
     - kubectl rollout status deployment/order-service -n default --timeout=180s
