@@ -3,6 +3,7 @@ stages:
   - test
   - package
   - validate
+  - image
   - deploy
 
 
@@ -54,24 +55,73 @@ validate_helm:
     - helm template order-service deploy/helm/order-service -f deploy/environments/minikube/order-service-values.yaml > /tmp/order-service.yaml
     - helm template api-gateway deploy/helm/api-gateway -f deploy/environments/minikube/api-gateway-values.yaml > /tmp/api-gateway.yaml
 
-deploy_minikube:
-  stage: deploy
-  image: alpine/helm:3.17.3
+.build_image_template:
+  stage: image
+  image:
+    name: gcr.io/kaniko-project/executor:v1.23.2-debug
+    entrypoint: [""]
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
-      when: manual
-  before_script:
-    - apk add --no-cache curl bash
-    - curl -LO "https://dl.k8s.io/release/v1.32.2/bin/linux/amd64/kubectl"
-    - install -m 0755 kubectl /usr/local/bin/kubectl
-    - kubectl version --client
-    - helm version
+  script:
+    - mkdir -p /kaniko/.docker
+    - >
+      cat > /kaniko/.docker/config.json <<EOF
+      {"auths":{"$CI_REGISTRY":{"username":"$CI_REGISTRY_USER","password":"$CI_REGISTRY_PASSWORD"}}}
+      EOF
+    - >
+      /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/${SERVICE}/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}/${SERVICE}:${CI_COMMIT_SHORT_SHA}"
+      --destination "${CI_REGISTRY_IMAGE}/${SERVICE}:main"
+      --skip-tls-verify-registry "${CI_REGISTRY}"
+
+build_api_gateway_image:
+  extends: .build_image_template
+  variables:
+    SERVICE: "api-gateway"
+
+build_user_service_image:
+  extends: .build_image_template
+  variables:
+    SERVICE: "user-service"
+
+build_order_service_image:
+  extends: .build_image_template
+  variables:
+    SERVICE: "order-service"
+
+build_product_service_image:
+  extends: .build_image_template
+  variables:
+    SERVICE: "product-service"
+
   script:
     - helm upgrade --install postgres deploy/helm/postgres --namespace default -f deploy/environments/minikube/postgres-values.yaml
-    - helm upgrade --install user-service deploy/helm/user-service --namespace default -f deploy/environments/minikube/user-service-values.yaml
-    - helm upgrade --install product-service deploy/helm/product-service --namespace default -f deploy/environments/minikube/product-service-values.yaml
-    - helm upgrade --install order-service deploy/helm/order-service --namespace default -f deploy/environments/minikube/order-service-values.yaml
-    - helm upgrade --install api-gateway deploy/helm/api-gateway --namespace default -f deploy/environments/minikube/api-gateway-values.yaml
+    - >
+      helm upgrade --install user-service deploy/helm/user-service
+      --namespace default
+      -f deploy/environments/minikube/user-service-values.yaml
+      --set image.repository="${CI_REGISTRY_IMAGE}/user-service"
+      --set image.tag="${CI_COMMIT_SHORT_SHA}"
+    - >
+      helm upgrade --install product-service deploy/helm/product-service
+      --namespace default
+      -f deploy/environments/minikube/product-service-values.yaml
+      --set image.repository="${CI_REGISTRY_IMAGE}/product-service"
+      --set image.tag="${CI_COMMIT_SHORT_SHA}"
+    - >
+      helm upgrade --install order-service deploy/helm/order-service
+      --namespace default
+      -f deploy/environments/minikube/order-service-values.yaml
+      --set image.repository="${CI_REGISTRY_IMAGE}/order-service"
+      --set image.tag="${CI_COMMIT_SHORT_SHA}"
+    - >
+      helm upgrade --install api-gateway deploy/helm/api-gateway
+      --namespace default
+      -f deploy/environments/minikube/api-gateway-values.yaml
+      --set image.repository="${CI_REGISTRY_IMAGE}/api-gateway"
+      --set image.tag="${CI_COMMIT_SHORT_SHA}"
     - kubectl rollout status deployment/user-service -n default --timeout=180s
     - kubectl rollout status deployment/product-service -n default --timeout=180s
     - kubectl rollout status deployment/order-service -n default --timeout=180s
