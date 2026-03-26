@@ -1,0 +1,27 @@
+replicaCount: 1
+
+image:
+  repository: mercadona/order-service
+  tag: 0.0.1-SNAPSHOT
+  pullPolicy: IfNotPresent
+
+containerPort: 8083
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8083
+  nodePort: null
+
+probes:
+  readiness:
+    path: /actuator/health
+    initialDelaySeconds: 20
+    periodSeconds: 10
+  liveness:
+    path: /actuator/health
+    initialDelaySeconds: 35
+    periodSeconds: 15
+
+env: []
+

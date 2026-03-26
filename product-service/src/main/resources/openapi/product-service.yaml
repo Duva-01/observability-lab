@@ -1,0 +1,49 @@
+openapi: 3.0.3
+info:
+  title: Product Service API
+  version: 1.0.0
+paths: {}
+components:
+  schemas:
+    ProductDto:
+      type: object
+      required: [id, name, category, price]
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        category:
+          type: string
+        price:
+          type: number
+          format: double
+    CreateProductRequest:
+      type: object
+      required: [name, category, price]
+      properties:
+        name:
+          type: string
+          minLength: 2
+        category:
+          type: string
+          minLength: 2
+        price:
+          type: number
+          format: double
+          minimum: 0
+    UpdateProductRequest:
+      type: object
+      required: [name, category, price]
+      properties:
+        name:
+          type: string
+          minLength: 2
+        category:
+          type: string
+          minLength: 2
+        price:
+          type: number
+          format: double
+          minimum: 0

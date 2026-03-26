@@ -1,0 +1,28 @@
+I0325 13:46:54.359261   26568 log.go:245] (0xc000206f20) (0xc0009c83c0) Create stream
+I0325 13:46:54.369446   26568 log.go:245] (0xc000206f20) (0xc0009c83c0) Stream added, broadcasting: 1
+I0325 13:46:54.370793   26568 log.go:245] (0xc000206f20) Reply frame received for 1
+I0325 13:46:54.370793   26568 log.go:245] (0xc0009c83c0) (1) Writing data frame
+I0325 13:46:54.370793   26568 log.go:245] (0xc000206f20) (0xc0008a45a0) Create stream
+I0325 13:46:54.370793   26568 log.go:245] (0xc000206f20) (0xc0008a45a0) Stream added, broadcasting: 3
+I0325 13:46:54.371812   26568 log.go:245] (0xc000206f20) Reply frame received for 3
+I0325 13:46:54.371812   26568 log.go:245] (0xc0008a45a0) (3) Writing data frame
+I0325 13:46:54.375915   26568 log.go:245] (0xc000206f20) Data frame received for 3
+I0325 13:46:54.375915   26568 log.go:245] (0xc0008a45a0) (3) Data frame handling
+I0325 13:46:54.376430   26568 log.go:245] (0xc0008a45a0) (3) Data frame sent
+I0325 13:46:54.376430   26568 log.go:245] (0xc000206f20) Data frame received for 3
+I0325 13:46:54.376430   26568 log.go:245] (0xc0008a45a0) (3) Data frame handling
+I0325 13:46:54.376430   26568 log.go:245] (0xc0008a45a0) (3) Data frame sent
+I0325 13:46:54.384671   26568 log.go:245] (0xc0008a45a0) (3) Writing data frame
+I0325 13:46:54.389959   26568 log.go:245] (0xc000206f20) Data frame received for 3
+I0325 13:46:54.389959   26568 log.go:245] (0xc0008a45a0) (3) Data frame handling
+I0325 13:46:54.389959   26568 log.go:245] (0xc0008a45a0) (3) Data frame sent
+E0325 13:46:54.416839   26568 portforward.go:398] error copying from local connection to remote stream: writeto tcp4 127.0.0.1:8083->127.0.0.1:51274: read tcp4 127.0.0.1:8083->127.0.0.1:51274: wsarecv: Se ha forzado la interrupción de una conexión existente por el host remoto.
+I0325 13:46:54.417343   26568 log.go:245] (0xc0008a45a0) (3) Writing data frame
+I0325 13:46:54.419045   26568 log.go:245] (0xc000206f20) Data frame received for 3
+I0325 13:46:54.419045   26568 log.go:245] (0xc0008a45a0) (3) Data frame handling
+I0325 13:46:54.419045   26568 log.go:245] (0xc000206f20) (0xc0008a45a0) Stream removed, broadcasting: 3
+I0325 13:46:54.419045   26568 log.go:245] (0xc000206f20) Data frame received for 1
+I0325 13:46:54.419045   26568 log.go:245] (0xc0009c83c0) (1) Data frame handling
+I0325 13:46:54.419045   26568 log.go:245] (0xc000206f20) (0xc0009c83c0) Stream removed, broadcasting: 1
+I0325 18:32:18.130484   26568 log.go:245] (0xc000206f20) EOF received
+error: lost connection to pod

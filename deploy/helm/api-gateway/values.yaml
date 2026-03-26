@@ -1,0 +1,27 @@
+replicaCount: 1
+
+image:
+  repository: mercadona/api-gateway
+  tag: 0.0.1-SNAPSHOT
+  pullPolicy: IfNotPresent
+
+containerPort: 8080
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+  nodePort: null
+
+probes:
+  readiness:
+    path: /actuator/health
+    initialDelaySeconds: 20
+    periodSeconds: 10
+  liveness:
+    path: /actuator/health
+    initialDelaySeconds: 35
+    periodSeconds: 15
+
+env: []
+

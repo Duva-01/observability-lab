@@ -1,0 +1,21 @@
+openapi: 3.0.3
+info:
+  title: API Gateway
+  version: 1.0.0
+paths: {}
+components:
+  schemas:
+    OverviewResponse:
+      type: object
+      required: [service, routes, downstreamServices]
+      properties:
+        service:
+          type: string
+        routes:
+          type: array
+          items:
+            type: string
+        downstreamServices:
+          type: object
+          additionalProperties:
+            type: string

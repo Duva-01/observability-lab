@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: User Service API
+  version: 1.0.0
+paths: {}
+components:
+  schemas:
+    UserDto:
+      type: object
+      required: [id, name, email, segment]
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        email:
+          type: string
+        segment:
+          type: string
+    CreateUserRequest:
+      type: object
+      required: [name, email, segment]
+      properties:
+        name:
+          type: string
+          minLength: 2
+        email:
+          type: string
+          format: email
+        segment:
+          type: string
+          minLength: 2
+    UpdateUserRequest:
+      type: object
+      required: [name, email, segment]
+      properties:
+        name:
+          type: string
+          minLength: 2
+        email:
+          type: string
+          format: email
+        segment:
+          type: string
+          minLength: 2

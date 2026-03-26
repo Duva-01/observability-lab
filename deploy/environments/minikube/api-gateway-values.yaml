@@ -1,0 +1,15 @@
+image:
+  pullPolicy: Never
+
+service:
+  type: NodePort
+  nodePort: 30080
+
+env:
+  - name: USER_SERVICE_URL
+    value: http://user-service:8080
+  - name: PRODUCT_SERVICE_URL
+    value: http://product-service:8080
+  - name: ORDER_SERVICE_URL
+    value: http://order-service:8080
+

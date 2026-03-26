@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  title: Order Service API
+  version: 1.0.0
+paths: {}
+components:
+  schemas:
+    UserSummaryDto:
+      type: object
+      required: [id, name, email, segment]
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        email:
+          type: string
+        segment:
+          type: string
+    ProductSummaryDto:
+      type: object
+      required: [id, name, category, price]
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        category:
+          type: string
+        price:
+          type: number
+          format: double
+    OrderItemDto:
+      type: object
+      required: [product, quantity]
+      properties:
+        product:
+          $ref: '#/components/schemas/ProductSummaryDto'
+        quantity:
+          type: integer
+          format: int32
+    OrderDto:
+      type: object
+      required: [id, status, user, items, total]
+      properties:
+        id:
+          type: integer
+          format: int64
+        status:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserSummaryDto'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemDto'
+        total:
+          type: number
+          format: double
+    CreateOrderItemRequest:
+      type: object
+      required: [productId, quantity]
+      properties:
+        productId:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int32
+          minimum: 1
+    UpdateOrderItemRequest:
+      type: object
+      required: [productId, quantity]
+      properties:
+        productId:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int32
+          minimum: 1
+    CreateOrderRequest:
+      type: object
+      required: [userId, items]
+      properties:
+        userId:
+          type: integer
+          format: int64
+        status:
+          type: string
+        items:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/CreateOrderItemRequest'
+    UpdateOrderRequest:
+      type: object
+      required: [userId, status, items]
+      properties:
+        userId:
+          type: integer
+          format: int64
+        status:
+          type: string
+        items:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/UpdateOrderItemRequest'

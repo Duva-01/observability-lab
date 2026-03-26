@@ -1,0 +1,61 @@
+stages:
+  - build
+  - test
+  - package
+  - validate
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  MAVEN_CLI_OPTS: "-B -ntp"
+
+cache:
+  key: maven-cache
+  paths:
+    - .m2/repository
+
+build:
+  stage: build
+  image: maven:3.9.9-eclipse-temurin-17
+  script:
+    - mvn $MAVEN_CLI_OPTS -DskipTests clean compile
+
+test:
+  stage: test
+  image: maven:3.9.9-eclipse-temurin-17
+  services:
+    - name: docker:27.5.1-dind
+      alias: docker
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+  script:
+    - mvn $MAVEN_CLI_OPTS test
+
+package:
+  stage: package
+  image: maven:3.9.9-eclipse-temurin-17
+  script:
+    - mvn $MAVEN_CLI_OPTS -DskipTests package
+  artifacts:
+    when: always
+    expire_in: 1 week
+    paths:
+      - api-gateway/target/*.jar
+      - user-service/target/*.jar
+      - product-service/target/*.jar
+      - order-service/target/*.jar
+
+validate_helm:
+  stage: validate
+  image: alpine/helm:3.17.3
+  script:
+    - helm lint deploy/helm/postgres
+    - helm lint deploy/helm/user-service
+    - helm lint deploy/helm/product-service
+    - helm lint deploy/helm/order-service
+    - helm lint deploy/helm/api-gateway
+    - helm template postgres deploy/helm/postgres -f deploy/environments/minikube/postgres-values.yaml > /tmp/postgres.yaml
+    - helm template user-service deploy/helm/user-service -f deploy/environments/minikube/user-service-values.yaml > /tmp/user-service.yaml
+    - helm template product-service deploy/helm/product-service -f deploy/environments/minikube/product-service-values.yaml > /tmp/product-service.yaml
+    - helm template order-service deploy/helm/order-service -f deploy/environments/minikube/order-service-values.yaml > /tmp/order-service.yaml
+    - helm template api-gateway deploy/helm/api-gateway -f deploy/environments/minikube/api-gateway-values.yaml > /tmp/api-gateway.yaml

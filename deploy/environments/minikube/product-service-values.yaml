@@ -1,0 +1,16 @@
+image:
+  pullPolicy: Never
+
+env:
+  - name: SPRING_DATASOURCE_URL
+    value: jdbc:postgresql://postgres:5432/ecommerce_platform
+  - name: SPRING_DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: postgres-credentials
+        key: POSTGRES_USER
+  - name: SPRING_DATASOURCE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: postgres-credentials
+        key: POSTGRES_PASSWORD

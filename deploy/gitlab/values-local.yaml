@@ -1,0 +1,13 @@
+global:
+  edition: ce
+  hosts:
+    domain: 192.168.49.2.nip.io
+    externalIP: 192.168.49.2
+  grafana:
+    enabled: false
+
+prometheus:
+  install: false
+
+gitlab-runner:
+  install: false
