@@ -1,0 +1,18 @@
+gitlabUrl: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181/
+
+runnerToken: "glrt-A3g4PDFpaS5Frt3rRVIkiG86MQpwOjEKdDozCnU6MQ8.01.171dih6jv"
+
+rbac:
+  create: true
+
+concurrent: 2
+checkInterval: 30
+
+runners:
+  config: |
+    [[runners]]
+      [runners.kubernetes]
+        namespace = "gitlab-runner"
+        image = "alpine:3.20"
+        privileged = true
+        poll_timeout = 600

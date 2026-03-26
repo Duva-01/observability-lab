@@ -1,5 +1,216 @@
 # Roadmap del proyecto `ecommerce-platform`
 
+## Addendum GitLab local
+
+En una fase posterior del laboratorio se incorporÃ³ tambiÃ©n GitLab self-managed dentro del mismo clÃºster Minikube, con el objetivo de cubrir la parte de CI/CD desde una plataforma propia y no depender de un servicio externo.
+
+### Objetivo de esta ampliaciÃ³n
+
+- desplegar un GitLab local dentro del laboratorio
+- almacenar el repositorio del proyecto en ese GitLab
+- preparar el entorno para ejecutar pipelines sobre el propio stack
+- ampliar el proyecto desde observabilidad hacia plataforma DevOps
+
+### ConfiguraciÃ³n incorporada al repo
+
+Se aÃ±adieron estos ficheros:
+
+- [values-minikube.yaml](C:/Users/Usuario/Desktop/Personal/Proyectos/Devops/Mercadona%20Project/deploy/gitlab/values-minikube.yaml)
+- [values-local.yaml](C:/Users/Usuario/Desktop/Personal/Proyectos/Devops/Mercadona%20Project/deploy/gitlab/values-local.yaml)
+
+La configuraciÃ³n local se orientÃ³ a:
+
+- `edition: ce`
+- dominio basado en `nip.io`
+- desactivar el Grafana interno del chart
+- desactivar el Prometheus interno del chart
+- aplazar la instalaciÃ³n del runner del chart para una fase posterior
+
+### InstalaciÃ³n realizada
+
+```powershell
+kubectl create namespace gitlab
+helm upgrade --install gitlab gitlab/gitlab `
+  --namespace gitlab `
+  --create-namespace `
+  --timeout 1200s `
+  -f .\deploy\gitlab\values-minikube.yaml `
+  -f .\deploy\gitlab\values-local.yaml
+```
+
+La instalaciÃ³n devolviÃ³ el release en estado `deployed`, aunque el servicio no estuvo listo de forma inmediata.
+
+### Problemas reales encontrados
+
+- GitLab no estuvo accesible inmediatamente tras el `helm install`
+- varios pods crÃ­ticos tardaron bastante en quedar `Running`
+- la URL basada en la IP directa de Minikube no era accesible desde Windows en este setup con driver Docker
+- fue necesario usar `port-forward` del `ingress-nginx-controller`
+- fue necesario aÃ±adir una entrada al fichero `hosts` de Windows
+- el acceso final se realizÃ³ con HTTPS y certificado no confiable de laboratorio
+- Git no pudo empujar al primer intento por el certificado self-signed y por el flujo de credenciales de Git Credential Manager
+
+### SoluciÃ³n de acceso adoptada
+
+Se terminÃ³ accediendo mediante:
+
+- `port-forward` del ingress controller
+- entrada local en `hosts`
+- URL final:
+
+```text
+https://gitlab.192.168.49.2.nip.io:8443
+```
+
+con esta entrada:
+
+```text
+127.0.0.1 gitlab.192.168.49.2.nip.io
+```
+
+### AutomatizaciÃ³n auxiliar
+
+Se ampliÃ³ el script de port-forwards para dar soporte tambiÃ©n a GitLab:
+
+- [port-forward-services.ps1](C:/Users/Usuario/Desktop/Personal/Proyectos/Devops/Mercadona%20Project/scripts/port-forward-services.ps1)
+
+Se aÃ±adieron forwards de ingress para:
+
+- `http://gitlab.192.168.49.2.nip.io:8088`
+- `https://gitlab.192.168.49.2.nip.io:8443`
+
+### Resultado conseguido
+
+Al final de esta fase se consiguiÃ³ acceder a GitLab CE desde navegador, autenticar como `root`, crear el proyecto `Observability-Project`, inicializar Git en el proyecto local y subir el primer commit del repositorio al GitLab local.
+
+### Siguiente paso recomendado desde este punto
+
+El siguiente paso con mÃ¡s valor ya no es aÃ±adir mÃ¡s componentes, sino conectar un runner al GitLab local y hacer funcionar la pipeline bÃ¡sica del proyecto con `build`, `test`, `package` y validaciÃ³n Helm.
+
+### Fase siguiente completada: GitLab Runner en Kubernetes
+
+Tras dejar GitLab accesible, se completó también la incorporación del runner dentro del propio clúster.
+
+#### Objetivo
+
+- evitar depender de un runner instalado en Windows
+- mantener GitLab y ejecución de pipelines dentro del mismo laboratorio
+- preparar una CI real sobre Kubernetes
+
+#### Decisión técnica
+
+Se eligió:
+
+- mantener GitLab como servidor CI/CD
+- desplegar `gitlab-runner` dentro de Kubernetes mediante Helm
+- conectar el runner a GitLab usando la URL interna del servicio web de GitLab
+
+La URL elegida para el runner fue:
+
+```text
+http://gitlab-webservice-default.gitlab.svc.cluster.local:8181/
+```
+
+Esto evitó depender de:
+
+- `port-forward`
+- `hosts` de Windows
+- certificados self-signed para el tráfico interno runner -> GitLab
+
+#### Runner creado en GitLab
+
+Se creó en la UI un runner de proyecto:
+
+- descripción: `k8s-minikube-runner`
+- asociado al proyecto `Observability-Project`
+- configurado para recoger jobs sin tags
+
+Durante esta fase se detectó una limitación práctica:
+
+- la UI de GitLab redirigía a URLs sin `:8443`
+- esto impedía navegar correctamente por algunas pantallas del runner desde navegador
+- el token de autenticación del runner había que copiarlo en el momento de creación porque luego no era recuperable desde la UI
+
+#### Ficheros incorporados
+
+Se añadió:
+
+- [values.yaml](C:/Users/Usuario/Desktop/Personal/Proyectos/Devops/Mercadona%20Project/deploy/gitlab-runner/values.yaml)
+
+#### Configuración del runner
+
+La configuración del chart se orientó a:
+
+- `gitlabUrl` apuntando al servicio interno de GitLab
+- `runnerToken` con el token `glrt-...` del runner creado en la UI
+- `rbac.create: true`
+- `concurrent: 2`
+- `checkInterval: 30`
+- `privileged = true` en el executor Kubernetes
+
+El modo privilegiado se dejó activado para facilitar:
+
+- `docker:dind`
+- tests con Testcontainers
+- ejecución de jobs más cercanos a la `.gitlab-ci.yml` actual
+
+#### Instalación realizada
+
+```powershell
+kubectl create namespace gitlab-runner
+helm repo add gitlab https://charts.gitlab.io
+helm repo update
+helm upgrade --install gitlab-runner gitlab/gitlab-runner `
+  --namespace gitlab-runner `
+  --create-namespace `
+  -f .\deploy\gitlab-runner\values.yaml
+```
+
+#### Comprobaciones realizadas
+
+Se verificó:
+
+- registro correcto del runner contra GitLab
+- persistencia de la configuración del runner
+- arranque del deployment del runner
+- pod del runner en estado `1/1 Running`
+- `readinessProbe` superada tras el arranque inicial
+
+Los logs mostraron mensajes clave como:
+
+- `Runner registered successfully`
+- `Configuration ... was saved`
+- `Starting multi-runner`
+- `Initializing executor providers`
+
+#### Interpretación de los warnings
+
+Durante el arranque aparecieron avisos como:
+
+- `Running in user-mode`
+- `Long polling issues detected`
+- `listen_address not defined`
+
+Estos avisos no bloquearon la operación del runner y se consideraron aceptables para el laboratorio actual.
+
+#### Estado alcanzado al final de esta fase
+
+Al final de esta fase se consiguió:
+
+- tener GitLab Runner desplegado en Kubernetes
+- runner registrado correctamente contra el GitLab local
+- pod listo para recoger jobs
+- infraestructura preparada para lanzar la primera pipeline CI
+
+#### Siguiente paso natural
+
+El siguiente paso ya no es de instalación, sino de validación funcional:
+
+1. lanzar la primera pipeline del proyecto
+2. observar qué jobs pasan y cuáles fallan
+3. ajustar la `.gitlab-ci.yml` según el comportamiento real del runner
+4. decidir después si se añade también un job de despliegue hacia Minikube
+
 ## 1. Objetivo del proyecto
 
 Este proyecto nace como laboratorio práctico para estudiar:
