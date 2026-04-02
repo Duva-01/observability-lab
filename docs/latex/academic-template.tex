@@ -1,4 +1,4 @@
-\documentclass[
+﻿\documentclass[
 $for(classoption)$
 $classoption$$sep$,
 $endfor$
@@ -13,7 +13,7 @@ $endif$
 \usepackage{geometry}
 \usepackage{setspace}
 \usepackage{hyperref}
-\usepackage{xcolor}
+\usepackage[pdftex]{xcolor}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc}
 \usepackage{graphicx}
@@ -57,9 +57,9 @@ $endfor$
 
 \begin{titlepage}
   \thispagestyle{empty}
-  \vspace*{1.8cm}
+  \vspace*{2.2cm}
 
-  {\large\scshape Memoria técnica de proyecto\par}
+  {\large\scshape Memoria técnica\par}
   \vspace{1.6cm}
 
   {\Huge\bfseries $title$\par}
@@ -67,21 +67,21 @@ $endfor$
 
 $if(subtitle)$
   {\Large $subtitle$\par}
-  \vspace{2.0cm}
+  \vspace{1.4cm}
 $endif$
 
-  \rule{\textwidth}{0.6pt}\par
-  \vspace{0.5cm}
-  {\large\textbf{Autoría:} $for(author)$$author$$sep$; $endfor$\par}
+  {\large Diseño, implementación e integración de métricas, logs, trazas, despliegue cloud native y automatización de plataforma\par}
+  \vspace{2.0cm}
+
+  {\large\textbf{Autor:} $for(author)$$author$$sep$; $endfor$\par}
   \vspace{0.25cm}
-  {\large\textbf{Entorno:} Windows, Docker, Minikube, Kubernetes, Helm y GitLab self-managed\par}
+$if(date)$
+  {\large\textbf{Fecha:} $date$\par}
   \vspace{0.25cm}
-  {\large\textbf{Formato:} Memoria técnica extendida con enfoque didáctico\par}
-  \vspace{0.5cm}
-  \rule{\textwidth}{0.6pt}\par
+$endif$
+  {\large\textbf{Stack:} Spring Boot, Kubernetes, Helm, Prometheus, Grafana, OpenTelemetry, Jaeger, Elasticsearch, Kibana, GitLab CI/CD\par}
 
   \vfill
-  {\large Documento preparado para revisión, iteración y entrega final.\par}
 \end{titlepage}
 
 \pagenumbering{arabic}
