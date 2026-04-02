@@ -1,4 +1,4 @@
-image:
+﻿image:
   pullPolicy: IfNotPresent
   pullSecrets:
     - name: gitlab-registry-creds
@@ -20,3 +20,5 @@ env:
     value: http://user-service:8080
   - name: PRODUCT_SERVICE_URL
     value: http://product-service:8080
+
+

@@ -1,4 +1,4 @@
-replicaCount: 1
+﻿replicaCount: 1
 
 image:
   repository: mercadona/product-service
@@ -15,13 +15,20 @@ service:
   nodePort: null
 
 probes:
+  startup:
+    enabled: true
+    path: /actuator/health
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    failureThreshold: 24
   readiness:
     path: /actuator/health
-    initialDelaySeconds: 15
+    initialDelaySeconds: 20
     periodSeconds: 10
   liveness:
     path: /actuator/health
-    initialDelaySeconds: 30
+    initialDelaySeconds: 90
     periodSeconds: 15
 
 env: []
+

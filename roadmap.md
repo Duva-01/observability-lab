@@ -1,32 +1,32 @@
-# Roadmap del proyecto `ecommerce-platform`
+﻿# Roadmap del proyecto `ecommerce-platform`
 
 ## Addendum GitLab local
 
-En una fase posterior del laboratorio se incorporÃ³ tambiÃ©n GitLab self-managed dentro del mismo clÃºster Minikube, con el objetivo de cubrir la parte de CI/CD desde una plataforma propia y no depender de un servicio externo.
+En una fase posterior del laboratorio se incorporó también GitLab self-managed dentro del mismo clúster Minikube, con el objetivo de cubrir la parte de CI/CD desde una plataforma propia y no depender de un servicio externo.
 
-### Objetivo de esta ampliaciÃ³n
+### Objetivo de esta ampliación
 
 - desplegar un GitLab local dentro del laboratorio
 - almacenar el repositorio del proyecto en ese GitLab
 - preparar el entorno para ejecutar pipelines sobre el propio stack
 - ampliar el proyecto desde observabilidad hacia plataforma DevOps
 
-### ConfiguraciÃ³n incorporada al repo
+### Configuración incorporada al repo
 
-Se aÃ±adieron estos ficheros:
+Se añadieron estos ficheros:
 
 - [values-minikube.yaml](C:/Users/Usuario/Desktop/Personal/Proyectos/Devops/Mercadona%20Project/deploy/gitlab/values-minikube.yaml)
 - [values-local.yaml](C:/Users/Usuario/Desktop/Personal/Proyectos/Devops/Mercadona%20Project/deploy/gitlab/values-local.yaml)
 
-La configuraciÃ³n local se orientÃ³ a:
+La configuración local se orientó a:
 
 - `edition: ce`
 - dominio basado en `nip.io`
 - desactivar el Grafana interno del chart
 - desactivar el Prometheus interno del chart
-- aplazar la instalaciÃ³n del runner del chart para una fase posterior
+- aplazar la instalación del runner del chart para una fase posterior
 
-### InstalaciÃ³n realizada
+### Instalación realizada
 
 ```powershell
 kubectl create namespace gitlab
@@ -38,21 +38,21 @@ helm upgrade --install gitlab gitlab/gitlab `
   -f .\deploy\gitlab\values-local.yaml
 ```
 
-La instalaciÃ³n devolviÃ³ el release en estado `deployed`, aunque el servicio no estuvo listo de forma inmediata.
+La instalación devolvió el release en estado `deployed`, aunque el servicio no estuvo listo de forma inmediata.
 
 ### Problemas reales encontrados
 
 - GitLab no estuvo accesible inmediatamente tras el `helm install`
-- varios pods crÃ­ticos tardaron bastante en quedar `Running`
+- varios pods críticos tardaron bastante en quedar `Running`
 - la URL basada en la IP directa de Minikube no era accesible desde Windows en este setup con driver Docker
 - fue necesario usar `port-forward` del `ingress-nginx-controller`
-- fue necesario aÃ±adir una entrada al fichero `hosts` de Windows
-- el acceso final se realizÃ³ con HTTPS y certificado no confiable de laboratorio
+- fue necesario añadir una entrada al fichero `hosts` de Windows
+- el acceso final se realizó con HTTPS y certificado no confiable de laboratorio
 - Git no pudo empujar al primer intento por el certificado self-signed y por el flujo de credenciales de Git Credential Manager
 
-### SoluciÃ³n de acceso adoptada
+### Solución de acceso adoptada
 
-Se terminÃ³ accediendo mediante:
+Se terminó accediendo mediante:
 
 - `port-forward` del ingress controller
 - entrada local en `hosts`
@@ -68,24 +68,24 @@ con esta entrada:
 127.0.0.1 gitlab.192.168.49.2.nip.io
 ```
 
-### AutomatizaciÃ³n auxiliar
+### Automatización auxiliar
 
-Se ampliÃ³ el script de port-forwards para dar soporte tambiÃ©n a GitLab:
+Se amplió el script de port-forwards para dar soporte también a GitLab:
 
 - [port-forward-services.ps1](C:/Users/Usuario/Desktop/Personal/Proyectos/Devops/Mercadona%20Project/scripts/port-forward-services.ps1)
 
-Se aÃ±adieron forwards de ingress para:
+Se añadieron forwards de ingress para:
 
 - `http://gitlab.192.168.49.2.nip.io:8088`
 - `https://gitlab.192.168.49.2.nip.io:8443`
 
 ### Resultado conseguido
 
-Al final de esta fase se consiguiÃ³ acceder a GitLab CE desde navegador, autenticar como `root`, crear el proyecto `Observability-Project`, inicializar Git en el proyecto local y subir el primer commit del repositorio al GitLab local.
+Al final de esta fase se consiguió acceder a GitLab CE desde navegador, autenticar como `root`, crear el proyecto `Observability-Project`, inicializar Git en el proyecto local y subir el primer commit del repositorio al GitLab local.
 
 ### Siguiente paso recomendado desde este punto
 
-El siguiente paso con mÃ¡s valor ya no es aÃ±adir mÃ¡s componentes, sino conectar un runner al GitLab local y hacer funcionar la pipeline bÃ¡sica del proyecto con `build`, `test`, `package` y validaciÃ³n Helm.
+El siguiente paso con más valor ya no es añadir más componentes, sino conectar un runner al GitLab local y hacer funcionar la pipeline básica del proyecto con `build`, `test`, `package` y validación Helm.
 
 ### Fase siguiente completada: GitLab Runner en Kubernetes
 
@@ -210,6 +210,123 @@ El siguiente paso ya no es de instalación, sino de validación funcional:
 2. observar qué jobs pasan y cuáles fallan
 3. ajustar la `.gitlab-ci.yml` según el comportamiento real del runner
 4. decidir después si se añade también un job de despliegue hacia Minikube
+
+### Fase siguiente completada: CI y CD real con GitLab Runner + Registry
+
+Tras validar el runner, el laboratorio se extendio hacia una cadena CI/CD real dentro del propio stack GitLab:
+
+- pipeline CI funcional en GitLab
+- job manual de despliegue a Minikube
+- construccion de imagenes por microservicio
+- push de imagenes al GitLab Container Registry
+- despliegue usando tags por commit
+
+#### Objetivo
+
+- pasar de una CI basica a un flujo mas cercano a plataforma real
+- dejar de depender de imagenes locales precargadas en Minikube
+- versionar el despliegue por SHA de commit
+- cerrar el ciclo `code -> build -> test -> image -> deploy`
+
+#### Decisiones tecnicas adoptadas
+
+- mantener GitLab como SCM, CI y registry
+- usar GitLab Runner en Kubernetes
+- usar Kaniko para construir imagenes dentro de los jobs
+- usar el GitLab Container Registry del propio chart
+- mantener el deploy como job manual para laboratorio
+
+#### Problemas reales encontrados y corregidos
+
+- el clone inicial del runner fallaba contra la URL publica de GitLab
+- se corrigio usando `clone_url` hacia el servicio interno de GitLab
+- el upload de artifacts Maven fallo con `413 Request Entity Too Large`
+- se elimino la subida de jars como artifacts para priorizar una CI estable
+- el job de deploy no tenia permisos suficientes en Kubernetes
+- se corrigio fijando `service_account = "gitlab-runner"` y aplicando RBAC para laboratorio
+- los jobs de Kaniko fallaban por generacion incorrecta del `config.json`
+- se corrigio sustituyendo el heredoc por `printf`
+- el registry autenticaba contra `gitlab.192.168.49.2.nip.io`, que dentro del cluster resolvia a `127.0.0.1`
+- se corrigio forzando resolucion en `/etc/hosts` dentro de los jobs de imagen
+- el primer despliegue con imagenes del registry fallo por `ErrImageNeverPull`
+- se corrigio preparando `imagePullSecrets`, cambiando `pullPolicy` y forzando esos valores tambien desde la pipeline
+
+#### Configuracion incorporada
+
+Se ajustaron:
+
+- [values.yaml](C:/Users/Usuario/Desktop/Personal/Proyectos/Devops/Mercadona%20Project/deploy/gitlab-runner/values.yaml)
+- [.gitlab-ci.yml](C:/Users/Usuario/Desktop/Personal/Proyectos/Devops/Mercadona%20Project/.gitlab-ci.yml)
+- [rbac-deployer.yaml](C:/Users/Usuario/Desktop/Personal/Proyectos/Devops/Mercadona%20Project/deploy/gitlab-runner/rbac-deployer.yaml)
+- los 4 charts Helm de microservicios para soportar `imagePullSecrets`
+- los 4 values de Minikube para soportar pull desde registry privado
+
+#### Flujo alcanzado
+
+La pipeline ya contempla:
+
+- `build`
+- `test`
+- `package`
+- `validate_helm`
+- construccion y push de 4 imagenes
+- `deploy_minikube` manual
+
+El despliegue queda ligado al `CI_COMMIT_SHORT_SHA`, de modo que Kubernetes puede ejecutar una imagen concreta del commit desplegado.
+
+#### Resultado conseguido
+
+Al final de esta fase el laboratorio ya permite demostrar:
+
+- GitLab local operativo en Minikube
+- repositorio alojado en GitLab local
+- runner ejecutando jobs dentro de Kubernetes
+- pipeline CI funcional de extremo a extremo
+- despliegue manual desde pipeline
+- GitLab Container Registry integrado en el flujo
+- CD real funcionando con construccion, push y deploy por `CI_COMMIT_SHORT_SHA`
+- pipeline completa en verde incluyendo stage de `deploy`
+
+### Fase siguiente completada: estabilizacion de GitLab web, Gitaly y registry auth
+
+Durante la fase de CD real aparecieron incidencias internas del propio GitLab self-managed que afectaban tanto a la UI como al consumo del Container Registry desde Kubernetes.
+
+#### Problemas reales encontrados
+
+- algunas pantallas de GitLab devolvian `500`
+- los jobs de despliegue quedaban bloqueados al intentar hacer pull de imagenes privadas
+- el registry necesitaba autenticar contra GitLab web mediante `/jwt/auth`
+- el backend Rails devolvia errores `GRPC::Unavailable`
+- el pod `gitlab-gitaly-0` quedo en mal estado por un `CrashLoopBackOff` del init container `configure`
+- el nodo de Minikube necesitaba confiar en la CA del registry para evitar errores TLS en pulls de imagenes
+
+#### Diagnostico realizado
+
+Se verifico que:
+
+- la UI de GitLab no fallaba por navegador ni por `port-forward`
+- el problema real estaba en la dependencia interna `GitLab web -> Gitaly`
+- el init container `configure` de Gitaly no podia copiar `.gitlab_shell_secret` a `/init-secrets`
+- el error exacto era `Permission denied`
+- el Docker daemon del nodo Minikube tambien necesitaba confiar en la CA del registry local
+
+#### Soluciones aplicadas
+
+- instalacion de la CA del registry en el nodo Minikube
+- ajuste de resolucion local para `gitlab.192.168.49.2.nip.io` y `registry.192.168.49.2.nip.io`
+- endurecimiento suave de `gitlab.webservice` para laboratorio en [values-local.yaml](C:/Users/Usuario/Desktop/Personal/Proyectos/Devops/Mercadona%20Project/deploy/gitlab/values-local.yaml)
+- override especifico para `gitlab.gitaly.init.containerSecurityContext` ejecutando el init container de Gitaly como `root`
+- reaplicacion del release Helm de GitLab
+
+#### Resultado conseguido
+
+Al final de esta fase se recupero un estado estable en el stack GitLab:
+
+- `gitlab-gitaly-0` paso a `1/1 Running`
+- `gitlab-webservice-default` recupero endpoints sanos
+- la UI de GitLab volvio a responder correctamente por HTTPS
+- los despliegues pudieron seguir autenticando contra el registry
+- el laboratorio quedo mucho mas robusto para seguir documentando y demostrando CI/CD real
 
 ## 1. Objetivo del proyecto
 
@@ -847,7 +964,7 @@ Validación realizada:
 
 - se escaló `user-service` a `0` réplicas
 - Prometheus mostró el target con `up=0`
-- Grafana pasó la alerta a estado `Firing`
+- Grafana pasí la alerta a estado `Firing`
 
 Aprendizaje:
 
@@ -882,7 +999,7 @@ Validación realizada:
 - se provocó un fallo real apagando temporalmente un microservicio dependiente
 - se generaron logs `ERROR`
 - Discover mostró los documentos esperados
-- la regla pasó a estado `Active`
+- la regla pasí a estado `Active`
 - el historial de la regla mostró ejecuciones con `Active alerts = 1`
 
 Valor conseguido:
@@ -1002,6 +1119,14 @@ Actualmente el proyecto ya permite demostrar:
 - correlación práctica entre logs y trazas mediante `trace_id`
 - una alerta de métricas funcional en Grafana
 - una alerta de logs funcional en Kibana
+- GitLab local desplegado en Minikube
+- repositorio alojado en GitLab self-managed
+- GitLab Runner ejecutando jobs en Kubernetes
+- pipeline CI funcional con `build`, `test`, `package` y `validate_helm`
+- job manual de deploy hacia Minikube
+- GitLab Container Registry integrado en el flujo
+- base de CD real por imagen y tag de commit
+- GitLab web estabilizado internamente tras corregir Gitaly y el acceso al registry
 
 En este punto el proyecto ya sirve como base seria para:
 
@@ -1018,16 +1143,20 @@ Siguientes líneas de evolución con más valor:
 - paneles específicos por servicio y por error
 - versionado de reglas y alertas como código
 - automatización operativa adicional sobre el stack actual
-- pipeline CI/CD
+- smoke tests post-deploy
+- rollback manual por tag o por release
+- trazabilidad de despliegue por commit / imagen / pipeline
 - posible integración futura de RUM o recolección más avanzada
 
 Orden recomendado:
 
 1. crear dashboards de errores por servicio
 2. decidir si se quieren versionar reglas y alertas en el repo
-3. añadir CI/CD
-4. ampliar automatización y operación del stack
-5. valorar integraciones adicionales según el foco del informe
+3. cerrar el CD real por imagen y verificarlo en Kubernetes
+4. añadir smoke tests y rollback
+5. ampliar automatización y operación del stack
+6. valorar integraciones adicionales según el foco del informe
+7. redactar y maquetar la memoria técnica completa del laboratorio
 
 Nota:
 
@@ -1054,6 +1183,11 @@ Este proyecto ya cubre una parte importante del perfil buscado en un puesto orie
 - Helm
 - contenedores
 - automatización con scripts
+- GitLab self-managed
+- GitLab Runner en Kubernetes
+- pipeline CI/CD real
+- Container Registry
+- troubleshooting real de GitLab self-managed, Runner, Registry y Gitaly
 
 Lo más importante es que no se ha quedado en teoría:
 
@@ -1082,3 +1216,4 @@ Conviene que el informe final incluya también capturas de:
 - trazas en Jaeger
 - Discover en Kibana con `service.name` y `log.level`
 - ejemplos de logs estructurados y métricas
+

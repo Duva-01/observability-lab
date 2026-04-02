@@ -1,0 +1,21 @@
+lang: spanish
+title: "Laboratorio de Observabilidad y CI/CD para Microservicios con Kubernetes y GitLab"
+subtitle: "Diseño, implementación, observabilidad y automatización de una plataforma local didáctica orientada a perfiles junior DevOps"
+author: "Proyecto personal de ingeniería orientado a observabilidad y plataforma"
+date: ""
+documentclass: report
+classoption:
+  - a4paper
+  - 12pt
+toc: true
+toc-depth: 3
+numbersections: true
+geometry:
+  - top=2.7cm
+  - bottom=2.5cm
+  - left=2.8cm
+  - right=2.4cm
+linestretch: 1.15
+colorlinks: true
+linkcolor: black
+urlcolor: blue

@@ -6,6 +6,29 @@ global:
   grafana:
     enabled: false
 
+gitlab:
+  gitaly:
+    init:
+      containerSecurityContext:
+        runAsUser: 0
+        runAsGroup: 0
+        runAsNonRoot: false
+  webservice:
+    minReplicas: 1
+    maxReplicas: 1
+    workerProcesses: 1
+    deployment:
+      readinessProbe:
+        initialDelaySeconds: 20
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 12
+      livenessProbe:
+        initialDelaySeconds: 180
+        periodSeconds: 60
+        timeoutSeconds: 30
+        failureThreshold: 3
+
 prometheus:
   install: false
 

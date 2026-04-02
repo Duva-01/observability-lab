@@ -1,0 +1,39 @@
+﻿repo_root: "{{ playbook_dir }}/../.."
+
+observability_namespace: observability
+gitlab_namespace: gitlab
+runner_namespace: gitlab-runner
+app_namespace: default
+
+gitlab_release_name: gitlab
+runner_release_name: gitlab-runner
+registry_pull_secret_name: gitlab-registry-creds
+
+gitlab_chart_ref: gitlab/gitlab
+runner_chart_ref: gitlab/gitlab-runner
+
+gitlab_values_file: "{{ repo_root }}/deploy/gitlab/values-local.yaml"
+runner_values_file: "{{ repo_root }}/deploy/gitlab-runner/values.yaml"
+runner_rbac_file: "{{ repo_root }}/deploy/gitlab-runner/rbac-deployer.yaml"
+
+app_releases:
+  - name: postgres
+    chart: "{{ repo_root }}/deploy/helm/postgres"
+    values: "{{ repo_root }}/deploy/environments/minikube/postgres-values.yaml"
+  - name: user-service
+    chart: "{{ repo_root }}/deploy/helm/user-service"
+    values: "{{ repo_root }}/deploy/environments/minikube/user-service-values.yaml"
+  - name: product-service
+    chart: "{{ repo_root }}/deploy/helm/product-service"
+    values: "{{ repo_root }}/deploy/environments/minikube/product-service-values.yaml"
+  - name: order-service
+    chart: "{{ repo_root }}/deploy/helm/order-service"
+    values: "{{ repo_root }}/deploy/environments/minikube/order-service-values.yaml"
+  - name: api-gateway
+    chart: "{{ repo_root }}/deploy/helm/api-gateway"
+    values: "{{ repo_root }}/deploy/environments/minikube/api-gateway-values.yaml"
+
+registry_pull_server: registry.192.168.49.2.nip.io
+registry_pull_username: ""
+registry_pull_password: ""
+registry_pull_email: devnull@example.local

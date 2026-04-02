@@ -1,0 +1,39 @@
+﻿---
+- name: Validar estado del laboratorio
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Mostrar pods de observabilidad
+      ansible.builtin.command: kubectl get pods -n "{{ observability_namespace }}"
+      changed_when: false
+      register: observability_pods
+
+    - name: Mostrar pods de GitLab
+      ansible.builtin.command: kubectl get pods -n "{{ gitlab_namespace }}"
+      changed_when: false
+      register: gitlab_pods
+
+    - name: Mostrar pods del runner
+      ansible.builtin.command: kubectl get pods -n "{{ runner_namespace }}"
+      changed_when: false
+      register: runner_pods
+
+    - name: Mostrar pods de aplicación
+      ansible.builtin.command: kubectl get pods -n "{{ app_namespace }}"
+      changed_when: false
+      register: app_pods
+
+    - name: Mostrar servicios de aplicación
+      ansible.builtin.command: kubectl get svc -n "{{ app_namespace }}"
+      changed_when: false
+      register: app_services
+
+    - name: Mostrar resumen de validación
+      ansible.builtin.debug:
+        msg:
+          - "{{ observability_pods.stdout_lines }}"
+          - "{{ gitlab_pods.stdout_lines }}"
+          - "{{ runner_pods.stdout_lines }}"
+          - "{{ app_pods.stdout_lines }}"
+          - "{{ app_services.stdout_lines }}"

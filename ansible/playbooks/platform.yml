@@ -1,0 +1,114 @@
+﻿---
+- name: Desplegar plataforma base del laboratorio
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Crear namespace de observabilidad
+      ansible.builtin.command: kubectl apply -f "{{ repo_root }}/deploy/observability/prometheus/namespace.yaml"
+      changed_when: true
+
+    - name: Instalar operador ECK
+      ansible.builtin.command: kubectl apply -k "{{ repo_root }}/deploy/observability/elastic/eck"
+      changed_when: true
+
+    - name: Aplicar manifests base de observabilidad
+      ansible.builtin.shell: |
+        kubectl apply -f "{{ repo_root }}/deploy/observability/jaeger/"
+        kubectl apply -f "{{ repo_root }}/deploy/observability/otel-collector/"
+        kubectl apply -f "{{ repo_root }}/deploy/observability/prometheus/"
+        kubectl apply -f "{{ repo_root }}/deploy/observability/grafana/"
+        kubectl apply -f "{{ repo_root }}/deploy/observability/elastic/elasticsearch.yaml"
+        kubectl apply -f "{{ repo_root }}/deploy/observability/elastic/kibana.yaml"
+        kubectl apply -f "{{ repo_root }}/deploy/observability/elastic/filebeat.yaml"
+      args:
+        executable: /bin/bash
+      changed_when: true
+
+    - name: Añadir repositorios Helm de observabilidad
+      ansible.builtin.shell: |
+        helm repo add kube-state-metrics https://kubernetes.github.io/kube-state-metrics
+        helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+        helm repo add gitlab https://charts.gitlab.io
+        helm repo update
+      args:
+        executable: /bin/bash
+      changed_when: true
+
+    - name: Instalar kube-state-metrics
+      ansible.builtin.command:
+        argv:
+          - helm
+          - upgrade
+          - --install
+          - kube-state-metrics
+          - kube-state-metrics/kube-state-metrics
+          - -n
+          - "{{ observability_namespace }}"
+          - -f
+          - "{{ repo_root }}/deploy/observability/kube-state-metrics/values.yaml"
+      changed_when: true
+
+    - name: Instalar node-exporter
+      ansible.builtin.command:
+        argv:
+          - helm
+          - upgrade
+          - --install
+          - node-exporter
+          - prometheus-community/prometheus-node-exporter
+          - -n
+          - "{{ observability_namespace }}"
+          - -f
+          - "{{ repo_root }}/deploy/observability/node-exporter/values.yaml"
+      changed_when: true
+
+    - name: Instalar GitLab self-managed
+      ansible.builtin.command:
+        argv:
+          - helm
+          - upgrade
+          - --install
+          - "{{ gitlab_release_name }}"
+          - "{{ gitlab_chart_ref }}"
+          - --namespace
+          - "{{ gitlab_namespace }}"
+          - --create-namespace
+          - -f
+          - "{{ gitlab_values_file }}"
+      changed_when: true
+
+    - name: Aplicar RBAC del runner para despliegues
+      ansible.builtin.command: kubectl apply -f "{{ runner_rbac_file }}"
+      changed_when: true
+
+    - name: Instalar GitLab Runner
+      ansible.builtin.command:
+        argv:
+          - helm
+          - upgrade
+          - --install
+          - "{{ runner_release_name }}"
+          - "{{ runner_chart_ref }}"
+          - --namespace
+          - "{{ runner_namespace }}"
+          - --create-namespace
+          - -f
+          - "{{ runner_values_file }}"
+      changed_when: true
+
+    - name: Crear imagePullSecret del registry si hay credenciales
+      ansible.builtin.shell: |
+        kubectl create secret docker-registry {{ registry_pull_secret_name }} \
+          --namespace {{ app_namespace }} \
+          --docker-server={{ registry_pull_server }} \
+          --docker-username={{ registry_pull_username }} \
+          --docker-password={{ registry_pull_password }} \
+          --docker-email={{ registry_pull_email }} \
+          --dry-run=client -o yaml | kubectl apply -f -
+      args:
+        executable: /bin/bash
+      when:
+        - registry_pull_username | length > 0
+        - registry_pull_password | length > 0
+      changed_when: true

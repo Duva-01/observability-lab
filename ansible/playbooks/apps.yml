@@ -1,0 +1,49 @@
+﻿---
+- name: Desplegar aplicaciones del laboratorio con Helm
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Desplegar releases de aplicación
+      ansible.builtin.command:
+        argv:
+          - helm
+          - upgrade
+          - --install
+          - "{{ item.name }}"
+          - "{{ item.chart }}"
+          - --namespace
+          - "{{ app_namespace }}"
+          - -f
+          - "{{ item.values }}"
+      loop: "{{ app_releases }}"
+      changed_when: true
+
+    - name: Esperar al rollout de postgres
+      ansible.builtin.command:
+        argv:
+          - kubectl
+          - rollout
+          - status
+          - deployment/postgres
+          - -n
+          - "{{ app_namespace }}"
+          - --timeout=180s
+      changed_when: false
+
+    - name: Esperar al rollout de los microservicios
+      ansible.builtin.command:
+        argv:
+          - kubectl
+          - rollout
+          - status
+          - "deployment/{{ item }}"
+          - -n
+          - "{{ app_namespace }}"
+          - --timeout=180s
+      loop:
+        - user-service
+        - product-service
+        - order-service
+        - api-gateway
+      changed_when: false

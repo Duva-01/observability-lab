@@ -1,0 +1,100 @@
+\documentclass[
+$for(classoption)$
+$classoption$$sep$,
+$endfor$
+]{$documentclass$}
+
+$if(lang)$
+\usepackage[$lang$]{babel}
+$endif$
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{framed}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{microtype}
+
+$for(geometry)$
+\geometry{$geometry$}
+$endfor$
+
+$if(linestretch)$
+\setstretch{$linestretch$}
+$endif$
+
+$if(colorlinks)$
+\hypersetup{
+  colorlinks=true,
+  linkcolor=$if(linkcolor)$$linkcolor$$else$black$endif$,
+  urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
+  pdftitle={$title$},
+  pdfauthor={$for(author)$$author$$sep$; $endfor$}
+}
+$else$
+\hypersetup{
+  hidelinks,
+  pdftitle={$title$},
+  pdfauthor={$for(author)$$author$$sep$; $endfor$}
+}
+$endif$
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+\begin{document}
+
+\begin{titlepage}
+  \thispagestyle{empty}
+  \vspace*{1.8cm}
+
+  {\large\scshape Memoria técnica de proyecto\par}
+  \vspace{1.6cm}
+
+  {\Huge\bfseries $title$\par}
+  \vspace{0.8cm}
+
+$if(subtitle)$
+  {\Large $subtitle$\par}
+  \vspace{2.0cm}
+$endif$
+
+  \rule{\textwidth}{0.6pt}\par
+  \vspace{0.5cm}
+  {\large\textbf{Autoría:} $for(author)$$author$$sep$; $endfor$\par}
+  \vspace{0.25cm}
+  {\large\textbf{Entorno:} Windows, Docker, Minikube, Kubernetes, Helm y GitLab self-managed\par}
+  \vspace{0.25cm}
+  {\large\textbf{Formato:} Memoria técnica extendida con enfoque didáctico\par}
+  \vspace{0.5cm}
+  \rule{\textwidth}{0.6pt}\par
+
+  \vfill
+  {\large Documento preparado para revisión, iteración y entrega final.\par}
+\end{titlepage}
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+$if(toc)$
+{
+  \hypersetup{linkcolor=black}
+  \tableofcontents
+}
+\clearpage
+$endif$
+
+$body$
+
+\end{document}
