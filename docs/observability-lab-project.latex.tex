@@ -1,4 +1,4 @@
-\documentclass[
+﻿\documentclass[
 a4paper,
 12pt]{report}
 
@@ -33,10 +33,8 @@ a4paper,
   colorlinks=true,
   linkcolor=black,
   urlcolor=blue,
-  pdftitle={Laboratorio de Observabilidad y CI/CD para Microservicios
-con Kubernetes y GitLab},
-  pdfauthor={Proyecto personal de ingeniería orientado a observabilidad
-y plataforma}
+  pdftitle={Observability Lab},
+  pdfauthor={David Martinez Diaz}
 }
 
 \usepackage{microtype}
@@ -82,11 +80,11 @@ y plataforma}
   identifierstyle=\color{codeplain},
   numbers=none,
   literate=
-    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'\i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
-    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
-    {ñ}{{\~n}}1 {Ñ}{{\~N}}1
-    {ü}{{\"u}}1 {Ü}{{\"U}}1
-    {¿}{{?`}}1 {¡}{{!`}}1
+    {Ã¡}{{\'a}}1 {Ã©}{{\'e}}1 {Ã­}{{\'\i}}1 {Ã³}{{\'o}}1 {Ãº}{{\'u}}1
+    {Ã}{{\'A}}1 {Ã‰}{{\'E}}1 {Ã}{{\'I}}1 {Ã“}{{\'O}}1 {Ãš}{{\'U}}1
+    {Ã±}{{\~n}}1 {Ã‘}{{\~N}}1
+    {Ã¼}{{\"u}}1 {Ãœ}{{\"U}}1
+    {Â¿}{{?`}}1 {Â¡}{{!`}}1
 }
 
 \lstdefinelanguage{Properties}{
@@ -150,7 +148,7 @@ y plataforma}
 
 \titleformat{\chapter}[display]
   {\bfseries\Huge\color{titlecolor}}
-  {\filleft\Large Capítulo \thechapter}
+  {\filleft\Large CapÃ­tulo \thechapter}
   {1ex}
   {\titlerule\vspace{1ex}\filright}
   [\vspace{1ex}\titlerule]
@@ -177,7 +175,7 @@ y plataforma}
 \setlength{\cftbeforesecskip}{0.15em}
 \renewcommand{\cfttoctitlefont}{\Huge\bfseries\color{titlecolor}}
 \renewcommand{\cftaftertoctitle}{\hfill}
-\renewcommand{\contentsname}{Índice general}
+\renewcommand{\contentsname}{Ãndice general}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -187,18 +185,28 @@ y plataforma}
 
 \begin{titlepage}
   \thispagestyle{empty}
-  \vspace*{1.8cm}
+  \vspace*{1.6cm}
 
-  {\large\scshape Memoria técnica de proyecto\par}
-  \vspace{1.6cm}
+  {\large\scshape Memoria técnica\par}
+  \vspace{1.8cm}
 
-  {\Huge\bfseries Laboratorio de Observabilidad y CI/CD para
-Microservicios con Kubernetes y GitLab\par}
-  \vspace{0.8cm}
+  {\Huge\bfseries Observability Lab\par}
+  \vspace{0.65cm}
 
-  {\Large Diseño, implementación, observabilidad y automatización de una
-plataforma local didáctica\par}
-  \vspace{2.0cm}
+  {\Large Laboratorio de observabilidad y CI/CD para microservicios con Kubernetes y GitLab\par}
+  \vspace{1.8cm}
+
+  {\large Diseño, implementación e integración de métricas, logs, trazas, despliegue cloud native y automatización de plataforma\par}
+  \vspace{2.2cm}
+
+  \rule{0.84\textwidth}{0.5pt}\par
+  \vspace{0.6cm}
+
+  {\large\textbf{Autor:} David Martinez Diaz\par}
+  \vspace{0.3cm}
+  {\large\textbf{Fecha:} Abril 2026\par}
+  \vspace{0.3cm}
+  {\large\textbf{Stack:} Spring Boot, Kubernetes, Helm, Prometheus, Grafana, OpenTelemetry, Jaeger, Elasticsearch, Kibana, GitLab CI/CD\par}
 
   \vfill
 \end{titlepage}
@@ -214,55 +222,55 @@ plataforma local didáctica\par}
 
 \chapter{Resumen}\label{resumen}
 
-Este documento describe el diseño, la implementación y la evolución de
-un laboratorio técnico orientado a microservicios, observabilidad y
-automatización DevOps. El proyecto parte de una base de cuatro
+Este documento describe el diseÃ±o, la implementaciÃ³n y la evoluciÃ³n de
+un laboratorio tÃ©cnico orientado a microservicios, observabilidad y
+automatizaciÃ³n DevOps. El proyecto parte de una base de cuatro
 microservicios Spring Boot y evoluciona hasta convertirse en una
-plataforma pequeña, pero realista, que integra despliegue en Kubernetes,
-persistencia con PostgreSQL, observabilidad completa de métricas, trazas
+plataforma pequeÃ±a, pero realista, que integra despliegue en Kubernetes,
+persistencia con PostgreSQL, observabilidad completa de mÃ©tricas, trazas
 y logs, alertado y una cadena CI/CD funcional con GitLab self-managed,
 GitLab Runner en Kubernetes y GitLab Container Registry.
 
-El valor del laboratorio no está únicamente en haber desplegado
-herramientas, sino en haber resuelto problemas reales de operación:
+El valor del laboratorio no estÃ¡ Ãºnicamente en haber desplegado
+herramientas, sino en haber resuelto problemas reales de operaciÃ³n:
 errores de migraciones con Flyway, dashboards mal parametrizados, logs
-poco útiles, correlación entre logs y trazas, problemas de permisos y
-autenticación en Kubernetes, y fallos internos de GitLab relacionados
-con Gitaly y con la autenticación del registry. Todo ello convierte el
-proyecto en una base sélida tanto para aprendizaje ante un trabajo orientado a 
+poco Ãºtiles, correlaciÃ³n entre logs y trazas, problemas de permisos y
+autenticaciÃ³n en Kubernetes, y fallos internos de GitLab relacionados
+con Gitaly y con la autenticaciÃ³n del registry. Todo ello convierte el
+proyecto en una base sÃ©lida tanto para aprendizaje ante un trabajo orientado a 
 observabilidad o plataforma.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\chapter{Introducción}\label{introducciuxf3n}
+\chapter{IntroducciÃ³n}\label{introducciuxf3n}
 
 En muchos proyectos de backend y plataforma aparece un problema
 recurrente: construir software es relativamente sencillo, pero operarlo
 correctamente es otra historia. Tener varios microservicios desplegados
 no garantiza poder observar el sistema, diagnosticar fallos, seguir una
-petición de extremo a extremo o automatizar despliegues con trazabilidad
+peticiÃ³n de extremo a extremo o automatizar despliegues con trazabilidad
 suficiente.
 
 Este laboratorio nace precisamente para cubrir esa distancia entre una
-demo simple y una plataforma más madura. La idea no fue quedarse en una
-colección de APIs, sino crear un entorno donde se pudieran practicar de
+demo simple y una plataforma mÃ¡s madura. La idea no fue quedarse en una
+colecciÃ³n de APIs, sino crear un entorno donde se pudieran practicar de
 forma integrada las capacidades que suelen exigirse en roles cercanos a
 observabilidad, DevOps y plataforma:
 
 \begin{itemize}
 \tightlist
 \item
-  diseño y despliegue de microservicios
+  diseÃ±o y despliegue de microservicios
 \item
-  orquestación con Kubernetes
+  orquestaciÃ³n con Kubernetes
 \item
   empaquetado con Helm
 \item
   persistencia con PostgreSQL y migraciones
 \item
-  métricas con Prometheus
+  mÃ©tricas con Prometheus
 \item
-  visualización con Grafana
+  visualizaciÃ³n con Grafana
 \item
   trazas distribuidas con OpenTelemetry y Jaeger
 \item
@@ -274,7 +282,7 @@ observabilidad, DevOps y plataforma:
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.96\textwidth]{assets/architecture/lab-overview.png}
-\caption{Vista general del laboratorio y relación entre sus bloques principales.}
+\caption{Vista general del laboratorio y relaciÃ³n entre sus bloques principales.}
 \label{fig:lab-overview}
 \end{figure}
 
@@ -284,12 +292,12 @@ observabilidad, DevOps y plataforma:
 
 \section{Objetivo general}\label{objetivo-general}
 
-Diseñar e implementar un laboratorio reproducible de microservicios
+DiseÃ±ar e implementar un laboratorio reproducible de microservicios
 observables sobre Kubernetes, incluyendo despliegue, persistencia,
-métricas, trazas, logs, alertado y una cadena CI/CD completa con GitLab
+mÃ©tricas, trazas, logs, alertado y una cadena CI/CD completa con GitLab
 self-managed.
 
-\section{Objetivos específicos}\label{objetivos-especuxedficos}
+\section{Objetivos especÃ­ficos}\label{objetivos-especuxedficos}
 
 \begin{itemize}
 \tightlist
@@ -297,7 +305,7 @@ self-managed.
   Construir una base de microservicios Spring Boot con dependencias
   reales entre servicios.
 \item
-  Desplegar la aplicación sobre Minikube mediante Helm.
+  Desplegar la aplicaciÃ³n sobre Minikube mediante Helm.
 \item
   Sustituir datos en memoria por persistencia real con PostgreSQL y
   migraciones con Flyway.
@@ -305,31 +313,31 @@ self-managed.
   Instrumentar los servicios con Spring Boot Actuator, Micrometer y
   OpenTelemetry.
 \item
-  Centralizar métricas en Prometheus y visualizarlas en Grafana.
+  Centralizar mÃ©tricas en Prometheus y visualizarlas en Grafana.
 \item
   Centralizar trazas distribuidas en Jaeger.
 \item
   Centralizar logs en Elasticsearch y consultarlos en Kibana.
 \item
-  Estructurar los logs de aplicación en formato ECS JSON para facilitar
-  búsquedas y correlación.
+  Estructurar los logs de aplicaciÃ³n en formato ECS JSON para facilitar
+  bÃºsquedas y correlaciÃ³n.
 \item
-  Definir alertas de observabilidad tanto por métricas como por logs.
+  Definir alertas de observabilidad tanto por mÃ©tricas como por logs.
 \item
   Desplegar GitLab self-managed en el mismo laboratorio.
 \item
   Ejecutar pipelines en Kubernetes con GitLab Runner.
 \item
-  Construir imágenes de contenedor, publicarlas en el GitLab Container
+  Construir imÃ¡genes de contenedor, publicarlas en el GitLab Container
   Registry y desplegarlas por SHA de commit.
 \end{itemize}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\chapter{Alcance y límites del
+\chapter{Alcance y lÃ­mites del
 laboratorio}\label{alcance-y-luxedmites-del-laboratorio}
 
-Este laboratorio cubre una porción importante del ciclo de vida
+Este laboratorio cubre una porciÃ³n importante del ciclo de vida
 operativo de un backend moderno, pero mantiene un alcance
 deliberadamente contenido para seguir siendo comprensible y ejecutable
 en un entorno local.
@@ -341,29 +349,29 @@ en un entorno local.
 \item
   cuatro microservicios de negocio
 \item
-  una librería compartida
+  una librerÃ­a compartida
 \item
   una base de datos PostgreSQL
 \item
-  despliegue en un único clúster Minikube
+  despliegue en un Ãºnico clÃºster Minikube
 \item
   stack de observabilidad completo
 \item
   GitLab local con Runner y Registry
 \end{itemize}
 
-\section{Límites conscientes}\label{luxedmites-conscientes}
+\section{LÃ­mites conscientes}\label{luxedmites-conscientes}
 
 \begin{itemize}
 \tightlist
 \item
   no se ha buscado alta disponibilidad real
 \item
-  no se han introducido méltiples clústeres ni méltiples entornos
+  no se han introducido mÃ©ltiples clÃºsteres ni mÃ©ltiples entornos
   completos
 \item
-  el storage y algunos componentes del chart de GitLab son vélidos para
-  laboratorio, no para producción
+  el storage y algunos componentes del chart de GitLab son vÃ©lidos para
+  laboratorio, no para producciÃ³n
 \item
   algunas decisiones de RBAC y seguridad se han simplificado por ser un
   entorno docente
@@ -371,7 +379,7 @@ en un entorno local.
 
 Este enfoque es intencionado. El objetivo no es replicar una plataforma
 corporativa en toda su complejidad, sino construir un sistema
-suficientemente realista como para aprender de él y explicarlo con
+suficientemente realista como para aprender de Ã©l y explicarlo con
 criterio.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -380,13 +388,13 @@ criterio.
 laboratorio}\label{arquitectura-general-del-laboratorio}
 
 La arquitectura final del proyecto puede entenderse como la
-superposición de cuatro capas:
+superposiciÃ³n de cuatro capas:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  capa de aplicación\\
+  capa de aplicaciÃ³n\\
 \item
   capa de datos\\
 \item
@@ -398,13 +406,13 @@ superposición de cuatro capas:
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.96\textwidth]{assets/architecture/layered-architecture.png}
-\caption{Arquitectura lógica del laboratorio dividida en cuatro capas.}
+\caption{Arquitectura lÃ³gica del laboratorio dividida en cuatro capas.}
 \label{fig:layered-architecture}
 \end{figure}
 
-\section{Capa de aplicación}\label{capa-de-aplicaciuxf3n}
+\section{Capa de aplicaciÃ³n}\label{capa-de-aplicaciuxf3n}
 
-La aplicación está formada por los siguientes módulos:
+La aplicaciÃ³n estÃ¡ formada por los siguientes mÃ³dulos:
 
 \begin{itemize}
 \tightlist
@@ -426,7 +434,7 @@ El flujo principal de negocio es:
 Cliente -> api-gateway -> order-service -> user-service / product-service
 \end{PlainCode}
 
-Este flujo se eligió porque permite demostrar una cadena distribuida
+Este flujo se eligiÃ³ porque permite demostrar una cadena distribuida
 sencilla pero suficiente para practicar:
 
 \begin{itemize}
@@ -434,11 +442,11 @@ sencilla pero suficiente para practicar:
 \item
   trazabilidad entre servicios
 \item
-  correlación de logs
+  correlaciÃ³n de logs
 \item
-  métricas por componente
+  mÃ©tricas por componente
 \item
-  detección de fallos downstream
+  detecciÃ³n de fallos downstream
 \end{itemize}
 
 \section{Capa de datos}\label{capa-de-datos}
@@ -454,25 +462,25 @@ La observabilidad se compone de:
 \begin{itemize}
 \tightlist
 \item
-  Prometheus para métricas
+  Prometheus para mÃ©tricas
 \item
-  Grafana para dashboards y alertas de métricas
+  Grafana para dashboards y alertas de mÃ©tricas
 \item
-  OpenTelemetry Collector como agregador de telemetría
+  OpenTelemetry Collector como agregador de telemetrÃ­a
 \item
   Jaeger para trazas distribuidas
 \item
-  Filebeat para recolección de logs
+  Filebeat para recolecciÃ³n de logs
 \item
   Elasticsearch para almacenamiento y consulta de logs
 \item
-  Kibana para exploración y alertado basado en logs
+  Kibana para exploraciÃ³n y alertado basado en logs
 \end{itemize}
 
 \section{Capa de CI/CD y
 plataforma}\label{capa-de-cicd-y-plataforma}
 
-La automatización de plataforma se apoya en:
+La automatizaciÃ³n de plataforma se apoya en:
 
 \begin{itemize}
 \tightlist
@@ -481,10 +489,10 @@ La automatización de plataforma se apoya en:
 \item
   GitLab Runner desplegado dentro de Kubernetes
 \item
-  GitLab Container Registry como registro privado de imágenes
+  GitLab Container Registry como registro privado de imÃ¡genes
 \item
-  pipeline GitLab CI para build, test, package, validación Helm, build
-  de imágenes y despliegue manual
+  pipeline GitLab CI para build, test, package, validaciÃ³n Helm, build
+  de imÃ¡genes y despliegue manual
 \end{itemize}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -492,7 +500,7 @@ La automatización de plataforma se apoya en:
 \chapter{Estructura del
 repositorio}\label{estructura-del-repositorio}
 
-La raíz del repositorio contiene los elementos principales del
+La raÃ­z del repositorio contiene los elementos principales del
 laboratorio:
 
 \begin{PlainCode}
@@ -510,10 +518,10 @@ laboratorio:
 `-- roadmap.md
 \end{PlainCode}
 
-\section{Módulos Maven}\label{muxf3dulos-maven}
+\section{MÃ³dulos Maven}\label{muxf3dulos-maven}
 
-El proyecto se construye como multi-módulo Maven. Los módulos de
-aplicación comparten dependencias y errores comunes a través de
+El proyecto se construye como multi-mÃ³dulo Maven. Los mÃ³dulos de
+aplicaciÃ³n comparten dependencias y errores comunes a travÃ©s de
 \texttt{essentials-lib}.
 
 \section{\texorpdfstring{Directorio
@@ -525,31 +533,31 @@ laboratorio:
 \begin{itemize}
 \tightlist
 \item
-  \texttt{deploy/helm} para charts de aplicación y PostgreSQL
+  \texttt{deploy/helm} para charts de aplicaciÃ³n y PostgreSQL
 \item
   \texttt{deploy/environments/minikube} para valores del entorno local
 \item
   \texttt{deploy/observability} para Prometheus, Grafana, Jaeger, OTel
   Collector y stack Elastic
 \item
-  \texttt{deploy/gitlab} para la instalación de GitLab
+  \texttt{deploy/gitlab} para la instalaciÃ³n de GitLab
 \item
-  \texttt{deploy/gitlab-runner} para la instalación del runner y sus
+  \texttt{deploy/gitlab-runner} para la instalaciÃ³n del runner y sus
   permisos
 \end{itemize}
 
 \section{\texorpdfstring{Directorio
 \texttt{scripts}}{Directorio scripts}}\label{directorio-scripts}
 
-El directorio \texttt{scripts/} contiene automatizaciones prácticas
+El directorio \texttt{scripts/} contiene automatizaciones prÃ¡cticas
 para:
 
 \begin{itemize}
 \tightlist
 \item
-  construir imágenes locales o para Minikube
+  construir imÃ¡genes locales o para Minikube
 \item
-  desplegar aplicación
+  desplegar aplicaciÃ³n
 \item
   desplegar observabilidad
 \item
@@ -561,42 +569,42 @@ para:
 \end{itemize}
 
 Esta capa de scripts es muy importante desde el punto de vista
-didáctico, porque muestra cómo convertir pasos manuales en operaciones
+didÃ¡ctico, porque muestra cÃ³mo convertir pasos manuales en operaciones
 repetibles.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\chapter{Construcción de la base de
+\chapter{ConstrucciÃ³n de la base de
 microservicios}\label{construcciuxf3n-de-la-base-de-microservicios}
 
-\section{Diseño inicial}\label{diseuxf1o-inicial}
+\section{DiseÃ±o inicial}\label{diseuxf1o-inicial}
 
-La primera fase del proyecto consistió en construir una base mínima
-sobre la que luego poder introducir observabilidad y automatización. Se
+La primera fase del proyecto consistiÃ³ en construir una base mÃ­nima
+sobre la que luego poder introducir observabilidad y automatizaciÃ³n. Se
 definieron cuatro servicios:
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{user-service}: catálogo de usuarios
+  \texttt{user-service}: catÃ¡logo de usuarios
 \item
-  \texttt{product-service}: catálogo de productos
+  \texttt{product-service}: catÃ¡logo de productos
 \item
-  \texttt{order-service}: gestión de pedidos y dependencia de los
-  catálogos
+  \texttt{order-service}: gestiÃ³n de pedidos y dependencia de los
+  catÃ¡logos
 \item
   \texttt{api-gateway}: punto de entrada unificado
 \end{itemize}
 
-Este diseño responde a una idea pedagógica clara: si los servicios son
+Este diseÃ±o responde a una idea pedagÃ³gica clara: si los servicios son
 completamente independientes, la observabilidad distribuida pierde
 valor. En cambio, al introducir una cadena de dependencias, el proyecto
-gana interés real.
+gana interÃ©s real.
 
-\section{Evolución hacia una estructura más
+\section{EvoluciÃ³n hacia una estructura mÃ¡s
 mantenible}\label{evoluciuxf3n-hacia-una-estructura-muxe1s-mantenible}
 
-Conforme el proyecto creció, los servicios evolucionaron hacia una
+Conforme el proyecto creciÃ³, los servicios evolucionaron hacia una
 estructura por capas:
 
 \begin{itemize}
@@ -613,7 +621,7 @@ estructura por capas:
   \texttt{model}
 \end{itemize}
 
-También se introdujeron:
+TambiÃ©n se introdujeron:
 
 \begin{itemize}
 \tightlist
@@ -622,14 +630,14 @@ También se introdujeron:
 \item
   interfaces de servicio
 \item
-  separación entre lógica de negocio y acceso a datos
+  separaciÃ³n entre lÃ³gica de negocio y acceso a datos
 \item
-  manejo común de errores desde la librería compartida
+  manejo comÃºn de errores desde la librerÃ­a compartida
 \end{itemize}
 
-Desde el punto de vista de ingeniería, esto es importante porque evita
-que la base del laboratorio se convierta en una demo frágil. Una
-plataforma de observabilidad se beneficia de una aplicación
+Desde el punto de vista de ingenierÃ­a, esto es importante porque evita
+que la base del laboratorio se convierta en una demo frÃ¡gil. Una
+plataforma de observabilidad se beneficia de una aplicaciÃ³n
 razonablemente estructurada.
 
 \section{Ejemplo de responsabilidad en el
@@ -656,16 +664,16 @@ Este tipo de interfaz permite:
 \item
   instrumentar mejor el flujo
 \item
-  registrar logs útiles
+  registrar logs Ãºtiles
 \item
   centralizar puntos de fallo y latencia
 \end{itemize}
 
-\section{Qué hace exactamente cada
-módulo}\label{quuxe9-hace-exactamente-cada-muxf3dulo}
+\section{QuÃ© hace exactamente cada
+mÃ³dulo}\label{quuxe9-hace-exactamente-cada-muxf3dulo}
 
-Una forma muy útil de entender el proyecto es separar responsabilidades
-por módulo. La siguiente tabla resume la función de cada uno y por qué
+Una forma muy Ãºtil de entender el proyecto es separar responsabilidades
+por mÃ³dulo. La siguiente tabla resume la funciÃ³n de cada uno y por quÃ©
 existe.
 
 {\def\LTcaptype{none} % do not increment counter
@@ -676,13 +684,13 @@ existe.
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
-Módulo
+MÃ³dulo
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Responsabilidad principal
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Tecnologías destacadas
+TecnologÃ­as destacadas
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Por qué es importante
+Por quÃ© es importante
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
@@ -691,35 +699,35 @@ Por qué es importante
 \texttt{api-gateway} & Punto de entrada unificado & Spring Web,
 Actuator, Prometheus, OTel, ECS logging & Permite observar llamadas
 agregadas y errores downstream \\
-\texttt{user-service} & Gestión de usuarios & Spring Web, JPA, Flyway,
+\texttt{user-service} & GestiÃ³n de usuarios & Spring Web, JPA, Flyway,
 PostgreSQL & Introduce persistencia y validaciones de negocio \\
-\texttt{product-service} & Gestión de productos & Spring Web, JPA,
-Flyway, PostgreSQL & Aporta catálogo persistente y otro dominio de
+\texttt{product-service} & GestiÃ³n de productos & Spring Web, JPA,
+Flyway, PostgreSQL & Aporta catÃ¡logo persistente y otro dominio de
 negocio \\
-\texttt{order-service} & Gestión de pedidos y orquestación & Spring Web,
+\texttt{order-service} & GestiÃ³n de pedidos y orquestaciÃ³n & Spring Web,
 JPA, Flyway, RestClient, OTel \texttt{@WithSpan} & Es el mejor punto
-para enseñar trazas distribuidas \\
-\texttt{essentials-lib} & Código común & Excepciones comunes, manejo de
-errores & Evita duplicación y unifica respuesta de errores \\
+para enseÃ±ar trazas distribuidas \\
+\texttt{essentials-lib} & CÃ³digo comÃºn & Excepciones comunes, manejo de
+errores & Evita duplicaciÃ³n y unifica respuesta de errores \\
 \end{longtable}
 }
 
-\section{Por qué se eligió este flujo de
+\section{Por quÃ© se eligiÃ³ este flujo de
 negocio}\label{por-quuxe9-se-eligiuxf3-este-flujo-de-negocio}
 
 El flujo
 \texttt{gateway\ -\textgreater{}\ order-service\ -\textgreater{}\ user-service/product-service}
-no es arbitrario. Desde un punto de vista docente, es ideal porque reúne
+no es arbitrario. Desde un punto de vista docente, es ideal porque reÃºne
 varios escenarios frecuentes:
 
 \begin{itemize}
 \tightlist
 \item
-  un servicio frontal que recibe tráfico del cliente
+  un servicio frontal que recibe trÃ¡fico del cliente
 \item
-  un servicio de negocio que agrega información
+  un servicio de negocio que agrega informaciÃ³n
 \item
-  dos servicios de catálogo consultados en tiempo de ejecución
+  dos servicios de catÃ¡logo consultados en tiempo de ejecuciÃ³n
 \item
   puntos claros donde medir latencia
 \item
@@ -728,26 +736,26 @@ varios escenarios frecuentes:
   contexto suficiente para generar trazas distribuidas interesantes
 \end{itemize}
 
-Si todos los servicios fueran completamente autónomos, la parte de
-observabilidad distribuida sería menos expresiva. En cambio, con esta
-topología se puede responder a preguntas como:
+Si todos los servicios fueran completamente autÃ³nomos, la parte de
+observabilidad distribuida serÃ­a menos expresiva. En cambio, con esta
+topologÃ­a se puede responder a preguntas como:
 
 \begin{itemize}
 \tightlist
 \item
-  ¿cuánto tarda una petición completa?
+  Â¿cuÃ¡nto tarda una peticiÃ³n completa?
 \item
-  ¿qué servicio fue el más lento?
+  Â¿quÃ© servicio fue el mÃ¡s lento?
 \item
-  ¿falló el servicio frontal o un servicio dependiente?
+  Â¿fallÃ³ el servicio frontal o un servicio dependiente?
 \item
-  ¿hay logs de error asociados al mismo \texttt{trace\_id}?
+  Â¿hay logs de error asociados al mismo \texttt{trace\_id}?
 \end{itemize}
 
 \section{Ejemplo real de llamada downstream en el
 gateway}\label{ejemplo-real-de-llamada-downstream-en-el-gateway}
 
-El siguiente fragmento del gateway resume muy bien la filosofía del
+El siguiente fragmento del gateway resume muy bien la filosofÃ­a del
 proyecto: hacer visibles las llamadas entre servicios y tratarlas como
 parte del sistema observable, no como una caja negra.
 
@@ -772,7 +780,7 @@ private ResponseEntity<Object> forwardGet(String baseUrl, String path, Object...
 }
 \end{JavaCode}
 
-\section{Qué enseña este
+\section{QuÃ© enseÃ±a este
 fragmento}\label{quuxe9-enseuxf1a-este-fragmento}
 
 \begin{itemize}
@@ -782,23 +790,23 @@ fragmento}\label{quuxe9-enseuxf1a-este-fragmento}
 \item
   \texttt{log.info} permite seguir el camino feliz del flujo.
 \item
-  \texttt{log.warn} captura respuestas erróneas del servicio downstream.
+  \texttt{log.warn} captura respuestas errÃ³neas del servicio downstream.
 \item
   \texttt{log.error} captura indisponibilidad real del downstream.
 \item
-  la respuesta al cliente se construye de forma explícita, evitando
+  la respuesta al cliente se construye de forma explÃ­cita, evitando
   excepciones opacas.
 \end{itemize}
 
-Desde el punto de vista de observabilidad, este código es valioso porque
+Desde el punto de vista de observabilidad, este cÃ³digo es valioso porque
 produce:
 
 \begin{itemize}
 \tightlist
 \item
-  métricas HTTP en el servicio
+  mÃ©tricas HTTP en el servicio
 \item
-  logs semánticamente útiles
+  logs semÃ¡nticamente Ãºtiles
 \item
   trazas que se pueden seguir en Jaeger
 \end{itemize}
@@ -812,14 +820,14 @@ Flyway}\label{persistencia-real-con-postgresql-y-flyway}
 persistencia}\label{de-datos-en-memoria-a-persistencia}
 
 Uno de los primeros saltos de madurez del proyecto fue abandonar el
-modelo puramente en memoria. Esto permitió acercar el laboratorio a un
-escenario mucho más realista, donde existen migraciones, estado
+modelo puramente en memoria. Esto permitiÃ³ acercar el laboratorio a un
+escenario mucho mÃ¡s realista, donde existen migraciones, estado
 persistente y problemas de compatibilidad entre entornos.
 
 \section{Despliegue de PostgreSQL en
 Kubernetes}\label{despliegue-de-postgresql-en-kubernetes}
 
-Se creó un chart Helm propio para PostgreSQL, con plantillas para:
+Se creÃ³ un chart Helm propio para PostgreSQL, con plantillas para:
 
 \begin{itemize}
 \tightlist
@@ -844,74 +852,74 @@ enfoque seguido fue:
 \begin{itemize}
 \tightlist
 \item
-  una única instancia PostgreSQL
+  una Ãºnica instancia PostgreSQL
 \item
   un esquema por microservicio
 \item
   Flyway como mecanismo de versionado de base de datos
 \end{itemize}
 
-Este diseño es simple y útil para laboratorio, porque permite practicar
-versionado de esquema sin multiplicar el número de bases.
+Este diseÃ±o es simple y Ãºtil para laboratorio, porque permite practicar
+versionado de esquema sin multiplicar el nÃºmero de bases.
 
 \section{Problemas reales con
 migraciones}\label{problemas-reales-con-migraciones}
 
-Durante el desarrollo aparecieron problemas clásicos de evolución de
+Durante el desarrollo aparecieron problemas clÃ¡sicos de evoluciÃ³n de
 base de datos:
 
 \begin{itemize}
 \tightlist
 \item
-  modificación de migraciones ya aplicadas
+  modificaciÃ³n de migraciones ya aplicadas
 \item
   divergencia entre historial y estado real
 \item
   necesidad de reparar el historial de Flyway
 \end{itemize}
 
-Este punto tiene mucho valor pedagógico, porque enseña una lección
+Este punto tiene mucho valor pedagÃ³gico, porque enseÃ±a una lecciÃ³n
 fundamental: las migraciones no son un detalle accesorio, forman parte
 del contrato operativo del sistema.
 
 \section{Tests con Testcontainers}\label{tests-con-testcontainers}
 
 Para evitar falsos positivos asociados a H2, las pruebas se alinearon
-más con el entorno real usando PostgreSQL efímero con Testcontainers. La
+mÃ¡s con el entorno real usando PostgreSQL efÃ­mero con Testcontainers. La
 ventaja principal es que el comportamiento de base de datos se acerca
-mucho más al de producción o preproducción.
+mucho mÃ¡s al de producciÃ³n o preproducciÃ³n.
 
-\section{Qué problema resuelve Flyway en este
+\section{QuÃ© problema resuelve Flyway en este
 laboratorio}\label{quuxe9-problema-resuelve-flyway-en-este-laboratorio}
 
 Cuando un proyecto usa JPA y una base de datos relacional, existe una
-tentación frecuente: dejar que Hibernate cree o altere el esquema
-automáticamente. Para un laboratorio pequeño puede parecer suficiente,
+tentaciÃ³n frecuente: dejar que Hibernate cree o altere el esquema
+automÃ¡ticamente. Para un laboratorio pequeÃ±o puede parecer suficiente,
 pero tiene varias desventajas:
 
 \begin{itemize}
 \tightlist
 \item
-  no queda versión explícita del esquema
+  no queda versiÃ³n explÃ­cita del esquema
 \item
   no hay trazabilidad de cambios
 \item
-  es difícil reproducir estados históricos
+  es difÃ­cil reproducir estados histÃ³ricos
 \item
   aparecen diferencias entre entornos
 \end{itemize}
 
-Por eso aquí se eligió:
+Por eso aquÃ­ se eligiÃ³:
 
 \begin{itemize}
 \tightlist
 \item
   \texttt{spring.jpa.hibernate.ddl-auto=validate}
 \item
-  Flyway como responsable único de crear y evolucionar el esquema
+  Flyway como responsable Ãºnico de crear y evolucionar el esquema
 \end{itemize}
 
-Ese diseño separa claramente dos responsabilidades:
+Ese diseÃ±o separa claramente dos responsabilidades:
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}ll@{}}
@@ -926,10 +934,10 @@ Flyway & Crear y versionar el esquema real \\
 \end{longtable}
 }
 
-\section{Ejemplo real de configuración de base de
+\section{Ejemplo real de configuraciÃ³n de base de
 datos}\label{ejemplo-real-de-configuraciuxf3n-de-base-de-datos}
 
-En \texttt{user-service} la configuración principal quedó así:
+En \texttt{user-service} la configuraciÃ³n principal quedÃ³ asÃ­:
 
 \begin{PropertiesCode}
 spring.datasource.url=${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/ecommerce_platform}
@@ -943,8 +951,8 @@ spring.flyway.schemas=user_service
 \end{PropertiesCode}
 
 
-\section{Explicación línea a
-línea}\label{explicaciuxf3n-luxednea-a-luxednea}
+\section{ExplicaciÃ³n lÃ­nea a
+lÃ­nea}\label{explicaciuxf3n-luxednea-a-luxednea}
 
 \begin{itemize}
 \tightlist
@@ -952,7 +960,7 @@ línea}\label{explicaciuxf3n-luxednea-a-luxednea}
   \texttt{spring.datasource.url}: define el endpoint de PostgreSQL.
 \item
   \texttt{username} y \texttt{password}: desacoplan credenciales del
-  código.
+  cÃ³digo.
 \item
   \texttt{ddl-auto=validate}: obliga a que el esquema exista y sea
   compatible.
@@ -967,10 +975,10 @@ línea}\label{explicaciuxf3n-luxednea-a-luxednea}
   esquema si no existe.
 \item
   \texttt{flyway.schemas} y \texttt{flyway.default-schema}: limitan la
-  migración al esquema del servicio.
+  migraciÃ³n al esquema del servicio.
 \end{itemize}
 
-\section{Por qué se usaron esquemas
+\section{Por quÃ© se usaron esquemas
 separados}\label{por-quuxe9-se-usaron-esquemas-separados}
 
 En vez de levantar cuatro bases de datos distintas, el proyecto usa una
@@ -986,17 +994,17 @@ claras para un laboratorio:
 \item
   mismo motor y mismas credenciales base
 \item
-  aislamiento lógico razonable entre dominios
+  aislamiento lÃ³gico razonable entre dominios
 \end{itemize}
 
-Es un compromiso didáctico muy útil. Permite enseñar separación de
-dominios sin convertir el laboratorio en una instalación de base de
+Es un compromiso didÃ¡ctico muy Ãºtil. Permite enseÃ±ar separaciÃ³n de
+dominios sin convertir el laboratorio en una instalaciÃ³n de base de
 datos excesivamente pesada.
 
 \section{Testcontainers en la
-práctica}\label{testcontainers-en-la-pruxe1ctica}
+prÃ¡ctica}\label{testcontainers-en-la-pruxe1ctica}
 
-La configuración de test de \texttt{user-service} muestra muy bien la
+La configuraciÃ³n de test de \texttt{user-service} muestra muy bien la
 idea:
 
 \begin{PropertiesCode}
@@ -1012,25 +1020,25 @@ spring.flyway.default-schema=user_service
 otel.sdk.disabled=true
 \end{PropertiesCode}
 
-\section{Qué enseña esta configuración de
+\section{QuÃ© enseÃ±a esta configuraciÃ³n de
 test}\label{quuxe9-enseuxf1a-esta-configuraciuxf3n-de-test}
 
 \begin{itemize}
 \tightlist
 \item
   \texttt{jdbc:tc:postgresql:16-alpine:///userdb} hace que
-  Testcontainers levante PostgreSQL automáticamente.
+  Testcontainers levante PostgreSQL automÃ¡ticamente.
 \item
   el driver \texttt{ContainerDatabaseDriver} abstrae el arranque del
   contenedor.
 \item
   el test sigue validando esquema y migraciones reales.
 \item
-  \texttt{otel.sdk.disabled=true} evita ruido de telemetría en tests de
+  \texttt{otel.sdk.disabled=true} evita ruido de telemetrÃ­a en tests de
   contexto.
 \end{itemize}
 
-Este detalle es importante para la memoria: explica por qué la pipeline
+Este detalle es importante para la memoria: explica por quÃ© la pipeline
 necesita acceso a Docker en la fase de tests.
 
 \section{Evidencia de los microservicios y de la base de datos}\label{evidencia-de-los-microservicios-y-de-la-base-de-datos}
@@ -1045,9 +1053,9 @@ product-service-7f5bd75f96-htrlj   1/1     Running   2 (2m39s ago)   5m2s
 user-service-66cc6c69b6-knwgf      1/1     Running   1 (2m48s ago)   5m2s
 \end{BashCode}
 
-Esta salida ilustra bien el objetivo de la sección porque deja ver, de
+Esta salida ilustra bien el objetivo de la secciÃ³n porque deja ver, de
 forma inmediata, que PostgreSQL y los cuatro microservicios se
-encuentran operativos y listos para recibir tráfico dentro del
+encuentran operativos y listos para recibir trÃ¡fico dentro del
 namespace \texttt{default}.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -1055,78 +1063,78 @@ namespace \texttt{default}.
 \chapter{Despliegue en Kubernetes con
 Helm}\label{despliegue-en-kubernetes-con-helm}
 
-\section{Qué es Kubernetes y qué problema
+\section{QuÃ© es Kubernetes y quÃ© problema
 resuelve}\label{quuxe9-es-kubernetes-y-quuxe9-problema-resuelve}
 
-Kubernetes es una plataforma de orquestación de contenedores diseñada
+Kubernetes es una plataforma de orquestaciÃ³n de contenedores diseÃ±ada
 para ejecutar aplicaciones distribuidas de forma declarativa. La idea
-clave no es lanzar procesos manualmente, sino describir cuál debe ser el
+clave no es lanzar procesos manualmente, sino describir cuÃ¡l debe ser el
 estado deseado del sistema y dejar que la plataforma trabaje de manera
 continua para mantener ese estado. En vez de pedirle al operador que
 arranque un contenedor concreto, abra un puerto y vigile reinicios,
-Kubernetes permite declarar que una aplicación debe tener una o varias
-réplicas, que debe exponerse mediante un servicio de red y que debe
-reiniciarse automáticamente si deja de responder.
+Kubernetes permite declarar que una aplicaciÃ³n debe tener una o varias
+rÃ©plicas, que debe exponerse mediante un servicio de red y que debe
+reiniciarse automÃ¡ticamente si deja de responder.
 
-En términos prácticos, Kubernetes resuelve varios problemas muy comunes
-cuando una aplicación deja de ser un proceso local y pasa a ejecutarse
+En tÃ©rminos prÃ¡cticos, Kubernetes resuelve varios problemas muy comunes
+cuando una aplicaciÃ³n deja de ser un proceso local y pasa a ejecutarse
 como sistema distribuido:
 
 \begin{itemize}
 \tightlist
 \item
-  planificación de contenedores sobre nodos disponibles
+  planificaciÃ³n de contenedores sobre nodos disponibles
 \item
-  reinicio automático cuando un proceso falla
+  reinicio automÃ¡tico cuando un proceso falla
 \item
-  descubrimiento de servicios dentro del clúster
+  descubrimiento de servicios dentro del clÃºster
 \item
-  balanceo de tráfico entre réplicas
+  balanceo de trÃ¡fico entre rÃ©plicas
 \item
-  separación entre configuración, secretos y binario
+  separaciÃ³n entre configuraciÃ³n, secretos y binario
 \item
   despliegues repetibles y trazables
 \end{itemize}
 
-El modelo mental más importante es entender que
-Kubernetes trabaja como un sistema de reconciliación. El usuario declara
-una intención, por ejemplo: ``quiero un \texttt{Deployment} con una
-réplica de \texttt{user-service} escuchando en el puerto 8080''. A
-partir de ahí, el plano de control compara continuamente el estado real
+El modelo mental mÃ¡s importante es entender que
+Kubernetes trabaja como un sistema de reconciliaciÃ³n. El usuario declara
+una intenciÃ³n, por ejemplo: ``quiero un \texttt{Deployment} con una
+rÃ©plica de \texttt{user-service} escuchando en el puerto 8080''. A
+partir de ahÃ­, el plano de control compara continuamente el estado real
 con el estado deseado. Si el pod muere, Kubernetes crea otro. Si el nodo
-se reinicia, la plataforma vuelve a programar la carga. Si la aplicación
+se reinicia, la plataforma vuelve a programar la carga. Si la aplicaciÃ³n
 no responde a las sondas, el pod deja de considerarse disponible.
 
-\section{Conceptos básicos para entender un
+\section{Conceptos bÃ¡sicos para entender un
 despliegue}\label{conceptos-buxe1sicos-para-entender-un-despliegue}
 
-Antes de leer los charts de Helm conviene dominar los objetos mínimos
+Antes de leer los charts de Helm conviene dominar los objetos mÃ­nimos
 que intervienen en este laboratorio:
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Pod}. Es la unidad mínima de ejecución en Kubernetes. En este
+  \textbf{Pod}. Es la unidad mÃ­nima de ejecuciÃ³n en Kubernetes. En este
   proyecto cada microservicio corre dentro de un pod gestionado por un
-  \texttt{Deployment}. Un pod no se trata como una máquina virtual, sino
-  como un envoltorio efímero que puede destruirse y recrearse.
+  \texttt{Deployment}. Un pod no se trata como una mÃ¡quina virtual, sino
+  como un envoltorio efÃ­mero que puede destruirse y recrearse.
 \item
-  \textbf{Deployment}. Define cómo debe ejecutarse un conjunto de pods
-  equivalentes. Permite decir cuántas réplicas debe haber, qué imagen se
-  ejecuta y cómo se actualiza una versión por otra.
+  \textbf{Deployment}. Define cÃ³mo debe ejecutarse un conjunto de pods
+  equivalentes. Permite decir cuÃ¡ntas rÃ©plicas debe haber, quÃ© imagen se
+  ejecuta y cÃ³mo se actualiza una versiÃ³n por otra.
 \item
   \textbf{Service}. Da una identidad de red estable a un conjunto de
   pods. En este laboratorio los microservicios internos usan
   \texttt{ClusterIP} y el \texttt{api-gateway} se publica como
-  \texttt{NodePort} para aceptar tráfico desde fuera del clúster.
+  \texttt{NodePort} para aceptar trÃ¡fico desde fuera del clÃºster.
 \item
-  \textbf{ConfigMap y Secret}. Separan la configuración del contenedor.
+  \textbf{ConfigMap y Secret}. Separan la configuraciÃ³n del contenedor.
   Gracias a eso, una imagen puede moverse entre entornos sin ser
   reconstruida solo por cambiar una URL o una credencial.
 \item
   \textbf{Probe}. Las sondas de \texttt{startup}, \texttt{readiness} y
-  \texttt{liveness} permiten a Kubernetes decidir si la aplicación ya ha
-  terminado de arrancar, si está preparada para recibir tráfico y si
+  \texttt{liveness} permiten a Kubernetes decidir si la aplicaciÃ³n ya ha
+  terminado de arrancar, si estÃ¡ preparada para recibir trÃ¡fico y si
   debe reiniciarse.
 \item
   \textbf{PersistentVolumeClaim}. En PostgreSQL se usa para no perder
@@ -1134,50 +1142,50 @@ que intervienen en este laboratorio:
 \end{itemize}
 
 Un ejemplo muy simple ayuda a fijar la idea. Si un \texttt{Deployment}
-de \texttt{user-service} declara una réplica y una imagen concreta,
-Kubernetes intentará mantener siempre exactamente un pod de ese servicio.
-Si además existe un \texttt{Service} llamado \texttt{user-service}, el
-resto de aplicaciones del clúster no tienen que conocer la IP cambiante
+de \texttt{user-service} declara una rÃ©plica y una imagen concreta,
+Kubernetes intentarÃ¡ mantener siempre exactamente un pod de ese servicio.
+Si ademÃ¡s existe un \texttt{Service} llamado \texttt{user-service}, el
+resto de aplicaciones del clÃºster no tienen que conocer la IP cambiante
 del pod, sino solo el nombre DNS estable del servicio.
 
-\section{Cómo funciona Kubernetes dentro de este
+\section{CÃ³mo funciona Kubernetes dentro de este
 laboratorio}\label{cuxf3mo-funciona-kubernetes-dentro-de-este-laboratorio}
 
 En este proyecto Kubernetes se ejecuta sobre Minikube, lo que permite
-simular un entorno de plataforma completo dentro de un portátil. Aunque
+simular un entorno de plataforma completo dentro de un portÃ¡til. Aunque
 se trata de un laboratorio local, los conceptos operativos son los
-mismos que aparecerían en un entorno real:
+mismos que aparecerÃ­an en un entorno real:
 
 \begin{itemize}
 \tightlist
 \item
-  Minikube actúa como clúster de Kubernetes.
+  Minikube actÃºa como clÃºster de Kubernetes.
 \item
   Los microservicios y PostgreSQL se despliegan en el namespace
   \texttt{default}.
 \item
-  GitLab y GitLab Runner se ejecutan también dentro del clúster, aunque
+  GitLab y GitLab Runner se ejecutan tambiÃ©n dentro del clÃºster, aunque
   en namespaces separados.
 \item
-  La pila de observabilidad convive con la aplicación y consume métricas,
+  La pila de observabilidad convive con la aplicaciÃ³n y consume mÃ©tricas,
   logs y trazas de los pods.
 \end{itemize}
 
-Esto hace que el laboratorio sea especialmente didáctico, porque permite
-observar cómo se relacionan los componentes de aplicación con los de
+Esto hace que el laboratorio sea especialmente didÃ¡ctico, porque permite
+observar cÃ³mo se relacionan los componentes de aplicaciÃ³n con los de
 plataforma. Por ejemplo, cuando un pod no queda \texttt{Ready}, no basta
-con ver el log de Spring Boot: también hay que revisar sondas,
+con ver el log de Spring Boot: tambiÃ©n hay que revisar sondas,
 \texttt{Services}, eventos del scheduler y estado del rollout.
-Kubernetes obliga a pensar la aplicación como parte de un sistema más
+Kubernetes obliga a pensar la aplicaciÃ³n como parte de un sistema mÃ¡s
 amplio.
 
-\section{Qué aporta Helm por encima de
+\section{QuÃ© aporta Helm por encima de
 \texttt{kubectl apply}}\label{quuxe9-aporta-helm-por-encima-de-kubectl-apply}
 
 \texttt{kubectl apply} permite crear recursos Kubernetes a partir de
-manifiestos YAML estáticos. Es suficiente para ejemplos sencillos, pero
-se queda corto cuando el número de servicios crece y aparecen
-variaciones entre entornos. Helm añade una capa de empaquetado,
+manifiestos YAML estÃ¡ticos. Es suficiente para ejemplos sencillos, pero
+se queda corto cuando el nÃºmero de servicios crece y aparecen
+variaciones entre entornos. Helm aÃ±ade una capa de empaquetado,
 templating y versionado sobre esos manifiestos.
 
 En otras palabras, Helm permite tratar un conjunto de recursos
@@ -1186,27 +1194,27 @@ Kubernetes como una unidad desplegable. Un \emph{chart} agrupa
 \texttt{Secret} y cualquier otro recurso asociado a un componente. Los
 valores variables se extraen a ficheros \texttt{values.yaml}, lo que
 facilita reutilizar la misma plantilla en varios entornos cambiando solo
-parámetros concretos.
+parÃ¡metros concretos.
 
 En este laboratorio Helm aporta tres ventajas clave:
 
 \begin{itemize}
 \tightlist
 \item
-  evita duplicar manifiestos casi idénticos entre microservicios y
+  evita duplicar manifiestos casi idÃ©nticos entre microservicios y
   entornos
 \item
-  permite inyectar parámetros como imagen, tag, probes y recursos de red
+  permite inyectar parÃ¡metros como imagen, tag, probes y recursos de red
   sin reescribir las plantillas base
 \item
   hace posible usar \texttt{helm upgrade --install} para tener un flujo
-  de despliegue idempotente y fácil de automatizar desde CI/CD
+  de despliegue idempotente y fÃ¡cil de automatizar desde CI/CD
 \end{itemize}
 
-\section{Motivación para usar
+\section{MotivaciÃ³n para usar
 Helm}\label{motivaciuxf3n-para-usar-helm}
 
-Una vez que la aplicación dejó de ser local y pasí a ejecutarse en
+Una vez que la aplicaciÃ³n dejÃ³ de ser local y pasÃ­ a ejecutarse en
 Kubernetes, era necesario un mecanismo para empaquetar recursos,
 parametrizarlos y reutilizarlos por entorno. Helm cubre exactamente esa
 necesidad.
@@ -1236,12 +1244,12 @@ Este enfoque facilita:
 \item
   despliegues independientes
 \item
-  configuración específica por servicio
+  configuraciÃ³n especÃ­fica por servicio
 \item
-  evolución aislada de recursos Kubernetes
+  evoluciÃ³n aislada de recursos Kubernetes
 \end{itemize}
 
-\section{Separación entre chart y
+\section{SeparaciÃ³n entre chart y
 entorno}\label{separaciuxf3n-entre-chart-y-entorno}
 
 Los charts contienen valores por defecto, mientras que el entorno
@@ -1261,13 +1269,13 @@ Minikube se parametriza en:
   \texttt{deploy/environments/minikube/postgres-values.yaml}
 \end{itemize}
 
-Esta separación es muy útil porque evita duplicar charts y permite
+Esta separaciÃ³n es muy Ãºtil porque evita duplicar charts y permite
 adaptar comportamiento por entorno sin modificar plantillas.
 
-\section{Automatización del
+\section{AutomatizaciÃ³n del
 despliegue}\label{automatizaciuxf3n-del-despliegue}
 
-El laboratorio incluye scripts específicos como:
+El laboratorio incluye scripts especÃ­ficos como:
 
 \begin{itemize}
 \tightlist
@@ -1277,13 +1285,13 @@ El laboratorio incluye scripts específicos como:
   \texttt{scripts/deploy-minikube.ps1}
 \end{itemize}
 
-El primero sirve para construir imágenes directamente dentro de
+El primero sirve para construir imÃ¡genes directamente dentro de
 Minikube. El segundo empaqueta el despliegue completo con Helm y espera
 a que los rollouts terminen correctamente.
 
 \section{Aprendizaje principal}\label{aprendizaje-principal}
 
-Kubernetes no debe entenderse solo como ``levantar pods''. La operación
+Kubernetes no debe entenderse solo como ``levantar pods''. La operaciÃ³n
 real exige:
 
 \begin{itemize}
@@ -1291,20 +1299,20 @@ real exige:
 \item
   empaquetado
 \item
-  parámetros por entorno
+  parÃ¡metros por entorno
 \item
   restart controlado
 \item
   espera de readiness
 \item
-  diagnóstico cuando un rollout falla
+  diagnÃ³stico cuando un rollout falla
 \end{itemize}
 
-\section{Anatomía de un chart Helm de
+\section{AnatomÃ­a de un chart Helm de
 microservicio}\label{anatomuxeda-de-un-chart-helm-de-microservicio}
 
 El chart de \texttt{api-gateway} es suficientemente simple como para
-explicarlo casi línea a línea. Su \texttt{values.yaml} contiene:
+explicarlo casi lÃ­nea a lÃ­nea. Su \texttt{values.yaml} contiene:
 
 \begin{YamlCode}
 replicaCount: 1
@@ -1324,33 +1332,33 @@ service:
   nodePort: null
 \end{YamlCode}
 
-\section{\texorpdfstring{Qué enseña este
-\texttt{values.yaml}}{8.7 Qué enseña este values.yaml}}\label{quuxe9-enseuxf1a-este-values.yaml}
+\section{\texorpdfstring{QuÃ© enseÃ±a este
+\texttt{values.yaml}}{8.7 QuÃ© enseÃ±a este values.yaml}}\label{quuxe9-enseuxf1a-este-values.yaml}
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{replicaCount}: número deseado de pods.
+  \texttt{replicaCount}: nÃºmero deseado de pods.
 \item
-  \texttt{image.repository}: de dónde sale la imagen.
+  \texttt{image.repository}: de dÃ³nde sale la imagen.
 \item
-  \texttt{image.tag}: qué versión concreta se quiere ejecutar.
+  \texttt{image.tag}: quÃ© versiÃ³n concreta se quiere ejecutar.
 \item
-  \texttt{pullPolicy}: cuándo debe descargar la imagen.
+  \texttt{pullPolicy}: cuÃ¡ndo debe descargar la imagen.
 \item
   \texttt{pullSecrets}: credenciales para un registry privado.
 \item
-  \texttt{service.type}: cómo se expondrá el servicio.
+  \texttt{service.type}: cÃ³mo se expondrÃ¡ el servicio.
 \end{itemize}
 
-Este fichero es muy útil en una memoria docente porque muestra que Helm
+Este fichero es muy Ãºtil en una memoria docente porque muestra que Helm
 no ``crea magia'', sino que parametriza decisiones de despliegue
-explícitas.
+explÃ­citas.
 
 \section{Plantilla real del
 Deployment}\label{plantilla-real-del-deployment}
 
-El \texttt{deployment.yaml} del chart de \texttt{api-gateway} quedó así:
+El \texttt{deployment.yaml} del chart de \texttt{api-gateway} quedÃ³ asÃ­:
 
 \begin{YamlCode}
 apiVersion: apps/v1
@@ -1371,7 +1379,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
 \end{YamlCode}
 
-\section{Cómo leer esta plantilla}\label{cuxf3mo-leer-esta-plantilla}
+\section{CÃ³mo leer esta plantilla}\label{cuxf3mo-leer-esta-plantilla}
 
 \begin{itemize}
 \tightlist
@@ -1382,17 +1390,17 @@ spec:
   \texttt{\{\{\ .Values.*\ \}\}}: inyecta valores desde
   \texttt{values.yaml} o desde un fichero de entorno.
 \item
-  \texttt{with\ .Values.image.pullSecrets}: añade
+  \texttt{with\ .Values.image.pullSecrets}: aÃ±ade
   \texttt{imagePullSecrets} solo si hay credenciales definidas.
 \item
   \texttt{image.repository} y \texttt{image.tag}: permiten separar la
-  plantilla del detalle de versión.
+  plantilla del detalle de versiÃ³n.
 \end{itemize}
 
-La gran enseñanza aquí es que Helm no reemplaza Kubernetes. Helm es una
-capa de parametrización y reutilización sobre Kubernetes.
+La gran enseÃ±anza aquÃ­ es que Helm no reemplaza Kubernetes. Helm es una
+capa de parametrizaciÃ³n y reutilizaciÃ³n sobre Kubernetes.
 
-\section{Valores específicos de
+\section{Valores especÃ­ficos de
 Minikube}\label{valores-especuxedficos-de-minikube}
 
 El entorno de Minikube modifica el comportamiento del chart. Por
@@ -1413,10 +1421,10 @@ env:
     value: http://user-service:8080
 \end{YamlCode}
 
-\section{Qué problema resuelve esta capa de
+\section{QuÃ© problema resuelve esta capa de
 values}\label{quuxe9-problema-resuelve-esta-capa-de-values}
 
-Sin un fichero por entorno, el chart tendría que codificar detalles del
+Sin un fichero por entorno, el chart tendrÃ­a que codificar detalles del
 laboratorio:
 
 \begin{itemize}
@@ -1431,15 +1439,15 @@ laboratorio:
   URLs de servicios downstream
 \end{itemize}
 
-Ese sería un diseño pobre, porque mezclaría plantilla base con detalles
+Ese serÃ­a un diseÃ±o pobre, porque mezclarÃ­a plantilla base con detalles
 del entorno. Separarlo mejora mucho la mantenibilidad.
 
-\section{Script de despliegue y lógica
+\section{Script de despliegue y lÃ³gica
 operativa}\label{script-de-despliegue-y-luxf3gica-operativa}
 
 El script \texttt{deploy-minikube.ps1} es un buen ejemplo de
-automatización incremental. No se limita a aplicar YAML, sino que
-incorpora diagnóstico.
+automatizaciÃ³n incremental. No se limita a aplicar YAML, sino que
+incorpora diagnÃ³stico.
 
 Fragmento representativo:
 
@@ -1463,7 +1471,7 @@ function Wait-DeploymentRollout {
 }
 \end{PowerShellCode}
 
-\section{Qué enseña este
+\section{QuÃ© enseÃ±a este
 script}\label{quuxe9-enseuxf1a-este-script}
 
 \begin{itemize}
@@ -1471,25 +1479,25 @@ script}\label{quuxe9-enseuxf1a-este-script}
 \item
   espera activa del rollout
 \item
-  salida rápida cuando todo va bien
+  salida rÃ¡pida cuando todo va bien
 \item
-  captura de diagnóstico cuando algo falla
+  captura de diagnÃ³stico cuando algo falla
 \item
   uso de \texttt{describe} y \texttt{logs} como rutina de
   troubleshooting
 \end{itemize}
 
-Este patrón es muy valioso porque enseña una disciplina
-operativa concreta: automatizar no es solo ejecutar, también es saber
+Este patrÃ³n es muy valioso porque enseÃ±a una disciplina
+operativa concreta: automatizar no es solo ejecutar, tambiÃ©n es saber
 diagnosticar.
 
 \section{Evidencia operativa de servicios
 publicados}\label{evidencia-operativa-de-servicios-publicados}
 
-En lugar de dejar esta parte como una figura sugerida, resulta más útil
-incluir una evidencia real de cómo Kubernetes expone cada componente.
-La siguiente salida permite entender, de forma directa, qué servicios se
-publican hacia fuera y cuáles permanecen como red interna del clúster:
+En lugar de dejar esta parte como una figura sugerida, resulta mÃ¡s Ãºtil
+incluir una evidencia real de cÃ³mo Kubernetes expone cada componente.
+La siguiente salida permite entender, de forma directa, quÃ© servicios se
+publican hacia fuera y cuÃ¡les permanecen como red interna del clÃºster:
 
 \begin{BashCode}
 kubectl get svc -n default
@@ -1503,40 +1511,40 @@ user-service      ClusterIP   10.108.157.40   <none>        8080/TCP         4d
 \end{BashCode}
 
 La lectura de esta tabla es muy formativa para entender el modelo de red
-básico de Kubernetes:
+bÃ¡sico de Kubernetes:
 
 \begin{itemize}
 \tightlist
 \item
   \texttt{api-gateway} aparece como \texttt{NodePort}, lo que significa
   que Kubernetes publica el servicio en un puerto del nodo para aceptar
-  tráfico externo.
+  trÃ¡fico externo.
 \item
   \texttt{user-service}, \texttt{product-service},
   \texttt{order-service} y \texttt{postgres} se exponen como
   \texttt{ClusterIP}, por lo que solo son accesibles desde dentro del
-  clúster.
+  clÃºster.
 \item
-  Esta separación refleja una práctica habitual: concentrar el acceso
+  Esta separaciÃ³n refleja una prÃ¡ctica habitual: concentrar el acceso
   externo en un punto de entrada y mantener el resto de componentes como
   servicios internos.
 \end{itemize}
 
-Dicho de otra forma, el \texttt{api-gateway} actúa como fachada de la
-aplicación, mientras que los demás servicios quedan protegidos detrás de
+Dicho de otra forma, el \texttt{api-gateway} actÃºa como fachada de la
+aplicaciÃ³n, mientras que los demÃ¡s servicios quedan protegidos detrÃ¡s de
 la red interna de Kubernetes. Esto simplifica el encaminamiento,
-centraliza políticas de entrada y evita exponer innecesariamente cada
+centraliza polÃ­ticas de entrada y evita exponer innecesariamente cada
 microservicio hacia el exterior.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\chapter{Observabilidad de métricas y
+\chapter{Observabilidad de mÃ©tricas y
 trazas}\label{observabilidad-de-muxe9tricas-y-trazas}
 
-\section{Instrumentación con Actuator y
+\section{InstrumentaciÃ³n con Actuator y
 Micrometer}\label{instrumentaciuxf3n-con-actuator-y-micrometer}
 
-La primera capa de observabilidad se construyó con:
+La primera capa de observabilidad se construyÃ³ con:
 
 \begin{itemize}
 \tightlist
@@ -1545,7 +1553,7 @@ La primera capa de observabilidad se construyó con:
 \item
   Micrometer
 \item
-  exposición del endpoint \texttt{/actuator/prometheus}
+  exposiciÃ³n del endpoint \texttt{/actuator/prometheus}
 \end{itemize}
 
 Con ello, cada servicio pudo empezar a publicar:
@@ -1553,24 +1561,24 @@ Con ello, cada servicio pudo empezar a publicar:
 \begin{itemize}
 \tightlist
 \item
-  métricas JVM
+  mÃ©tricas JVM
 \item
-  métricas HTTP
+  mÃ©tricas HTTP
 \item
-  información básica de health y readiness
+  informaciÃ³n bÃ¡sica de health y readiness
 \end{itemize}
 
 \section{OpenTelemetry}\label{opentelemetry}
 
-Para las trazas distribuidas se introdujo OpenTelemetry como estándar de
-instrumentación y exportación. Esta decisión cambia de forma notable el
+Para las trazas distribuidas se introdujo OpenTelemetry como estÃ¡ndar de
+instrumentaciÃ³n y exportaciÃ³n. Esta decisiÃ³n cambia de forma notable el
 comportamiento de los microservicios: dejan de ser cajas negras que solo
-responden con un código HTTP y pasan a emitir información estructurada
-sobre qué operación están ejecutando, cuánto tarda cada tramo y cómo se
+responden con un cÃ³digo HTTP y pasan a emitir informaciÃ³n estructurada
+sobre quÃ© operaciÃ³n estÃ¡n ejecutando, cuÃ¡nto tarda cada tramo y cÃ³mo se
 encadenan las llamadas entre servicios.
 
-En Spring Boot, el \texttt{opentelemetry-spring-boot-starter} añade de
-forma automática instrumentación sobre elementos muy habituales del
+En Spring Boot, el \texttt{opentelemetry-spring-boot-starter} aÃ±ade de
+forma automÃ¡tica instrumentaciÃ³n sobre elementos muy habituales del
 framework:
 
 \begin{itemize}
@@ -1580,34 +1588,34 @@ framework:
 \item
   llamadas HTTP salientes realizadas con clientes compatibles
 \item
-  acceso a base de datos a través de JDBC
+  acceso a base de datos a travÃ©s de JDBC
 \item
-  metadatos del servicio, como nombre, entorno y namespace lógico
+  metadatos del servicio, como nombre, entorno y namespace lÃ³gico
 \end{itemize}
 
-Eso significa que una petición aparentemente simple, como un
+Eso significa que una peticiÃ³n aparentemente simple, como un
 \texttt{POST /api/orders}, deja rastros en varios niveles. El gateway
 crea un span de entrada, \texttt{order-service} crea spans de negocio y,
-además, aparecen spans derivados de las consultas a \texttt{user-service},
+ademÃ¡s, aparecen spans derivados de las consultas a \texttt{user-service},
 \texttt{product-service} y PostgreSQL. La traza final cuenta la historia
-completa de la operación.
+completa de la operaciÃ³n.
 
-Otro punto importante es que OpenTelemetry no es solo una librería, sino
-un modelo común. Permite describir telemetría con conceptos estándar,
+Otro punto importante es que OpenTelemetry no es solo una librerÃ­a, sino
+un modelo comÃºn. Permite describir telemetrÃ­a con conceptos estÃ¡ndar,
 como \texttt{trace}, \texttt{span}, atributos y contexto propagado.
-Gracias a eso, Jaeger puede reconstruir una petición completa aunque
+Gracias a eso, Jaeger puede reconstruir una peticiÃ³n completa aunque
 haya pasado por varios microservicios diferentes.
 
-Conviene introducir aquí el concepto de \textbf{OTLP}. OTLP significa
-\emph{OpenTelemetry Protocol}. Es el protocolo estándar con el que una
-aplicación instrumentada envía su telemetría a un collector o backend.
+Conviene introducir aquÃ­ el concepto de \textbf{OTLP}. OTLP significa
+\emph{OpenTelemetry Protocol}. Es el protocolo estÃ¡ndar con el que una
+aplicaciÃ³n instrumentada envÃ­a su telemetrÃ­a a un collector o backend.
 En este proyecto se usa OTLP sobre HTTP/Protobuf, lo que permite que
 cada microservicio entregue sus spans al OTel Collector sin depender de
 un formato propietario.
 
 \section{OpenTelemetry Collector}\label{opentelemetry-collector}
 
-El OTel Collector se desplegó como componente intermedio para:
+El OTel Collector se desplegÃ³ como componente intermedio para:
 
 \begin{itemize}
 \tightlist
@@ -1619,39 +1627,39 @@ El OTel Collector se desplegó como componente intermedio para:
   redirigirlos a Jaeger
 \end{itemize}
 
-Esta pieza es muy didáctica porque introduce la idea de canalizar
-telemetría a través de un punto de agregación y no enviar todo
-directamente desde la aplicación al backend final.
+Esta pieza es muy didÃ¡ctica porque introduce la idea de canalizar
+telemetrÃ­a a travÃ©s de un punto de agregaciÃ³n y no enviar todo
+directamente desde la aplicaciÃ³n al backend final.
 
 \section{Jaeger}\label{jaeger}
 
-Jaeger se incorporó para visualizar las trazas distribuidas. Gracias a
+Jaeger se incorporÃ³ para visualizar las trazas distribuidas. Gracias a
 ello fue posible:
 
 \begin{itemize}
 \tightlist
 \item
-  seguir una petición entre varios servicios
+  seguir una peticiÃ³n entre varios servicios
 \item
   detectar llamadas downstream
 \item
-  validar correlación con logs mediante \texttt{trace\_id}
+  validar correlaciÃ³n con logs mediante \texttt{trace\_id}
 \end{itemize}
 
 \section{Ejemplo de valor
 operativo}\label{ejemplo-de-valor-operativo}
 
-En un laboratorio simple podría parecer suficiente ver tiempos de
+En un laboratorio simple podrÃ­a parecer suficiente ver tiempos de
 respuesta en Grafana. Sin embargo, las trazas aportan una capa distinta:
 
 \begin{itemize}
 \tightlist
 \item
-  qué servicio llamó a cuál
+  quÃ© servicio llamÃ³ a cuÃ¡l
 \item
-  cuánto tardó cada salto
+  cuÃ¡nto tardÃ³ cada salto
 \item
-  dónde fallí una petición concreta
+  dÃ³nde fallÃ­ una peticiÃ³n concreta
 \end{itemize}
 
 Esa diferencia es crucial para un perfil de observabilidad.
@@ -1659,7 +1667,7 @@ Esa diferencia es crucial para un perfil de observabilidad.
 \section{Conceptos clave: traza, span y
 contexto}\label{conceptos-clave-traza-span-y-contexto}
 
-Para que esta sección sea realmente didáctica conviene detenerse en tres
+Para que esta secciÃ³n sea realmente didÃ¡ctica conviene detenerse en tres
 conceptos fundamentales:
 
 {\def\LTcaptype{none} % do not increment counter
@@ -1671,7 +1679,7 @@ conceptos fundamentales:
 \begin{minipage}[b]{\linewidth}\raggedright
 Concepto
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Definición sencilla
+DefiniciÃ³n sencilla
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Ejemplo en este proyecto
 \end{minipage} \\
@@ -1679,9 +1687,9 @@ Ejemplo en este proyecto
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-\texttt{Trace} & recorrido completo de una petición & una llamada al
-gateway que termina consultando pedidos y catálogos \\
-\texttt{Span} & una unidad de trabajo dentro de una traza & la ejecución
+\texttt{Trace} & recorrido completo de una peticiÃ³n & una llamada al
+gateway que termina consultando pedidos y catÃ¡logos \\
+\texttt{Span} & una unidad de trabajo dentro de una traza & la ejecuciÃ³n
 de \texttt{order.findById} \\
 \texttt{Context} & metadatos que viajan entre servicios &
 identificadores de trace y span propagados entre llamadas HTTP \\
@@ -1695,16 +1703,16 @@ En otras palabras:
 \item
   una \texttt{trace} cuenta la historia completa
 \item
-  un \texttt{span} cuenta un capítulo de esa historia
+  un \texttt{span} cuenta un capÃ­tulo de esa historia
 \item
-  el \texttt{context} permite que cada servicio sepa a qué historia
+  el \texttt{context} permite que cada servicio sepa a quÃ© historia
   pertenece
 \end{itemize}
 
 \section{Dependencias necesarias en Spring
 Boot}\label{dependencias-necesarias-en-spring-boot}
 
-En los módulos de aplicación se añadieron dependencias como estas:
+En los mÃ³dulos de aplicaciÃ³n se aÃ±adieron dependencias como estas:
 
 \begin{XmlCode}
 <dependency>
@@ -1721,7 +1729,7 @@ En los módulos de aplicación se añadieron dependencias como estas:
 </dependency>
 \end{XmlCode}
 
-\section{Para qué sirve cada
+\section{Para quÃ© sirve cada
 dependencia}\label{para-quuxe9-sirve-cada-dependencia}
 
 \begin{itemize}
@@ -1729,39 +1737,39 @@ dependencia}\label{para-quuxe9-sirve-cada-dependencia}
 \item
   \texttt{spring-boot-starter-actuator}: expone endpoints operativos
   como \texttt{health}, \texttt{info} y \texttt{prometheus}. Gracias a
-  él, Kubernetes puede consultar sondas de salud y Prometheus puede
-  scrapear métricas sin depender de código ad hoc.
+  Ã©l, Kubernetes puede consultar sondas de salud y Prometheus puede
+  scrapear mÃ©tricas sin depender de cÃ³digo ad hoc.
 \item
-  \texttt{micrometer-registry-prometheus}: adapta el modelo de métricas
+  \texttt{micrometer-registry-prometheus}: adapta el modelo de mÃ©tricas
   internas de Micrometer al formato que entiende Prometheus. Sin esta
   dependencia, Spring puede medir cosas, pero no publicarlas de la forma
-  esperada por el backend de métricas.
+  esperada por el backend de mÃ©tricas.
 \item
-  \texttt{opentelemetry-spring-boot-starter}: habilita instrumentación
-  automática de peticiones HTTP, cliente web y acceso a base de datos,
-  además de la exportación de spans mediante OTLP.
+  \texttt{opentelemetry-spring-boot-starter}: habilita instrumentaciÃ³n
+  automÃ¡tica de peticiones HTTP, cliente web y acceso a base de datos,
+  ademÃ¡s de la exportaciÃ³n de spans mediante OTLP.
 \end{itemize}
 
-La combinación de estas tres piezas transforma el servicio en algo mucho
-más observable. Antes de instrumentarlo, un microservicio es básicamente
-una API que responde. Después de instrumentarlo, también es capaz de:
+La combinaciÃ³n de estas tres piezas transforma el servicio en algo mucho
+mÃ¡s observable. Antes de instrumentarlo, un microservicio es bÃ¡sicamente
+una API que responde. DespuÃ©s de instrumentarlo, tambiÃ©n es capaz de:
 
 \begin{itemize}
 \tightlist
 \item
-  declarar si está sano o no
+  declarar si estÃ¡ sano o no
 \item
-  publicar métricas de JVM y de tráfico HTTP
+  publicar mÃ©tricas de JVM y de trÃ¡fico HTTP
 \item
   propagar contexto distribuido entre llamadas
 \item
-  dejar constancia temporal de qué operación se está ejecutando
+  dejar constancia temporal de quÃ© operaciÃ³n se estÃ¡ ejecutando
 \end{itemize}
 
-\section{Configuración real de
-telemetría}\label{configuraciuxf3n-real-de-telemetruxeda}
+\section{ConfiguraciÃ³n real de
+telemetrÃ­a}\label{configuraciuxf3n-real-de-telemetruxeda}
 
-La configuración de \texttt{api-gateway} es representativa:
+La configuraciÃ³n de \texttt{api-gateway} es representativa:
 
 \begin{PropertiesCode}
 management.endpoints.web.exposure.include=health,info,prometheus
@@ -1778,87 +1786,87 @@ otel.exporter.otlp.endpoint=http://otel-collector.observability.svc.cluster.loca
 otel.exporter.otlp.protocol=http/protobuf
 \end{PropertiesCode}
 
-\section{Explicación detallada de esta
-configuración}\label{explicaciuxf3n-detallada-de-esta-configuraciuxf3n}
+\section{ExplicaciÃ³n detallada de esta
+configuraciÃ³n}\label{explicaciuxf3n-detallada-de-esta-configuraciuxf3n}
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{management.endpoints.web.exposure.include}: decide qué
+  \texttt{management.endpoints.web.exposure.include}: decide quÃ©
   endpoints operativos quedan accesibles. En este caso se exponen
   \texttt{health}, \texttt{info} y \texttt{prometheus}, que cubren
-  salud, metadatos y métricas.
+  salud, metadatos y mÃ©tricas.
 \item
   \texttt{otel.resource.attributes.service.name}: define el nombre con
-  el que el servicio aparecerá en Jaeger y en el Collector. Es clave
+  el que el servicio aparecerÃ¡ en Jaeger y en el Collector. Es clave
   para distinguir correctamente \texttt{api-gateway},
   \texttt{user-service}, \texttt{product-service} y
   \texttt{order-service}.
 \item
   \texttt{service.namespace}: agrupa varios servicios bajo una misma
-  plataforma lógica. En un entorno mayor esto ayuda a separar dominios o
+  plataforma lÃ³gica. En un entorno mayor esto ayuda a separar dominios o
   plataformas.
 \item
-  \texttt{deployment.environment}: añade contexto de entorno. Es útil
-  para diferenciar trazas de laboratorio, preproducción o producción.
+  \texttt{deployment.environment}: aÃ±ade contexto de entorno. Es Ãºtil
+  para diferenciar trazas de laboratorio, preproducciÃ³n o producciÃ³n.
 \item
   \texttt{otel.traces.exporter=otlp}: indica que las trazas se exportan
-  utilizando OTLP, el protocolo estándar de OpenTelemetry.
+  utilizando OTLP, el protocolo estÃ¡ndar de OpenTelemetry.
 \item
-  \texttt{otel.metrics.exporter=none}: evita duplicar métricas por la
-  vía de OTel, porque en este laboratorio las métricas se gestionan con
+  \texttt{otel.metrics.exporter=none}: evita duplicar mÃ©tricas por la
+  vÃ­a de OTel, porque en este laboratorio las mÃ©tricas se gestionan con
   Actuator + Micrometer + Prometheus.
 \item
   \texttt{otel.logs.exporter=none}: evita mezclar una segunda estrategia
-  de logs, ya que la canalización de logs se resuelve con ECS JSON,
+  de logs, ya que la canalizaciÃ³n de logs se resuelve con ECS JSON,
   Filebeat y Elasticsearch.
 \item
   \texttt{otel.exporter.otlp.endpoint}: apunta al OTel Collector dentro
-  del clúster. Esto desacopla a los servicios del backend final de
+  del clÃºster. Esto desacopla a los servicios del backend final de
   trazas y permite insertar procesamiento intermedio.
 \item
   \texttt{otel.exporter.otlp.protocol=http/protobuf}: define la forma
-  concreta en la que el microservicio envía la telemetría. En este caso,
-  se usa HTTP con serialización Protobuf.
+  concreta en la que el microservicio envÃ­a la telemetrÃ­a. En este caso,
+  se usa HTTP con serializaciÃ³n Protobuf.
 \end{itemize}
 
-Esta configuración tiene un efecto muy importante sobre el diseño del
+Esta configuraciÃ³n tiene un efecto muy importante sobre el diseÃ±o del
 laboratorio: cada microservicio ya no necesita conocer directamente a
 Jaeger. Solo sabe que debe exportar spans al OTel Collector. Eso reduce
 acoplamiento, simplifica cambios futuros y encaja mejor con una
 arquitectura real de observabilidad.
 
-También conviene entender qué resultados prácticos produce. Gracias a
-esta configuración, una petición de negocio puede dejar a la vez:
+TambiÃ©n conviene entender quÃ© resultados prÃ¡cticos produce. Gracias a
+esta configuraciÃ³n, una peticiÃ³n de negocio puede dejar a la vez:
 
 \begin{itemize}
 \tightlist
 \item
-  métricas Prometheus sobre tiempos y contadores HTTP
+  mÃ©tricas Prometheus sobre tiempos y contadores HTTP
 \item
   spans distribuidos reconstruibles en Jaeger
 \item
   logs estructurados correlables mediante \texttt{trace\_id}
 \end{itemize}
 
-Este diseño es importante. No todo se manda por OpenTelemetry. En este
+Este diseÃ±o es importante. No todo se manda por OpenTelemetry. En este
 laboratorio se separan responsabilidades:
 
 \begin{itemize}
 \tightlist
 \item
-  métricas -\textgreater{} Prometheus
+  mÃ©tricas -\textgreater{} Prometheus
 \item
   trazas -\textgreater{} OpenTelemetry + Jaeger
 \item
   logs -\textgreater{} ECS JSON + Filebeat + Elasticsearch
 \end{itemize}
 
-\section{\texorpdfstring{Instrumentación manual en
-\texttt{order-service}}{9.11 Instrumentación manual en order-service}}\label{instrumentaciuxf3n-manual-en-order-service}
+\section{\texorpdfstring{InstrumentaciÃ³n manual en
+\texttt{order-service}}{9.11 InstrumentaciÃ³n manual en order-service}}\label{instrumentaciuxf3n-manual-en-order-service}
 
-Aunque el starter de OpenTelemetry ya aporta instrumentación automática,
-se añadió también instrumentación manual en puntos de interés. Ejemplo:
+Aunque el starter de OpenTelemetry ya aporta instrumentaciÃ³n automÃ¡tica,
+se aÃ±adiÃ³ tambiÃ©n instrumentaciÃ³n manual en puntos de interÃ©s. Ejemplo:
 
 \begin{JavaCode}
 @Override
@@ -1871,13 +1879,13 @@ public OrderDto findById(@SpanAttribute("order.id") Long id) {
 }
 \end{JavaCode}
 
-Este tipo de anotación cambia mucho la calidad interpretativa de las
-trazas. Sin ella, Jaeger mostraría principalmente spans automáticos de
-HTTP y JDBC. Con ella, aparece una operación de negocio nombrada de
-forma explícita, más cercana al lenguaje del dominio.
+Este tipo de anotaciÃ³n cambia mucho la calidad interpretativa de las
+trazas. Sin ella, Jaeger mostrarÃ­a principalmente spans automÃ¡ticos de
+HTTP y JDBC. Con ella, aparece una operaciÃ³n de negocio nombrada de
+forma explÃ­cita, mÃ¡s cercana al lenguaje del dominio.
 
-Otro fragmento representativo del mismo servicio es la resolución de
-usuarios y productos durante la creación de pedidos:
+Otro fragmento representativo del mismo servicio es la resoluciÃ³n de
+usuarios y productos durante la creaciÃ³n de pedidos:
 
 \begin{JavaCode}
 private UserSummaryDto fetchUser(Long userId) {
@@ -1897,41 +1905,41 @@ private ProductSummaryDto fetchProduct(Long productId) {
 }
 \end{JavaCode}
 
-Cuando esta lógica se combina con OpenTelemetry, Jaeger no solo enseña
-que hubo una llamada a \texttt{POST /api/orders}. También enseña qué
-consultas downstream se dispararon, en qué orden temporal ocurrieron y
-qué parte del tiempo total consumió cada salto.
+Cuando esta lÃ³gica se combina con OpenTelemetry, Jaeger no solo enseÃ±a
+que hubo una llamada a \texttt{POST /api/orders}. TambiÃ©n enseÃ±a quÃ©
+consultas downstream se dispararon, en quÃ© orden temporal ocurrieron y
+quÃ© parte del tiempo total consumiÃ³ cada salto.
 
-\section{\texorpdfstring{Qué enseña
-\texttt{@WithSpan}}{9.12 Qué enseña @WithSpan}}\label{quuxe9-enseuxf1a-withspan}
+\section{\texorpdfstring{QuÃ© enseÃ±a
+\texttt{@WithSpan}}{9.12 QuÃ© enseÃ±a @WithSpan}}\label{quuxe9-enseuxf1a-withspan}
 
 \begin{itemize}
 \tightlist
 \item
-  crea un span explícito con un nombre semántico
+  crea un span explÃ­cito con un nombre semÃ¡ntico
 \item
-  hace visible una operación de negocio concreta en la traza
+  hace visible una operaciÃ³n de negocio concreta en la traza
 \item
-  permite enriquecer el span con atributos útiles como \texttt{order.id}
+  permite enriquecer el span con atributos Ãºtiles como \texttt{order.id}
 \end{itemize}
 
-Esto tiene mucho valor didáctico porque enseña la diferencia entre:
+Esto tiene mucho valor didÃ¡ctico porque enseÃ±a la diferencia entre:
 
 \begin{itemize}
 \tightlist
 \item
-  observabilidad automática
+  observabilidad automÃ¡tica
 \item
   observabilidad intencional
 \end{itemize}
 
-La automática es útil, pero la intencional hace que las trazas sean
-mucho más interpretables.
+La automÃ¡tica es Ãºtil, pero la intencional hace que las trazas sean
+mucho mÃ¡s interpretables.
 
-\section{Configuración del OTel
+\section{ConfiguraciÃ³n del OTel
 Collector}\label{configuraciuxf3n-del-otel-collector}
 
-El collector se definió así:
+El collector se definiÃ³ asÃ­:
 
 \begin{YamlCode}
 receivers:
@@ -1954,27 +1962,27 @@ exporters:
       insecure: true
 \end{YamlCode}
 
-\section{Cómo leer esta
-configuración}\label{cuxf3mo-leer-esta-configuraciuxf3n}
+\section{CÃ³mo leer esta
+configuraciÃ³n}\label{cuxf3mo-leer-esta-configuraciuxf3n}
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{receivers}: indica cómo recibe telemetría el collector.
+  \texttt{receivers}: indica cÃ³mo recibe telemetrÃ­a el collector.
 \item
-  \texttt{grpc} y \texttt{http}: permiten varias formas de ingestión.
+  \texttt{grpc} y \texttt{http}: permiten varias formas de ingestiÃ³n.
 \item
-  \texttt{batch}: agrupa spans para enviarlos de forma más eficiente.
+  \texttt{batch}: agrupa spans para enviarlos de forma mÃ¡s eficiente.
 \item
   \texttt{debug}: ayuda a diagnosticar en laboratorio.
 \item
-  \texttt{otlp}: reenvía las trazas a Jaeger.
+  \texttt{otlp}: reenvÃ­a las trazas a Jaeger.
 \end{itemize}
 
 \section{Flujo de una traza en este
 proyecto}\label{flujo-de-una-traza-en-este-proyecto}
 
-El flujo real de una petición instrumentada es:
+El flujo real de una peticiÃ³n instrumentada es:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1989,9 +1997,9 @@ El flujo real de una petición instrumentada es:
   \texttt{order-service} crea spans propios y consulta
   \texttt{user-service} y \texttt{product-service}
 \item
-  los spans se envían al OTel Collector
+  los spans se envÃ­an al OTel Collector
 \item
-  el collector los reenvía a Jaeger
+  el collector los reenvÃ­a a Jaeger
 \item
   Jaeger permite reconstruir la traza completa
 \end{enumerate}
@@ -2001,7 +2009,7 @@ Jaeger}\label{traza-distribuida-real-en-jaeger}
 
 La mejor evidencia visual de esta parte del proyecto es una traza real
 generada desde \texttt{api-gateway} al crear un pedido. En esa imagen se
-aprecia cómo la operación de alto nivel se descompone en spans internos,
+aprecia cÃ³mo la operaciÃ³n de alto nivel se descompone en spans internos,
 consultas a \texttt{user-service}, llamadas a \texttt{product-service} y
 operaciones JDBC en \texttt{order-service}.
 
@@ -2012,64 +2020,64 @@ operaciones JDBC en \texttt{order-service}.
 }{%
   \fbox{\parbox{0.92\textwidth}{\centering
   Guardar la captura de Jaeger en \texttt{docs/assets/jaeger/30-jaeger-trace-overview.png}\\
-  para que esta figura se renderice automáticamente en el PDF.}}
+  para que esta figura se renderice automÃ¡ticamente en el PDF.}}
 }
-\caption{Traza distribuida real de \texttt{POST /api/orders} en Jaeger. La vista temporal permite observar el span de entrada en \texttt{api-gateway}, la operación de negocio en \texttt{order-service} y las llamadas encadenadas a \texttt{user-service}, \texttt{product-service} y base de datos.}
+\caption{Traza distribuida real de \texttt{POST /api/orders} en Jaeger. La vista temporal permite observar el span de entrada en \texttt{api-gateway}, la operaciÃ³n de negocio en \texttt{order-service} y las llamadas encadenadas a \texttt{user-service}, \texttt{product-service} y base de datos.}
 \end{figure}
 
-Esta figura tiene especial valor pedagógico porque resume, en una sola
-pantalla, el resultado de todas las decisiones técnicas introducidas en
+Esta figura tiene especial valor pedagÃ³gico porque resume, en una sola
+pantalla, el resultado de todas las decisiones tÃ©cnicas introducidas en
 esta parte del laboratorio:
 
 \begin{itemize}
 \tightlist
 \item
-  dependencias de Spring para métricas y trazas
+  dependencias de Spring para mÃ©tricas y trazas
 \item
-  configuración de recursos y exportadores OTLP
+  configuraciÃ³n de recursos y exportadores OTLP
 \item
   despliegue del OTel Collector dentro de Kubernetes
 \item
-  propagación de contexto entre microservicios
+  propagaciÃ³n de contexto entre microservicios
 \item
-  instrumentación automática y manual combinadas
+  instrumentaciÃ³n automÃ¡tica y manual combinadas
 \end{itemize}
 
 Dicho de otra forma, esta captura no es un adorno visual, sino la prueba
-operativa de que la observabilidad distribuida está funcionando y de que
+operativa de que la observabilidad distribuida estÃ¡ funcionando y de que
 la llamada \texttt{POST /api/orders} puede explicarse extremo a extremo.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\chapter{Métricas de plataforma con Prometheus y
+\chapter{MÃ©tricas de plataforma con Prometheus y
 Grafana}\label{muxe9tricas-de-plataforma-con-prometheus-y-grafana}
 
 \section{Prometheus como backend de
-métricas y motor de scraping}\label{prometheus-como-backend-de-muxe9tricas}
+mÃ©tricas y motor de scraping}\label{prometheus-como-backend-de-muxe9tricas}
 
-Prometheus se desplegó con manifiestos propios y un scraping ajustado
-tanto a la aplicación como al clúster. Esto permitió unificar en el
+Prometheus se desplegÃ³ con manifiestos propios y un scraping ajustado
+tanto a la aplicaciÃ³n como al clÃºster. Esto permitiÃ³ unificar en el
 mismo backend:
 
 \begin{itemize}
 \tightlist
 \item
-  métricas de microservicios
+  mÃ©tricas de microservicios
 \item
-  métricas del nodo
+  mÃ©tricas del nodo
 \item
-  métricas del clúster
+  mÃ©tricas del clÃºster
 \end{itemize}
 
-Para entender bien esta parte conviene explicar qué significa
-\textbf{scraping}. Prometheus no espera a que las aplicaciones le envíen
-métricas de forma activa. Funciona al revés: el servidor Prometheus
-consulta periódicamente unos endpoints HTTP y extrae de ellos el estado
-actual de las métricas. Ese proceso de ir a un endpoint, leer su
+Para entender bien esta parte conviene explicar quÃ© significa
+\textbf{scraping}. Prometheus no espera a que las aplicaciones le envÃ­en
+mÃ©tricas de forma activa. Funciona al revÃ©s: el servidor Prometheus
+consulta periÃ³dicamente unos endpoints HTTP y extrae de ellos el estado
+actual de las mÃ©tricas. Ese proceso de ir a un endpoint, leer su
 contenido y almacenarlo como una nueva muestra temporal es precisamente
 el scraping.
 
-En este laboratorio, cada microservicio expone métricas en
+En este laboratorio, cada microservicio expone mÃ©tricas en
 \texttt{/actuator/prometheus} gracias a Spring Boot Actuator y
 Micrometer. Prometheus visita ese endpoint a intervalos regulares,
 parsea el texto en formato Prometheus y guarda series temporales con
@@ -2083,28 +2091,28 @@ Desde un punto de vista conceptual, el flujo es este:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  el microservicio publica métricas en un endpoint HTTP
+  el microservicio publica mÃ©tricas en un endpoint HTTP
 \\item
-  Prometheus conoce la URL de ese endpoint porque está declarada en su configuración
+  Prometheus conoce la URL de ese endpoint porque estÃ¡ declarada en su configuraciÃ³n
 \item
-  Prometheus consulta periódicamente ese endpoint
+  Prometheus consulta periÃ³dicamente ese endpoint
 \item
   almacena las muestras como series temporales
 \item
-  Grafana consulta después esas series mediante PromQL
+  Grafana consulta despuÃ©s esas series mediante PromQL
 \end{enumerate}
 
-Este diseño tiene varias ventajas didácticas. En primer lugar, hace muy
-visible la diferencia entre \emph{emitir} métricas y \emph{almacenarlas}.
+Este diseÃ±o tiene varias ventajas didÃ¡cticas. En primer lugar, hace muy
+visible la diferencia entre \emph{emitir} mÃ©tricas y \emph{almacenarlas}.
 El microservicio solo expone su estado actual; quien lo recoge y lo
-convierte en histórico es Prometheus. En segundo lugar, permite
-incorporar al mismo backend tanto métricas de aplicación como métricas
+convierte en histÃ³rico es Prometheus. En segundo lugar, permite
+incorporar al mismo backend tanto mÃ©tricas de aplicaciÃ³n como mÃ©tricas
 de plataforma, siempre que exista un endpoint scrapeable.
 
-\section{Grafana como capa de visualización y
+\section{Grafana como capa de visualizaciÃ³n y
 alertado}\label{grafana-como-capa-de-visualizaciuxf3n-y-alertado}
 
-Grafana se provisionó con:
+Grafana se provisionÃ³ con:
 
 \begin{itemize}
 \tightlist
@@ -2116,13 +2124,13 @@ Grafana se provisionó con:
   dashboards importados y dashboards propios
 \end{itemize}
 
-Este punto tiene mucho valor práctico, porque enseña no solo a
+Este punto tiene mucho valor prÃ¡ctico, porque enseÃ±a no solo a
 ``instalar Grafana'', sino a operarla correctamente como parte de una
 plataforma reproducible.
 
-\section{Métricas del clúster}\label{muxe9tricas-del-cluxfaster}
+\section{MÃ©tricas del clÃºster}\label{muxe9tricas-del-cluxfaster}
 
-Además de la aplicación se incorporaron:
+AdemÃ¡s de la aplicaciÃ³n se incorporaron:
 
 \begin{itemize}
 \tightlist
@@ -2134,11 +2142,11 @@ Además de la aplicación se incorporaron:
   \texttt{node-exporter}
 \end{itemize}
 
-Con esto el laboratorio dejó de ser solo observabilidad de backend y
-pasí a cubrir también la salud del clúster, que es una competencia
+Con esto el laboratorio dejÃ³ de ser solo observabilidad de backend y
+pasÃ­ a cubrir tambiÃ©n la salud del clÃºster, que es una competencia
 esencial en roles de plataforma.
 
-\section{Configuración real de scraping en
+\section{ConfiguraciÃ³n real de scraping en
 Prometheus}\label{configuraciuxf3n-real-de-scraping-en-prometheus}
 
 El \texttt{ConfigMap} de Prometheus contiene entradas muy expresivas del
@@ -2159,63 +2167,63 @@ enfoque seguido:
     - targets: ["node-exporter.observability.svc.cluster.local:9100"]
 \end{YamlCode}
 
-Cada bloque de scraping define qué debe consultar Prometheus y cómo debe
-nombrarlo internamente. Aquí aparecen varias ideas importantes:
+Cada bloque de scraping define quÃ© debe consultar Prometheus y cÃ³mo debe
+nombrarlo internamente. AquÃ­ aparecen varias ideas importantes:
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{job\_name}: agrupa y etiqueta el origen de las métricas. Es el
-  nombre lógico con el que después se filtran series y se construyen
+  \texttt{job\_name}: agrupa y etiqueta el origen de las mÃ©tricas. Es el
+  nombre lÃ³gico con el que despuÃ©s se filtran series y se construyen
   paneles en Grafana.
 \item
   \texttt{metrics\_path}: indica la ruta HTTP exacta que expone las
-  métricas. En los microservicios de Spring es
+  mÃ©tricas. En los microservicios de Spring es
   \texttt{/actuator/prometheus}.
 \item
   \texttt{static\_configs}: lista los endpoints que Prometheus debe
-  visitar. En este laboratorio se ha usado configuración estática para
-  que el comportamiento sea fácil de entender y reproducir.
+  visitar. En este laboratorio se ha usado configuraciÃ³n estÃ¡tica para
+  que el comportamiento sea fÃ¡cil de entender y reproducir.
 \end{itemize}
 
-\section{Cómo funciona el scraping en la
-práctica}\label{quuxe9-significa-esto-en-la-pruxe1ctica}
+\section{CÃ³mo funciona el scraping en la
+prÃ¡ctica}\label{quuxe9-significa-esto-en-la-pruxe1ctica}
 
-Prometheus no distingue ``mágicamente'' entre aplicación y plataforma.
-Es el operador quien decide qué scrapea y cómo lo agrupa:
+Prometheus no distingue ``mÃ¡gicamente'' entre aplicaciÃ³n y plataforma.
+Es el operador quien decide quÃ© scrapea y cÃ³mo lo agrupa:
 
 \begin{itemize}
 \tightlist
 \item
   los microservicios se scrapean por \texttt{/actuator/prometheus}
 \item
-  \texttt{kube-state-metrics} aporta estado lógico de objetos de
-  Kubernetes, como pods, deployments o réplicas disponibles
+  \texttt{kube-state-metrics} aporta estado lÃ³gico de objetos de
+  Kubernetes, como pods, deployments o rÃ©plicas disponibles
 \item
-  \texttt{node-exporter} aporta métricas del nodo, como CPU, memoria o
-  presión de recursos
+  \texttt{node-exporter} aporta mÃ©tricas del nodo, como CPU, memoria o
+  presiÃ³n de recursos
 \end{itemize}
 
 Eso significa que el mismo Prometheus puede responder preguntas muy
- distintas entre sí. Por ejemplo:
+ distintas entre sÃ­. Por ejemplo:
 
 \begin{itemize}
 \tightlist
 \item
-  ``¿cuántas peticiones por segundo recibe \texttt{api-gateway}?''
+  ``Â¿cuÃ¡ntas peticiones por segundo recibe \texttt{api-gateway}?''
 \item
-  ``¿cuánta heap JVM está consumiendo \texttt{order-service}?''
+  ``Â¿cuÃ¡nta heap JVM estÃ¡ consumiendo \texttt{order-service}?''
 \item
-  ``¿están todos los targets de scraping en estado \texttt{UP}?''
+  ``Â¿estÃ¡n todos los targets de scraping en estado \texttt{UP}?''
 \item
-  ``¿el nodo de Minikube está saturado?''
+  ``Â¿el nodo de Minikube estÃ¡ saturado?''
 \end{itemize}
 
 Esa mezcla es justo la que convierte a Prometheus en el backend central
-de métricas del laboratorio. No solo recoge la salud de la aplicación,
-sino también la del entorno que la ejecuta.
+de mÃ©tricas del laboratorio. No solo recoge la salud de la aplicaciÃ³n,
+sino tambiÃ©n la del entorno que la ejecuta.
 
-Un ejemplo sencillo de cómo se traduce esto en resultados sería el
+Un ejemplo sencillo de cÃ³mo se traduce esto en resultados serÃ­a el
 siguiente:
 
 \begin{PlainCode}
@@ -2225,13 +2233,13 @@ process_resident_memory_bytes{job="order-service"} = ...
 kube_deployment_status_replicas_available{deployment="api-gateway"} = ...
 \end{PlainCode}
 
-En ese pequeño conjunto ya se combinan cuatro perspectivas distintas:
-conectividad del target, tráfico HTTP, consumo de memoria del proceso y
-estado lógico del deployment en Kubernetes.
+En ese pequeÃ±o conjunto ya se combinan cuatro perspectivas distintas:
+conectividad del target, trÃ¡fico HTTP, consumo de memoria del proceso y
+estado lÃ³gico del deployment en Kubernetes.
 
 \section{Datasource provisionado en`r`nGrafana}\label{datasource-provisionado-en-grafana}
 
-El datasource quedó definido de forma declarativa:
+El datasource quedÃ³ definido de forma declarativa:
 
 \begin{YamlCode}
 datasources:
@@ -2243,14 +2251,14 @@ datasources:
     isDefault: true
 \end{YamlCode}
 
-\section{Evidencia visual de métricas,
+\section{Evidencia visual de mÃ©tricas,
 dashboards y targets}\label{evidencia-visual-de-muxe9tricas-dashboards-y-targets}
 
 La parte visual de esta capa se puede resumir con dos evidencias muy
 complementarias. La primera muestra el dashboard operativo construido en
 Grafana a partir de las series almacenadas en Prometheus. La segunda
-muestra el estado de los targets, es decir, la confirmación de que el
-scraping realmente está funcionando sobre los endpoints esperados.
+muestra el estado de los targets, es decir, la confirmaciÃ³n de que el
+scraping realmente estÃ¡ funcionando sobre los endpoints esperados.
 
 \begin{figure}[H]
 \centering
@@ -2259,15 +2267,15 @@ scraping realmente está funcionando sobre los endpoints esperados.
 }{%
   \fbox{\parbox{0.92\textwidth}{\centering
   Guardar la captura de Grafana en \texttt{docs/assets/grafana/20-grafana-dashboard-general.png}\\
-  para que esta figura se renderice automáticamente en el PDF.}}
+  para que esta figura se renderice automÃ¡ticamente en el PDF.}}
 }
-\caption{Dashboard general de plataforma en Grafana construido sobre Prometheus. En él se combinan paneles de disponibilidad, peticiones por segundo, errores 5xx, latencia, consumo de heap JVM y duración de scraping.}
+\caption{Dashboard general de plataforma en Grafana construido sobre Prometheus. En Ã©l se combinan paneles de disponibilidad, peticiones por segundo, errores 5xx, latencia, consumo de heap JVM y duraciÃ³n de scraping.}
 \end{figure}
 
 Este dashboard demuestra varias ideas a la vez. En un mismo panel se
-juntan métricas de aplicación y métricas operativas: estado \texttt{UP}
+juntan mÃ©tricas de aplicaciÃ³n y mÃ©tricas operativas: estado \texttt{UP}
 de servicios, throughput HTTP, errores y comportamiento de memoria.
-Dicho de otra forma, no se trata solo de ``tener gráficas'', sino de
+Dicho de otra forma, no se trata solo de ``tener grÃ¡ficas'', sino de
 poder responder preguntas operativas con una sola vista.
 
 \begin{figure}[H]
@@ -2277,17 +2285,17 @@ poder responder preguntas operativas con una sola vista.
 }{%
   \fbox{\parbox{0.92\textwidth}{\centering
   Guardar la captura de Prometheus en \texttt{docs/assets/prometheus/22-prometheus-targets.png}\\
-  para que esta figura se renderice automáticamente en el PDF.}}
+  para que esta figura se renderice automÃ¡ticamente en el PDF.}}
 }
 \caption{Vista de targets de Prometheus en estado \texttt{UP}. Esta pantalla valida que el scraping alcanza correctamente a los microservicios instrumentados y a componentes de plataforma como \texttt{kube-state-metrics}, \texttt{node-exporter}, \texttt{grafana} y el propio \texttt{prometheus}.}
 \end{figure}
 
-Esta segunda figura es especialmente importante porque conecta la teoría 
+Esta segunda figura es especialmente importante porque conecta la teorÃ­a 
 del scraping con una evidencia operativa real.
 No basta con escribir un \texttt{job\_name} en el \texttt{ConfigMap}; hay
 que comprobar que Prometheus consigue resolver el endpoint, consultar la
-ruta de métricas y almacenarla sin error. La columna de estado
-\texttt{UP}, la duración del scrape y la ausencia de errores permiten
+ruta de mÃ©tricas y almacenarla sin error. La columna de estado
+\texttt{UP}, la duraciÃ³n del scrape y la ausencia de errores permiten
 confirmarlo.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -2295,28 +2303,28 @@ confirmarlo.
 \chapter{Logging centralizado y logs
 estructurados}\label{logging-centralizado-y-logs-estructurados}
 
-\section{Introducción del stack
+\section{IntroducciÃ³n del stack
 Elastic}\label{introducciuxf3n-del-stack-elastic}
 
-Para cubrir la dimensión de logs del laboratorio se desplegó un stack
-basado en tecnologías Elastic. Este bloque resuelve una necesidad muy
+Para cubrir la dimensiÃ³n de logs del laboratorio se desplegÃ³ un stack
+basado en tecnologÃ­as Elastic. Este bloque resuelve una necesidad muy
 concreta: almacenar, indexar, enriquecer y consultar eventos generados
 por los microservicios y por la propia plataforma. En un sistema
-mínimamente distribuido, leer la salida de consola de un único pod deja
-rápidamente de ser suficiente. En cuanto intervienen varios servicios,
+mÃ­nimamente distribuido, leer la salida de consola de un Ãºnico pod deja
+rÃ¡pidamente de ser suficiente. En cuanto intervienen varios servicios,
 trazas concurrentes y reinicios de contenedores, hace falta una capa de
 logging centralizado que permita responder preguntas como estas:
 
 \begin{itemize}
 \tightlist
 \item
-  qué servicio emitió el evento
+  quÃ© servicio emitiÃ³ el evento
 \item
-  en qué instante exacto ocurrió
+  en quÃ© instante exacto ocurriÃ³
 \item
-  qué nivel de severidad tenía
+  quÃ© nivel de severidad tenÃ­a
 \item
-  a qué pod, namespace y contenedor pertenecía
+  a quÃ© pod, namespace y contenedor pertenecÃ­a
 \item
   si el evento se relaciona con una traza concreta
 \end{itemize}
@@ -2326,37 +2334,37 @@ Para cubrir esa necesidad se desplegaron estos componentes:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Elasticsearch}, como motor de almacenamiento, indexación y
-  búsqueda de documentos.
+  \textbf{Elasticsearch}, como motor de almacenamiento, indexaciÃ³n y
+  bÃºsqueda de documentos.
 \item
-  \textbf{Kibana}, como interfaz de exploración, filtrado, visualización
+  \textbf{Kibana}, como interfaz de exploraciÃ³n, filtrado, visualizaciÃ³n
   y alertado sobre los logs indexados.
 \item
   \textbf{Filebeat}, como agente ligero encargado de leer los logs de
   contenedores en Kubernetes y enviarlos aguas arriba.
 \item
   \textbf{ECK} (\emph{Elastic Cloud on Kubernetes}), como operador que
-  simplifica el despliegue y la gestión de los recursos Elastic dentro
-  del clúster.
+  simplifica el despliegue y la gestiÃ³n de los recursos Elastic dentro
+  del clÃºster.
 \end{itemize}
 
-La elección de este stack no responde solo a su popularidad. También es
-especialmente útil en un laboratorio didáctico porque obliga a entender
+La elecciÃ³n de este stack no responde solo a su popularidad. TambiÃ©n es
+especialmente Ãºtil en un laboratorio didÃ¡ctico porque obliga a entender
 varias capas de observabilidad a la vez: formato de los logs,
-recolección, enriquecimiento con metadatos, indexación, búsqueda por
-campos y correlación con métricas y trazas.
+recolecciÃ³n, enriquecimiento con metadatos, indexaciÃ³n, bÃºsqueda por
+campos y correlaciÃ³n con mÃ©tricas y trazas.
 
-\section{Qué es Elasticsearch y por qué se usa en este
+\section{QuÃ© es Elasticsearch y por quÃ© se usa en este
 proyecto}\label{quuxe9-es-elasticsearch-y-por-quuxe9-se-usa-en-este-proyecto}
 
 Elasticsearch es un motor distribuido orientado a almacenar documentos y
 consultarlos de forma eficiente. En este laboratorio cada evento de log
-acaba convirtiéndose en un documento indexado con campos estructurados,
+acaba convirtiÃ©ndose en un documento indexado con campos estructurados,
 por ejemplo \texttt{service.name}, \texttt{log.level},
 \texttt{trace\_id}, \texttt{message} o metadatos de Kubernetes.
 
 Eso cambia por completo la forma de trabajar con logs. En lugar de tener
-una secuencia lineal de texto, Elasticsearch permite hacer búsquedas y
+una secuencia lineal de texto, Elasticsearch permite hacer bÃºsquedas y
 agregaciones sobre campos concretos. Por ejemplo, se puede pedir:
 
 \begin{itemize}
@@ -2368,18 +2376,18 @@ agregaciones sobre campos concretos. Por ejemplo, se puede pedir:
 \item
   todos los eventos emitidos por un pod concreto
 \item
-  la distribución temporal de errores en una franja horaria
+  la distribuciÃ³n temporal de errores en una franja horaria
 \end{itemize}
 
-Desde el punto de vista de arquitectura, Elasticsearch actúa como el
+Desde el punto de vista de arquitectura, Elasticsearch actÃºa como el
 backend persistente de la capa de logs. Filebeat le entrega eventos ya
-procesados y Kibana consulta después esa información para mostrarla,
+procesados y Kibana consulta despuÃ©s esa informaciÃ³n para mostrarla,
 filtrarla y construir reglas de alerta.
 
-\section{Qué es Kibana y qué aporta más allá de ``ver
+\section{QuÃ© es Kibana y quÃ© aporta mÃ¡s allÃ¡ de ``ver
 logs'}\label{quuxe9-es-kibana-y-quuxe9-aporta-muxe1s-alluxe1-de-ver-logs}
 
-Kibana es la interfaz visual del stack Elastic. Su valor no está solo en
+Kibana es la interfaz visual del stack Elastic. Su valor no estÃ¡ solo en
 mostrar eventos, sino en permitir explorarlos con contexto. En la vista
 \emph{Discover}, por ejemplo, el operador puede:
 
@@ -2398,80 +2406,80 @@ mostrar eventos, sino en permitir explorarlos con contexto. En la vista
   \texttt{log.level} o \texttt{trace\_id}
 \end{itemize}
 
-En la práctica, Kibana convierte una colección de documentos en una
-herramienta de análisis operacional. En este proyecto sirve para
+En la prÃ¡ctica, Kibana convierte una colecciÃ³n de documentos en una
+herramienta de anÃ¡lisis operacional. En este proyecto sirve para
 entender el comportamiento del flujo de negocio, localizar errores,
-seguir dependencias entre microservicios y enlazar una línea de log con
+seguir dependencias entre microservicios y enlazar una lÃ­nea de log con
 una traza completa en Jaeger.
 
-\section{Qué es Filebeat y cómo se conecta con los
+\section{QuÃ© es Filebeat y cÃ³mo se conecta con los
 servicios}\label{quuxe9-es-filebeat-y-cuxf3mo-se-conecta-con-los-servicios}
 
-Filebeat es un agente de recolección de logs. No se integra dentro del
-código Java ni llama a los microservicios por HTTP. Su papel es otro:
-lee los ficheros de log generados por los contenedores del clúster,
-extrae cada evento, lo procesa y lo reenvía a Elasticsearch.
+Filebeat es un agente de recolecciÃ³n de logs. No se integra dentro del
+cÃ³digo Java ni llama a los microservicios por HTTP. Su papel es otro:
+lee los ficheros de log generados por los contenedores del clÃºster,
+extrae cada evento, lo procesa y lo reenvÃ­a a Elasticsearch.
 
 En Kubernetes, los contenedores escriben normalmente a \texttt{stdout} y
 \texttt{stderr}. El runtime del contenedor persiste esa salida en rutas
 bajo \texttt{/var/log/containers}. Filebeat se despliega como agente del
-clúster y observa precisamente esas rutas. Después aplica procesadores
-que interpretan el formato del evento, expanden el JSON y añaden
+clÃºster y observa precisamente esas rutas. DespuÃ©s aplica procesadores
+que interpretan el formato del evento, expanden el JSON y aÃ±aden
 metadatos como namespace, pod, labels o nombre del contenedor.
 
-Esto significa que la conexión entre Filebeat y los servicios es
+Esto significa que la conexiÃ³n entre Filebeat y los servicios es
 \textbf{indirecta pero continua}: los microservicios solo escriben logs a
-consola, y Filebeat se encarga de recogerlos sin modificar el código de
+consola, y Filebeat se encarga de recogerlos sin modificar el cÃ³digo de
 negocio.
 
-\section{Qué es ECK y por qué se utilizó en el
+\section{QuÃ© es ECK y por quÃ© se utilizÃ³ en el
 laboratorio}\label{quuxe9-es-eck-y-por-quuxe9-se-utilizuxf3-en-el-laboratorio}
 
 ECK significa \emph{Elastic Cloud on Kubernetes}. Se trata del operador
-oficial de Elastic para Kubernetes. Su función es traducir recursos de
-alto nivel, como clústeres Elasticsearch o instancias de Kibana, en los
+oficial de Elastic para Kubernetes. Su funciÃ³n es traducir recursos de
+alto nivel, como clÃºsteres Elasticsearch o instancias de Kibana, en los
 objetos nativos que Kubernetes necesita realmente: pods, statefulsets,
-servicios, secretos, certificados y configuración asociada.
+servicios, secretos, certificados y configuraciÃ³n asociada.
 
-En un laboratorio pequeño podría haberse optado por manifiestos
-manuales, pero ECK aporta varias ventajas didácticas y operativas:
+En un laboratorio pequeÃ±o podrÃ­a haberse optado por manifiestos
+manuales, pero ECK aporta varias ventajas didÃ¡cticas y operativas:
 
 \begin{itemize}
 \tightlist
 \item
-  automatiza tareas de despliegue y configuración seguras
+  automatiza tareas de despliegue y configuraciÃ³n seguras
 \item
-  gestiona certificados y comunicación TLS entre componentes
+  gestiona certificados y comunicaciÃ³n TLS entre componentes
 \item
-  simplifica la administración de credenciales
+  simplifica la administraciÃ³n de credenciales
 \item
-  acerca el laboratorio a un modelo real de operación en Kubernetes
+  acerca el laboratorio a un modelo real de operaciÃ³n en Kubernetes
 \end{itemize}
 
-Por tanto, ECK no ``genera logs', pero sí habilita la forma ordenada y
-reproducible de desplegar la plataforma Elastic dentro del clúster.
+Por tanto, ECK no ``genera logs', pero sÃ­ habilita la forma ordenada y
+reproducible de desplegar la plataforma Elastic dentro del clÃºster.
 
 \section{Primer problema: tener logs no significa tener
 observabilidad}\label{primer-problema-tener-logs-no-significa-tener-observabilidad}
 
-En las primeras iteraciones, Kibana recibía datos pero no resultaba útil
+En las primeras iteraciones, Kibana recibÃ­a datos pero no resultaba Ãºtil
 para investigar flujo de negocio. Muchos eventos visibles eran puramente
 de infraestructura. El problema real no era Filebeat ni Elasticsearch,
-sino la calidad de los logs emitidos por la aplicación.
+sino la calidad de los logs emitidos por la aplicaciÃ³n.
 
-\section{Introducción de logging de
+\section{IntroducciÃ³n de logging de
 negocio}\label{introducciuxf3n-de-logging-de-negocio}
 
-Se añadieron logs de negocio en servicios clave, especialmente en los
+Se aÃ±adieron logs de negocio en servicios clave, especialmente en los
 puntos donde el flujo entra o donde existen dependencias downstream. Con
-ello empezaron a aparecer mensajes que sí describían acciones relevantes
+ello empezaron a aparecer mensajes que sÃ­ describÃ­an acciones relevantes
 del sistema.
 
 \section{Limitaciones del texto
 plano}\label{limitaciones-del-texto-plano}
 
-Aunque los logs de negocio mejoraron la visibilidad, seguían siendo
-difíciles de explotar:
+Aunque los logs de negocio mejoraron la visibilidad, seguÃ­an siendo
+difÃ­ciles de explotar:
 
 \begin{itemize}
 \tightlist
@@ -2480,14 +2488,14 @@ difíciles de explotar:
 \item
   no era trivial filtrar por \texttt{log.level}
 \item
-  la correlación con trazas era pobre
+  la correlaciÃ³n con trazas era pobre
 \end{itemize}
 
-Por eso se decidió migrar a logs ECS JSON.
+Por eso se decidiÃ³ migrar a logs ECS JSON.
 
 \section{ECS JSON}\label{ecs-json}
 
-Los servicios incorporaron \texttt{logback-ecs-encoder}, lo que permitió
+Los servicios incorporaron \texttt{logback-ecs-encoder}, lo que permitiÃ³
 emitir eventos estructurados con campos como:
 
 \begin{itemize}
@@ -2510,21 +2518,21 @@ emitir eventos estructurados con campos como:
   \texttt{span\_id}
 \end{itemize}
 
-Este cambio marcó uno de los hitos más importantes del laboratorio: los
+Este cambio marcÃ³ uno de los hitos mÃ¡s importantes del laboratorio: los
 logs pasaron de ser texto ``legible'' a ser datos realmente explotables.
 
-\section{Adaptación de Filebeat}\label{adaptaciuxf3n-de-filebeat}
+\section{AdaptaciÃ³n de Filebeat}\label{adaptaciuxf3n-de-filebeat}
 
-Filebeat se ajustó para detectar y decodificar JSON dentro del campo
+Filebeat se ajustÃ³ para detectar y decodificar JSON dentro del campo
 \texttt{message}, expandiendo los campos y enriqueciendo el evento con
 metadatos de Kubernetes. De este modo Kibana pudo consultar directamente
 propiedades estructuradas.
 
-\section{Correlación Kibana -\textgreater{}
+\section{CorrelaciÃ³n Kibana -\textgreater{}
 Jaeger}\label{correlaciuxf3n-kibana---jaeger}
 
 Una vez disponible \texttt{trace\_id} en logs, el flujo de
-troubleshooting ganó mucha potencia:
+troubleshooting ganÃ³ mucha potencia:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2539,14 +2547,14 @@ troubleshooting ganó mucha potencia:
   buscar la traza exacta
 \end{enumerate}
 
-Este punto convierte el laboratorio en algo mucho más valioso que una
-simple agregación de logs.
+Este punto convierte el laboratorio en algo mucho mÃ¡s valioso que una
+simple agregaciÃ³n de logs.
 
-\section{\texorpdfstring{Configuración real de
-\texttt{logback-spring.xml}}{11.8 Configuración real de logback-spring.xml}}\label{configuraciuxf3n-real-de-logback-spring.xml}
+\section{\texorpdfstring{ConfiguraciÃ³n real de
+\texttt{logback-spring.xml}}{11.8 ConfiguraciÃ³n real de logback-spring.xml}}\label{configuraciuxf3n-real-de-logback-spring.xml}
 
 Los cuatro servicios comparten una estructura muy parecida para emitir
-ECS JSON. El patrón básico es:
+ECS JSON. El patrÃ³n bÃ¡sico es:
 
 \begin{XmlCode}
 <configuration>
@@ -2568,7 +2576,7 @@ ECS JSON. El patrón básico es:
 </configuration>
 \end{XmlCode}
 
-\section{Qué hace cada bloque de este
+\section{QuÃ© hace cada bloque de este
 logback}\label{quuxe9-hace-cada-bloque-de-este-logback}
 
 \begin{itemize}
@@ -2583,20 +2591,20 @@ logback}\label{quuxe9-hace-cada-bloque-de-este-logback}
   \texttt{EcsEncoder}: transforma cada evento de log en un documento
   JSON con estructura ECS.
 \item
-  \texttt{serviceEnvironment}: añade contexto de entorno.
+  \texttt{serviceEnvironment}: aÃ±ade contexto de entorno.
 \item
-  \texttt{includeOrigin=true}: agrega información de origen útil para
+  \texttt{includeOrigin=true}: agrega informaciÃ³n de origen Ãºtil para
   debugging.
 \end{itemize}
 
-Esta configuración es un excelente ejemplo de una buena práctica
+Esta configuraciÃ³n es un excelente ejemplo de una buena prÃ¡ctica
 moderna: en contenedores, lo habitual es escribir a consola y dejar que
 un agente externo recoja y enrute los logs.
 
-\section{Ejemplo de log útil en código de
+\section{Ejemplo de log Ãºtil en cÃ³digo de
 negocio}\label{ejemplo-de-log-uxfatil-en-cuxf3digo-de-negocio}
 
-En \texttt{OrderServiceImpl} aparecen logs que sí ayudan a entender el
+En \texttt{OrderServiceImpl} aparecen logs que sÃ­ ayudan a entender el
 comportamiento:
 
 \begin{JavaCode}
@@ -2605,28 +2613,28 @@ log.info("Fetching user {} from user-service", userId);
 log.error("User service unavailable while fetching user {}", userId, exception);
 \end{JavaCode}
 
-\section{Por qué estos logs sí aportan
+\section{Por quÃ© estos logs sÃ­ aportan
 valor}\label{por-quuxe9-estos-logs-suxed-aportan-valor}
 
 \begin{itemize}
 \tightlist
 \item
-  describen una acción concreta
+  describen una acciÃ³n concreta
 \item
-  indican a qué dependencia se está llamando
+  indican a quÃ© dependencia se estÃ¡ llamando
 \item
-  diferencian éxito, degradación y fallo
+  diferencian Ã©xito, degradaciÃ³n y fallo
 \item
-  se correlacionan con spans y métricas
+  se correlacionan con spans y mÃ©tricas
 \end{itemize}
 
-Un junior suele tender a loggear solo ``entró en método X''. En cambio,
-aquí el foco se puso en eventos de negocio y de integración.
+Un junior suele tender a loggear solo ``entrÃ³ en mÃ©todo X''. En cambio,
+aquÃ­ el foco se puso en eventos de negocio y de integraciÃ³n.
 
 \section{Filebeat como puente entre contenedores y
 Elasticsearch}\label{filebeat-como-puente-entre-contenedores-y-elasticsearch}
 
-La configuración relevante de Filebeat es esta:
+La configuraciÃ³n relevante de Filebeat es esta:
 
 \begin{YamlCode}
 filebeat.inputs:
@@ -2650,8 +2658,8 @@ processors:
   - add_kubernetes_metadata: {}
 \end{YamlCode}
 
-\section{Cómo se interpreta esta
-configuración}\label{cuxf3mo-se-interpreta-esta-configuraciuxf3n}
+\section{CÃ³mo se interpreta esta
+configuraciÃ³n}\label{cuxf3mo-se-interpreta-esta-configuraciuxf3n}
 
 \begin{itemize}
 \tightlist
@@ -2665,33 +2673,33 @@ configuración}\label{cuxf3mo-se-interpreta-esta-configuraciuxf3n}
   \texttt{decode\_json\_fields}: convierte el JSON emitido por Logback
   en campos de Elasticsearch.
 \item
-  \texttt{add\_kubernetes\_metadata}: añade namespace, pod, labels y
-  otra información útil.
+  \texttt{add\_kubernetes\_metadata}: aÃ±ade namespace, pod, labels y
+  otra informaciÃ³n Ãºtil.
 \end{itemize}
 
-Este paso es crucial. Sin \texttt{decode\_json\_fields}, el log llegaría
-como texto plano dentro de \texttt{message}, y se perdería gran parte de
+Este paso es crucial. Sin \texttt{decode\_json\_fields}, el log llegarÃ­a
+como texto plano dentro de \texttt{message}, y se perderÃ­a gran parte de
 la utilidad del formato ECS.
 
 Desde un punto de vista operativo, Filebeat hace cuatro tareas seguidas:
-lee, interpreta, enriquece y reenvía. Primero detecta una nueva línea de
-log en el fichero del contenedor. Después comprueba si la línea contiene
-JSON. Si es así, expande ese contenido en campos propios del documento.
-A continuación añade información de Kubernetes. Finalmente entrega el
+lee, interpreta, enriquece y reenvÃ­a. Primero detecta una nueva lÃ­nea de
+log en el fichero del contenedor. DespuÃ©s comprueba si la lÃ­nea contiene
+JSON. Si es asÃ­, expande ese contenido en campos propios del documento.
+A continuaciÃ³n aÃ±ade informaciÃ³n de Kubernetes. Finalmente entrega el
 evento a Elasticsearch para que pueda ser indexado.
 
-Ese pipeline convierte una simple línea de salida estándar en un evento
-mucho más rico. Gracias a ello, Kibana no solo muestra un mensaje, sino
-un documento con contexto de plataforma y de aplicación. En un informe
-didáctico conviene remarcar esta idea: el valor del stack no depende de
-una única pieza, sino del encadenamiento correcto entre emisor,
+Ese pipeline convierte una simple lÃ­nea de salida estÃ¡ndar en un evento
+mucho mÃ¡s rico. Gracias a ello, Kibana no solo muestra un mensaje, sino
+un documento con contexto de plataforma y de aplicaciÃ³n. En un informe
+didÃ¡ctico conviene remarcar esta idea: el valor del stack no depende de
+una Ãºnica pieza, sino del encadenamiento correcto entre emisor,
 recolector, almacenamiento e interfaz de consulta.
 
-\section{Cómo recorre un log todo el pipeline hasta
+\section{CÃ³mo recorre un log todo el pipeline hasta
 Kibana}\label{cuxf3mo-recorre-un-log-todo-el-pipeline-hasta-kibana}
 
 El recorrido completo de un evento en este laboratorio puede resumirse
-así:
+asÃ­:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2703,22 +2711,22 @@ así:
 \item
   Filebeat lee el evento desde \texttt{/var/log/containers}
 \item
-  Filebeat expande el JSON y añade metadatos de Kubernetes
+  Filebeat expande el JSON y aÃ±ade metadatos de Kubernetes
 \item
   Elasticsearch indexa el documento
 \item
-  Kibana consulta ese índice y permite filtrarlo por campos
+  Kibana consulta ese Ã­ndice y permite filtrarlo por campos
 \end{enumerate}
 
-Este modelo tiene una implicación importante: los servicios no necesitan
+Este modelo tiene una implicaciÃ³n importante: los servicios no necesitan
 saber nada de Kibana ni de Elasticsearch. Solo necesitan emitir logs con
-un formato coherente. Todo lo demás lo resuelve la canalización de
+un formato coherente. Todo lo demÃ¡s lo resuelve la canalizaciÃ³n de
 observabilidad.
 
-\section{Qué campos gana Kibana gracias a
+\section{QuÃ© campos gana Kibana gracias a
 ECS}\label{quuxe9-campos-gana-kibana-gracias-a-ecs}
 
-Cuando el pipeline de logging está bien montado, Kibana puede filtrar
+Cuando el pipeline de logging estÃ¡ bien montado, Kibana puede filtrar
 directamente por:
 
 \begin{itemize}
@@ -2743,11 +2751,11 @@ Ese es el salto de calidad real del proyecto. No se trata solo de
 \section{Evidencia visual de logs estructurados en
 Kibana}\label{evidencia-visual-de-logs-estructurados-en-kibana}
 
-La siguiente captura muestra el resultado práctico del pipeline de
+La siguiente captura muestra el resultado prÃ¡ctico del pipeline de
 logging ya completo. En ella se observan eventos procedentes de varios
 microservicios, columnas con \texttt{service.name},
 \texttt{log.level} y \texttt{trace\_id}, y una vista temporal que permite
-entender cómo se concentra la actividad en una franja concreta. Esta
+entender cÃ³mo se concentra la actividad en una franja concreta. Esta
 imagen es especialmente valiosa porque demuestra que la plataforma no
 solo almacena logs, sino que los presenta con el suficiente contexto
 como para investigar comportamiento distribuido.
@@ -2758,30 +2766,30 @@ como para investigar comportamiento distribuido.
   \includegraphics[width=\textwidth]{assets/kibana/40-kibana-discover-logs.png}%
 }{%
   \fbox{\parbox{0.92\textwidth}{%
-  \textbf{Falta la imagen real:} colocar aquí
+  \textbf{Falta la imagen real:} colocar aquÃ­
   \texttt{assets/kibana/40-kibana-discover-logs.png}.%
   }}%
 }
-\caption{Vista \emph{Discover} de Kibana con logs de varios microservicios y campos estructurados como \texttt{service.name}, \texttt{log.level} y \texttt{trace\_id}, útiles para correlación operativa.}
+\caption{Vista \emph{Discover} de Kibana con logs de varios microservicios y campos estructurados como \texttt{service.name}, \texttt{log.level} y \texttt{trace\_id}, Ãºtiles para correlaciÃ³n operativa.}
 \label{fig:kibana-discover-logs}
 \end{figure}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\chapter{Alertado por métricas y por
+\chapter{Alertado por mÃ©tricas y por
 logs}\label{alertado-por-muxe9tricas-y-por-logs}
 
-\section{Alerta de métricas en
+\section{Alerta de mÃ©tricas en
 Grafana}\label{alerta-de-muxe9tricas-en-grafana}
 
-Se implementó una alerta orientada a detectar caídas de microservicios,
-utilizando la métrica \texttt{up} de Prometheus. La validación se
-realizó provocando una situación real de no disponibilidad.
+Se implementÃ³ una alerta orientada a detectar caÃ­das de microservicios,
+utilizando la mÃ©trica \texttt{up} de Prometheus. La validaciÃ³n se
+realizÃ³ provocando una situaciÃ³n real de no disponibilidad.
 
 \section{Alerta de logs en Kibana}\label{alerta-de-logs-en-kibana}
 
-Se implementó una regla que detecta logs \texttt{ERROR} emitidos por
-cualquiera de los microservicios. Esto permitió demostrar una línea de
+Se implementÃ³ una regla que detecta logs \texttt{ERROR} emitidos por
+cualquiera de los microservicios. Esto permitiÃ³ demostrar una lÃ­nea de
 observabilidad complementaria:
 
 \begin{itemize}
@@ -2789,27 +2797,27 @@ observabilidad complementaria:
 \item
   fallo funcional
 \item
-  emisión de error
+  emisiÃ³n de error
 \item
   almacenamiento en Elasticsearch
 \item
-  visualización en Kibana
+  visualizaciÃ³n en Kibana
 \item
-  activación de una regla
+  activaciÃ³n de una regla
 \end{itemize}
 
 \section{Aprendizaje principal}\label{aprendizaje-principal-1}
 
-Métricas y logs no compiten: se complementan. Las métricas sirven para
-detectar comportamiento anómalo agregado; los logs ayudan a explicar qué
-ocurrió; las trazas muestran el recorrido de una petición concreta.
+MÃ©tricas y logs no compiten: se complementan. Las mÃ©tricas sirven para
+detectar comportamiento anÃ³malo agregado; los logs ayudan a explicar quÃ©
+ocurriÃ³; las trazas muestran el recorrido de una peticiÃ³n concreta.
 
-\section{Ejemplo didáctico de alerta de
-métricas}\label{ejemplo-diduxe1ctico-de-alerta-de-muxe9tricas}
+\section{Ejemplo didÃ¡ctico de alerta de
+mÃ©tricas}\label{ejemplo-diduxe1ctico-de-alerta-de-muxe9tricas}
 
-La alerta \texttt{MicroserviceDown} se apoyó en una idea muy simple y
+La alerta \texttt{MicroserviceDown} se apoyÃ³ en una idea muy simple y
 potente: si Prometheus deja de ver un target, probablemente el servicio
-está caído o inaccesible.
+estÃ¡ caÃ­do o inaccesible.
 
 Consulta representativa:
 
@@ -2817,7 +2825,7 @@ Consulta representativa:
 up{job=~"api-gateway|user-service|product-service|order-service"}
 \end{PlainCode}
 
-Interpretación:
+InterpretaciÃ³n:
 
 \begin{itemize}
 \tightlist
@@ -2827,20 +2835,20 @@ Interpretación:
   \texttt{up\ =\ 0}: el scrape ha fallado.
 \end{itemize}
 
-Este ejemplo es excelente porque enseña que una
-alerta efectiva no siempre necesita lógica compleja. A veces basta con
-entender bien una métrica base.
+Este ejemplo es excelente porque enseÃ±a que una
+alerta efectiva no siempre necesita lÃ³gica compleja. A veces basta con
+entender bien una mÃ©trica base.
 
-\section{Ejemplo didáctico de alerta de
+\section{Ejemplo didÃ¡ctico de alerta de
 logs}\label{ejemplo-diduxe1ctico-de-alerta-de-logs}
 
-La regla de Kibana para errores se apoyó en una consulta del tipo:
+La regla de Kibana para errores se apoyÃ³ en una consulta del tipo:
 
 \begin{PlainCode}
 log.level : "ERROR" and service.name : ("api-gateway" or "user-service" or "product-service" or "order-service")
 \end{PlainCode}
 
-Qué enseña esta consulta:
+QuÃ© enseÃ±a esta consulta:
 
 \begin{itemize}
 \tightlist
@@ -2850,10 +2858,10 @@ Qué enseña esta consulta:
   \texttt{service.name} solo es filtrable porque se ha normalizado el
   formato del log.
 \item
-  sin ECS JSON, esta regla sería mucho más frágil.
+  sin ECS JSON, esta regla serÃ­a mucho mÃ¡s frÃ¡gil.
 \end{itemize}
 
-\section{Diferencia pedagógica entre ambas
+\section{Diferencia pedagÃ³gica entre ambas
 alertas}\label{diferencia-pedaguxf3gica-entre-ambas-alertas}
 
 {\def\LTcaptype{none} % do not increment counter
@@ -2868,94 +2876,94 @@ Alerta
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Fuente
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Qué detecta
+QuÃ© detecta
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Qué no explica por sí sola
+QuÃ© no explica por sÃ­ sola
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Grafana \texttt{MicroserviceDown} & Métricas & indisponibilidad o fallo
+Grafana \texttt{MicroserviceDown} & MÃ©tricas & indisponibilidad o fallo
 de scrape & la causa concreta \\
-Kibana \texttt{ErrorLogsByService} & Logs & errores de aplicación
+Kibana \texttt{ErrorLogsByService} & Logs & errores de aplicaciÃ³n
 visibles en logs & salud global del target \\
 \end{longtable}
 }
 
-Esta comparación merece estar explícita en la memoria, porque enseña a
-elegir el backend adecuado según el tipo de señal que se quiere
+Esta comparaciÃ³n merece estar explÃ­cita en la memoria, porque enseÃ±a a
+elegir el backend adecuado segÃºn el tipo de seÃ±al que se quiere
 explotar.
 
 
 \chapter{GitLab self-managed dentro del
 laboratorio}\label{gitlab-self-managed-dentro-del-laboratorio}
 
-\section{Motivación}\label{motivaciuxf3n}
+\section{MotivaciÃ³n}\label{motivaciuxf3n}
 
 Una vez establecida la observabilidad, el siguiente salto natural fue
 incorporar una capa real de CI/CD. En lugar de depender de GitLab.com u
-otro SaaS, se optó por desplegar GitLab CE dentro del propio Minikube.
+otro SaaS, se optÃ³ por desplegar GitLab CE dentro del propio Minikube.
 
-Esta decisión tiene una carga didáctica importante. No se trataba solo
-de tener un repositorio Git, sino de estudiar cómo conviven en un mismo
-laboratorio el código fuente, la gestión del proyecto, las pipelines, el
+Esta decisiÃ³n tiene una carga didÃ¡ctica importante. No se trataba solo
+de tener un repositorio Git, sino de estudiar cÃ³mo conviven en un mismo
+laboratorio el cÃ³digo fuente, la gestiÃ³n del proyecto, las pipelines, el
 runner, el registry y el despliegue. Al introducir GitLab dentro del
-clúster, el proyecto dejó de centrarse únicamente en la aplicación y
-pasó a incluir también una plataforma de entrega continua operativa.
+clÃºster, el proyecto dejÃ³ de centrarse Ãºnicamente en la aplicaciÃ³n y
+pasÃ³ a incluir tambiÃ©n una plataforma de entrega continua operativa.
 
-\section{Qué es GitLab CE y qué aporta en este
+\section{QuÃ© es GitLab CE y quÃ© aporta en este
 proyecto}\label{quuxe9-es-gitlab-ce-y-quuxe9-aporta-en-este-proyecto}
 
-GitLab CE significa \emph{GitLab Community Edition}. Es la edición libre
+GitLab CE significa \emph{GitLab Community Edition}. Es la ediciÃ³n libre
 y autoalojada del producto, suficiente para cubrir la mayor parte de las
 necesidades que interesan en este laboratorio: control de versiones,
-interfaz web del repositorio, pipelines CI/CD, gestión de runners y
-registro de imágenes.
+interfaz web del repositorio, pipelines CI/CD, gestiÃ³n de runners y
+registro de imÃ¡genes.
 
-Conviene detenerse un momento en qué significa realmente \emph{Community
-Edition}. No es una edición ``demo' ni un visor del repositorio,
+Conviene detenerse un momento en quÃ© significa realmente \emph{Community
+Edition}. No es una ediciÃ³n ``demo' ni un visor del repositorio,
 sino un producto completo que permite gestionar el ciclo de vida del
-software. La diferencia fundamental frente a un servicio SaaS es que aquí
-la plataforma se administra dentro del propio clúster: el equipo decide
-cómo exponerla, cómo integrarla con el runner, cómo conectarla con el
-registry y cómo resolver sus problemas de red, persistencia o salud.
+software. La diferencia fundamental frente a un servicio SaaS es que aquÃ­
+la plataforma se administra dentro del propio clÃºster: el equipo decide
+cÃ³mo exponerla, cÃ³mo integrarla con el runner, cÃ³mo conectarla con el
+registry y cÃ³mo resolver sus problemas de red, persistencia o salud.
 
 En este proyecto GitLab CE cumple varios papeles a la vez:
 
 \begin{itemize}
 \tightlist
 \item
-  actúa como servidor Git del repositorio principal
+  actÃºa como servidor Git del repositorio principal
 \item
-  ofrece la interfaz web para navegar el código, commits, ramas,
-  pipelines y configuración del proyecto
+  ofrece la interfaz web para navegar el cÃ³digo, commits, ramas,
+  pipelines y configuraciÃ³n del proyecto
 \item
-  coordina la ejecución de la pipeline definida en
+  coordina la ejecuciÃ³n de la pipeline definida en
   \texttt{.gitlab-ci.yml}
 \item
   centraliza credenciales y variables de CI/CD
 \item
-  expone el Container Registry usado para almacenar las imágenes
+  expone el Container Registry usado para almacenar las imÃ¡genes
   generadas por la pipeline
 \item
-  sirve como punto único de verdad para enlazar commit, pipeline, imagen
+  sirve como punto Ãºnico de verdad para enlazar commit, pipeline, imagen
   y despliegue
 \end{itemize}
 
 En otras palabras, GitLab es el plano de control del ciclo de vida de
-entrega: recibe cambios, desencadena automatización, muestra resultados
-y conserva artefactos e imágenes. Esto transforma por completo el
+entrega: recibe cambios, desencadena automatizaciÃ³n, muestra resultados
+y conserva artefactos e imÃ¡genes. Esto transforma por completo el
 laboratorio: ya no se trata solo de varios microservicios desplegados,
-sino de una plataforma capaz de recibir código, validarlo, convertirlo
+sino de una plataforma capaz de recibir cÃ³digo, validarlo, convertirlo
 en una imagen y desplegarlo con trazabilidad.
 
-\section{Qué partes tiene GitLab dentro de este
+\section{QuÃ© partes tiene GitLab dentro de este
 laboratorio}\label{quuxe9-partes-tiene-gitlab-dentro-de-este-laboratorio}
 
-Cuando se despliega GitLab en Kubernetes no aparece un único pod mágico.
-Lo que se obtiene es un conjunto de componentes que colaboran entre sí.
-Los más relevantes en este laboratorio son estos:
+Cuando se despliega GitLab en Kubernetes no aparece un Ãºnico pod mÃ¡gico.
+Lo que se obtiene es un conjunto de componentes que colaboran entre sÃ­.
+Los mÃ¡s relevantes en este laboratorio son estos:
 
 \begin{itemize}
 \tightlist
@@ -2973,30 +2981,30 @@ Los más relevantes en este laboratorio son estos:
   donde viven configuraciones, usuarios, permisos, pipelines, registros
   y metadatos de proyecto.
 \item
-  \textbf{Redis}: soporta caché, colas y comunicación rápida entre
+  \textbf{Redis}: soporta cachÃ©, colas y comunicaciÃ³n rÃ¡pida entre
   componentes. Ayuda a desacoplar partes de la plataforma y a evitar que
   todo pase por consultas de base de datos.
 \item
-  \textbf{Registry}: publica y sirve imágenes de contenedor del
+  \textbf{Registry}: publica y sirve imÃ¡genes de contenedor del
   proyecto. Es el puente entre la parte de CI y el runtime de
   Kubernetes.
 \item
-  \textbf{Ingress}: expone GitLab hacia el exterior del clúster y hace
+  \textbf{Ingress}: expone GitLab hacia el exterior del clÃºster y hace
   posible que un usuario entre desde Windows a la interfaz web.
 \end{itemize}
 
-Esta descomposición es importante porque muestra
-que una plataforma de desarrollo moderna no es un binario único, sino un
-conjunto de servicios coordinados. También ayuda a entender por qué en
+Esta descomposiciÃ³n es importante porque muestra
+que una plataforma de desarrollo moderna no es un binario Ãºnico, sino un
+conjunto de servicios coordinados. TambiÃ©n ayuda a entender por quÃ© en
 esta fase aparecieron problemas reales de red, TLS, permisos y salud de
 pods: si falla Gitaly, por ejemplo, la web puede devolver errores 500
 aunque la interfaz siga respondiendo; si falla el registry, la pipeline
-puede construir pero no publicar imágenes; si falla el ingress, GitLab
+puede construir pero no publicar imÃ¡genes; si falla el ingress, GitLab
 puede seguir sano internamente pero dejar de ser accesible desde fuera.
 
-\section{Configuración principal}\label{configuraciuxf3n-principal}
+\section{ConfiguraciÃ³n principal}\label{configuraciuxf3n-principal}
 
-La instalación se apoyó en:
+La instalaciÃ³n se apoyÃ³ en:
 
 \begin{itemize}
 \tightlist
@@ -3006,16 +3014,16 @@ La instalación se apoyó en:
   \texttt{deploy/gitlab/values-local.yaml}
 \end{itemize}
 
-La configuración local se orientó a:
+La configuraciÃ³n local se orientÃ³ a:
 
 \begin{itemize}
 \tightlist
 \item
-  edición CE
+  ediciÃ³n CE
 \item
   dominio basado en \texttt{nip.io}
 \item
-  desactivación del Prometheus y Grafana incluidos en el chart
+  desactivaciÃ³n del Prometheus y Grafana incluidos en el chart
 \item
   uso de la instancia ya existente de observabilidad del laboratorio
 \end{itemize}
@@ -3034,13 +3042,13 @@ Docker no fue inmediato. Hubo que combinar:
   acceso por \texttt{https://gitlab.192.168.49.2.nip.io:8443}
 \end{itemize}
 
-Este punto es especialmente interesante en una memoria técnica porque
+Este punto es especialmente interesante en una memoria tÃ©cnica porque
 muestra una idea importante: muchas dificultades de plataforma tienen
-que ver con red y exposición de servicios, no con la aplicación en sí.
+que ver con red y exposiciÃ³n de servicios, no con la aplicaciÃ³n en sÃ­.
 
-\section{Configuración local de GitLab}\label{configuraciuxf3n-local-de-gitlab}
+\section{ConfiguraciÃ³n local de GitLab}\label{configuraciuxf3n-local-de-gitlab}
 
-El override principal quedó en \texttt{deploy/gitlab/values-local.yaml}:
+El override principal quedÃ³ en \texttt{deploy/gitlab/values-local.yaml}:
 
 \begin{YamlCode}
 global:
@@ -3058,29 +3066,29 @@ gitlab-runner:
   install: false
 \end{YamlCode}
 
-Esta configuración expresa varias decisiones importantes del laboratorio:
+Esta configuraciÃ³n expresa varias decisiones importantes del laboratorio:
 
 \begin{itemize}
 \tightlist
 \item
   \texttt{edition: ce} selecciona GitLab Community Edition.
 \item
-  \texttt{domain} y \texttt{externalIP} definen cómo se construyen los
-  hosts públicos del despliegue.
+  \texttt{domain} y \texttt{externalIP} definen cÃ³mo se construyen los
+  hosts pÃºblicos del despliegue.
 \item
   \texttt{grafana.enabled: false} y \texttt{prometheus.install: false}
   evitan duplicar la observabilidad ya existente en el laboratorio.
 \item
   \texttt{gitlab-runner.install: false} separa el servidor GitLab del
-  runner, de modo que este último puede configurarse e instalarse de
+  runner, de modo que este Ãºltimo puede configurarse e instalarse de
   forma controlada con su propio chart.
 \end{itemize}
 
 \section{Interfaz del proyecto en GitLab}\label{interfaz-del-proyecto-en-gitlab}
 
 La siguiente captura muestra el repositorio principal del laboratorio ya
-importado en GitLab. Esta evidencia es útil porque confirma que GitLab
-no fue una instalación aislada de infraestructura, sino el origen real
+importado en GitLab. Esta evidencia es Ãºtil porque confirma que GitLab
+no fue una instalaciÃ³n aislada de infraestructura, sino el origen real
 para commits, ramas, pipeline, Container Registry y despliegue.
 
 \begin{figure}[H]
@@ -3089,7 +3097,7 @@ para commits, ramas, pipeline, Container Registry y despliegue.
   \includegraphics[width=\textwidth]{assets/gitlab/50-gitlab-home-project.png}%
 }{%
   \fbox{\parbox{0.92\textwidth}{%
-  \textbf{Falta la imagen real:} colocar aquí
+  \textbf{Falta la imagen real:} colocar aquÃ­
   \texttt{assets/gitlab/50-gitlab-home-project.png}.%
   }}%
 }
@@ -3101,95 +3109,95 @@ para commits, ramas, pipeline, Container Registry y despliegue.
 
 \chapter{GitLab Runner en Kubernetes}\label{gitlab-runner-en-kubernetes}
 
-\section{Qué es GitLab Runner y por qué hace falta}\label{quuxe9-es-gitlab-runner-y-por-quuxe9-hace-falta}
+\section{QuÃ© es GitLab Runner y por quÃ© hace falta}\label{quuxe9-es-gitlab-runner-y-por-quuxe9-hace-falta}
 
 GitLab Runner es el agente ejecutor de las pipelines. GitLab almacena el
-repositorio, calcula qué jobs deben lanzarse y conserva el estado de la
-pipeline, pero no ejecuta los scripts por sí mismo. La ejecución real
+repositorio, calcula quÃ© jobs deben lanzarse y conserva el estado de la
+pipeline, pero no ejecuta los scripts por sÃ­ mismo. La ejecuciÃ³n real
 recae en el runner.
 
 Esto es importante porque en muchas explicaciones superficiales parece
-que GitLab ``hace CI' por sí solo. En realidad GitLab orquesta y
+que GitLab ``hace CI' por sÃ­ solo. En realidad GitLab orquesta y
 coordina, mientras que el runner trabaja. El runner es la pieza que:
 
 \begin{itemize}
 \tightlist
 \item
-  descarga el código del job
+  descarga el cÃ³digo del job
 \item
-  prepara el entorno de ejecución
+  prepara el entorno de ejecuciÃ³n
 \item
   ejecuta comandos como \texttt{mvn test}, \texttt{helm lint} o Kaniko
 \item
   devuelve logs, estado y artefactos a GitLab
 \end{itemize}
 
-En este laboratorio el runner es imprescindible porque se quería que la
-automatización hiciera trabajo real sobre la plataforma: compilar Maven,
-lanzar tests, validar charts, construir imágenes, publicarlas en el
+En este laboratorio el runner es imprescindible porque se querÃ­a que la
+automatizaciÃ³n hiciera trabajo real sobre la plataforma: compilar Maven,
+lanzar tests, validar charts, construir imÃ¡genes, publicarlas en el
 registry y desplegarlas de nuevo en Minikube.
 
-\section{Por qué se desplegó el runner dentro de Kubernetes}\label{por-quuxe9-se-despleguxf3-el-runner-dentro-de-kubernetes}
+\section{Por quÃ© se desplegÃ³ el runner dentro de Kubernetes}\label{por-quuxe9-se-despleguxf3-el-runner-dentro-de-kubernetes}
 
-Una vez desplegado GitLab, se decidió no instalar el runner en Windows.
-En su lugar, se desplegó GitLab Runner dentro del propio clúster
-mediante Helm. Esta decisión tiene varias ventajas:
+Una vez desplegado GitLab, se decidiÃ³ no instalar el runner en Windows.
+En su lugar, se desplegÃ³ GitLab Runner dentro del propio clÃºster
+mediante Helm. Esta decisiÃ³n tiene varias ventajas:
 
 \begin{itemize}
 \tightlist
 \item
   mantiene GitLab, el runner y el destino de despliegue dentro del mismo
-  entorno técnico
+  entorno tÃ©cnico
 \item
   evita depender del estado del host Windows para ejecutar jobs
 \item
-  permite que cada job se ejecute en un pod efímero y aislado
+  permite que cada job se ejecute en un pod efÃ­mero y aislado
 \item
-  acerca el laboratorio a un patrón cloud-native más realista
+  acerca el laboratorio a un patrÃ³n cloud-native mÃ¡s realista
 \end{itemize}
 
-\section{Por qué hubo que crear primero un runner en GitLab y luego instalar el chart}\label{por-quuxe9-hubo-que-crear-primero-un-runner-en-gitlab-y-luego-instalar-el-chart}
+\section{Por quÃ© hubo que crear primero un runner en GitLab y luego instalar el chart}\label{por-quuxe9-hubo-que-crear-primero-un-runner-en-gitlab-y-luego-instalar-el-chart}
 
-Este paso suele generar confusión y conviene explicarlo con claridad. El
+Este paso suele generar confusiÃ³n y conviene explicarlo con claridad. El
 proceso tuvo dos partes diferentes:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  en la interfaz de GitLab se creó el \emph{runner lógico}, es decir, el
+  en la interfaz de GitLab se creÃ³ el \emph{runner lÃ³gico}, es decir, el
   registro del agente autorizado para ejecutar jobs del proyecto
 \item
-  después se instaló el chart \texttt{gitlab-runner} en Kubernetes, que
+  despuÃ©s se instalÃ³ el chart \texttt{gitlab-runner} en Kubernetes, que
   despliega el proceso real que usa ese token y se conecta a GitLab
 \end{enumerate}
 
-En términos simples, la interfaz de GitLab crea la identidad y entrega el
+En tÃ©rminos simples, la interfaz de GitLab crea la identidad y entrega el
 token; el chart de Helm despliega el agente que consume ese token. Sin
-la primera parte, el pod no sabría cómo autenticarse. Sin la segunda,
-GitLab tendría un runner definido pero ningún ejecutor real detrás.
+la primera parte, el pod no sabrÃ­a cÃ³mo autenticarse. Sin la segunda,
+GitLab tendrÃ­a un runner definido pero ningÃºn ejecutor real detrÃ¡s.
 
-Esta distinción es muy útil didácticamente porque separa dos conceptos
+Esta distinciÃ³n es muy Ãºtil didÃ¡cticamente porque separa dos conceptos
 que a menudo se mezclan:
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{definición del runner en GitLab}: autorización, visibilidad en
+  \textbf{definiciÃ³n del runner en GitLab}: autorizaciÃ³n, visibilidad en
   la UI, token y pertenencia al proyecto
 \item
   \textbf{proceso GitLab Runner desplegado por Helm}: pod real que
-  pregunta por jobs, crea pods efímeros y ejecuta scripts
+  pregunta por jobs, crea pods efÃ­meros y ejecuta scripts
 \end{itemize}
 
 Dicho de otra forma: en la web se dio de alta al ``trabajador';
-en Kubernetes se desplegó al ``trabajador de verdad' que podía
+en Kubernetes se desplegÃ³ al ``trabajador de verdad' que podÃ­a
 ponerse a ejecutar tareas.
 
-\section{Configuración relevante del runner}\label{configuraciuxf3n-relevante-del-runner}
+\section{ConfiguraciÃ³n relevante del runner}\label{configuraciuxf3n-relevante-del-runner}
 
-El runner quedó definido en \texttt{deploy/gitlab-runner/values.yaml}
-con parámetros importantes como estos:
+El runner quedÃ³ definido en \texttt{deploy/gitlab-runner/values.yaml}
+con parÃ¡metros importantes como estos:
 
 \begin{PlainCode}
 gitlabUrl: http://gitlab-webservice-default.gitlab.svc.cluster.local:8181/
@@ -3206,24 +3214,24 @@ runners:
         privileged = true
 \end{PlainCode}
 
-\section{Qué resuelve cada parámetro importante}\label{quuxe9-resuelve-cada-paruxe1metro-importante}
+\section{QuÃ© resuelve cada parÃ¡metro importante}\label{quuxe9-resuelve-cada-paruxe1metro-importante}
 
 \begin{itemize}
 \tightlist
 \item
   \texttt{gitlabUrl} apunta al servicio interno de GitLab dentro del
-  clúster, no a la URL humana del navegador.
+  clÃºster, no a la URL humana del navegador.
 \item
   \texttt{clone\_url} fuerza el clonado del repositorio mediante una URL
   alcanzable desde los pods del runner.
 \item
-  \texttt{service\_account} permite aplicar RBAC específico a los jobs.
+  \texttt{service\_account} permite aplicar RBAC especÃ­fico a los jobs.
 \item
-  \texttt{privileged = true} habilita escenarios de build más complejos y
-  la ejecución de jobs que interactúan con contenedores.
+  \texttt{privileged = true} habilita escenarios de build mÃ¡s complejos y
+  la ejecuciÃ³n de jobs que interactÃºan con contenedores.
 \end{itemize}
 
-\section{Qué es exactamente un runner}\label{quuxe9-es-exactamente-un-runner}
+\section{QuÃ© es exactamente un runner}\label{quuxe9-es-exactamente-un-runner}
 
 Para un lector conviene describir el flujo completo:
 
@@ -3237,41 +3245,41 @@ Para un lector conviene describir el flujo completo:
 \item
   el runner reclama un job concreto
 \item
-  el runner crea un pod efímero en Kubernetes para ejecutarlo
+  el runner crea un pod efÃ­mero en Kubernetes para ejecutarlo
 \item
   el pod ejecuta el script del job y devuelve el resultado a GitLab
 \end{enumerate}
 
-Esta sección solapa mucho con la definición general de runner, así que se
-ha dejado una sola explicación consolidada para evitar redundancia.
+Esta secciÃ³n solapa mucho con la definiciÃ³n general de runner, asÃ­ que se
+ha dejado una sola explicaciÃ³n consolidada para evitar redundancia.
 
-\section{Por qué se usó URL interna del servicio GitLab}\label{por-quuxe9-se-usuxf3-url-interna-del-servicio-gitlab}
+\section{Por quÃ© se usÃ³ URL interna del servicio GitLab}\label{por-quuxe9-se-usuxf3-url-interna-del-servicio-gitlab}
 
-Uno de los aprendizajes más importantes de esta fase fue diferenciar dos
+Uno de los aprendizajes mÃ¡s importantes de esta fase fue diferenciar dos
 tipos de URL:
 
 {\small
 \begin{tabular}{p{0.19\linewidth}p{0.46\linewidth}p{0.23\linewidth}}
 \toprule
-\textbf{Tipo de URL} & \textbf{Ejemplo} & \textbf{Quién la usa} \\
+\textbf{Tipo de URL} & \textbf{Ejemplo} & \textbf{QuiÃ©n la usa} \\
 \midrule
 URL humana & \url{https://gitlab.192.168.49.2.nip.io:8443} & navegador desde Windows \\
-URL interna de clúster & \url{http://gitlab-webservice-default.gitlab.svc.cluster.local:8181/} & runner y pods dentro de Kubernetes \\
+URL interna de clÃºster & \url{http://gitlab-webservice-default.gitlab.svc.cluster.local:8181/} & runner y pods dentro de Kubernetes \\
 \bottomrule
 \end{tabular}
 }
 
-La distinción es crítica: una URL útil para el usuario no tiene por qué
-ser válida para componentes internos del clúster. Esa fue la razón por
-la que el runner se configuró con direcciones internas para registrarse y
+La distinciÃ³n es crÃ­tica: una URL Ãºtil para el usuario no tiene por quÃ©
+ser vÃ¡lida para componentes internos del clÃºster. Esa fue la razÃ³n por
+la que el runner se configurÃ³ con direcciones internas para registrarse y
 clonar.
 
-\section{Qué problema resolvió \texttt{clone\_url}}\label{quuxe9-problema-resolviuxf3-clone-url}
+\section{QuÃ© problema resolviÃ³ \texttt{clone\_url}}\label{quuxe9-problema-resolviuxf3-clone-url}
 
-En la práctica, el runner no solo necesitaba registrarse, sino también
+En la prÃ¡ctica, el runner no solo necesitaba registrarse, sino tambiÃ©n
 clonar el repositorio. Sin \texttt{clone\_url}, los jobs intentaban usar
-la URL pública del proyecto y fallaban desde dentro del clúster. El
-parámetro resolvió exactamente ese salto entre red humana y red interna.
+la URL pÃºblica del proyecto y fallaban desde dentro del clÃºster. El
+parÃ¡metro resolviÃ³ exactamente ese salto entre red humana y red interna.
 
 \section{Estado operativo del runner}\label{estado-operativo-del-runner}
 
@@ -3285,7 +3293,7 @@ ejecutor quedaron correctamente enlazados.
   \includegraphics[width=\textwidth]{assets/gitlab/51-gitlab-runner-online.png}%
 }{%
   \fbox{\parbox{0.92\textwidth}{%
-  \textbf{Falta la imagen real:} colocar aquí
+  \textbf{Falta la imagen real:} colocar aquÃ­
   \texttt{assets/gitlab/51-gitlab-runner-online.png}.%
   }}%
 }
@@ -3297,27 +3305,27 @@ ejecutor quedaron correctamente enlazados.
 
 \chapter{Pipeline CI con GitLab}\label{pipeline-ci-con-gitlab}
 
-\section{Qué es un pipeline y qué significan CI y CD}\label{quuxe9-es-un-pipeline-y-quuxe9-significan-ci-y-cd}
+\section{QuÃ© es un pipeline y quÃ© significan CI y CD}\label{quuxe9-es-un-pipeline-y-quuxe9-significan-ci-y-cd}
 
 Un \emph{pipeline} es una cadena ordenada de jobs automatizados que se
 ejecutan como respuesta a un evento, normalmente un commit o un merge.
 Cada job valida, construye o despliega una parte del sistema. En este
-proyecto la pipeline se diseñó para reflejar el ciclo de vida completo
-que interesa en un laboratorio DevOps: comprobar que el código compila,
-que pasa pruebas, que los charts son válidos, que las imágenes se
+proyecto la pipeline se diseÃ±Ã³ para reflejar el ciclo de vida completo
+que interesa en un laboratorio DevOps: comprobar que el cÃ³digo compila,
+que pasa pruebas, que los charts son vÃ¡lidos, que las imÃ¡genes se
 construyen y que el despliegue puede realizarse con trazabilidad.
 
-Conviene entender el pipeline como una línea de montaje software. El
+Conviene entender el pipeline como una lÃ­nea de montaje software. El
 commit entra por un extremo y, si todo va bien, sale por el otro lado
 convertido en un artefacto validado y desplegable. Cada stage cumple una
-función de control de calidad: si falla \texttt{build}, el código no
+funciÃ³n de control de calidad: si falla \texttt{build}, el cÃ³digo no
 compila; si falla \texttt{test}, el comportamiento no es fiable; si
-falla \texttt{validate}, la infraestructura declarativa no está bien
+falla \texttt{validate}, la infraestructura declarativa no estÃ¡ bien
 expresada; si falla \texttt{image}, no existe contenedor publicable; si
-falla \texttt{deploy}, el clúster no ha aceptado la nueva revisión.
+falla \texttt{deploy}, el clÃºster no ha aceptado la nueva revisiÃ³n.
 
 CI significa \emph{Continuous Integration}. Su objetivo es integrar
-cambios pequeños de forma frecuente y validarlos automáticamente para
+cambios pequeÃ±os de forma frecuente y validarlos automÃ¡ticamente para
 detectar errores cuanto antes. CD puede interpretarse en dos niveles:
 
 \begin{itemize}
@@ -3326,44 +3334,44 @@ detectar errores cuanto antes. CD puede interpretarse en dos niveles:
   \emph{Continuous Delivery}: el sistema queda siempre en un estado
 desplegable y el despliegue puede lanzarse de forma controlada
 \item
-  \emph{Continuous Deployment}: el despliegue se realiza automáticamente
-sin intervención manual
+  \emph{Continuous Deployment}: el despliegue se realiza automÃ¡ticamente
+sin intervenciÃ³n manual
 \end{itemize}
 
-En este laboratorio se implementó una CI completa y una CD controlada:
+En este laboratorio se implementÃ³ una CI completa y una CD controlada:
 la parte de build, test, empaquetado e imagen se ejecuta de forma
-automática, mientras que el despliegue en Minikube se dejó manual para
-mantener el control didáctico del proceso. Esto tiene sentido porque el
-objetivo del laboratorio no era maximizar automatización ciega, sino
-entender qué hace cada pieza del flujo.
+automÃ¡tica, mientras que el despliegue en Minikube se dejÃ³ manual para
+mantener el control didÃ¡ctico del proceso. Esto tiene sentido porque el
+objetivo del laboratorio no era maximizar automatizaciÃ³n ciega, sino
+entender quÃ© hace cada pieza del flujo.
 
-\section{Para qué sirve la pipeline en este laboratorio}\label{para-quuxe9-sirve-la-pipeline-en-este-laboratorio}
+\section{Para quÃ© sirve la pipeline en este laboratorio}\label{para-quuxe9-sirve-la-pipeline-en-este-laboratorio}
 
-La pipeline no se añadió solo para poder decir que existe CI/CD. Se
-utilizó para resolver necesidades concretas:
+La pipeline no se aÃ±adiÃ³ solo para poder decir que existe CI/CD. Se
+utilizÃ³ para resolver necesidades concretas:
 
 \begin{itemize}
 \tightlist
 \item
-  detectar errores de compilación antes del despliegue
+  detectar errores de compilaciÃ³n antes del despliegue
 \item
-  ejecutar tests con una base de datos efímera y realista
+  ejecutar tests con una base de datos efÃ­mera y realista
 \item
   validar que los charts Helm renderizan correctamente
 \item
-  construir imágenes versionadas por commit
+  construir imÃ¡genes versionadas por commit
 \item
-  publicar esas imágenes en el Container Registry
+  publicar esas imÃ¡genes en el Container Registry
 \item
   desplegar exactamente el artefacto construido por la pipeline
 \end{itemize}
 
-El valor pedagógico está en que el commit deja de ser solo código fuente
+El valor pedagÃ³gico estÃ¡ en que el commit deja de ser solo cÃ³digo fuente
 y pasa a convertirse en una unidad trazable de entrega.
 
 \section{Estructura de stages}\label{estructura-de-stages}
 
-La pipeline terminó evolucionando a:
+La pipeline terminÃ³ evolucionando a:
 
 \begin{YamlCode}
 stages:
@@ -3375,27 +3383,27 @@ stages:
   - deploy
 \end{YamlCode}
 
-Esta secuencia refleja el orden lógico de madurez del proceso: primero
-se valida el código, después su empaquetado y configuración, luego la
-construcción de imágenes y finalmente el despliegue.
+Esta secuencia refleja el orden lÃ³gico de madurez del proceso: primero
+se valida el cÃ³digo, despuÃ©s su empaquetado y configuraciÃ³n, luego la
+construcciÃ³n de imÃ¡genes y finalmente el despliegue.
 
-\section{Qué son Testcontainers y por qué se usaron}\label{quuxe9-son-testcontainers-y-por-quuxe9-se-usaron}
+\section{QuÃ© son Testcontainers y por quÃ© se usaron}\label{quuxe9-son-testcontainers-y-por-quuxe9-se-usaron}
 
-Testcontainers es una librería de testing que permite arrancar
-contenedores reales durante la ejecución de pruebas automatizadas. En
+Testcontainers es una librerÃ­a de testing que permite arrancar
+contenedores reales durante la ejecuciÃ³n de pruebas automatizadas. En
 lugar de ejecutar los tests contra H2 o contra mocks excesivamente
 artificiales, los servicios pueden validarse contra una base PostgreSQL
-efímera levantada específicamente para el test.
+efÃ­mera levantada especÃ­ficamente para el test.
 
 Esto es importante porque acerca el comportamiento del test al entorno
-real. En el laboratorio se usó para que las pruebas de persistencia y
+real. En el laboratorio se usÃ³ para que las pruebas de persistencia y
 migraciones se ejecutaran contra PostgreSQL y no contra una base
-simplificada con diferencias semánticas. Para un proyecto con Flyway,
-JPA y consultas reales, esta diferencia es crítica: un test verde sobre
-H2 puede ocultar errores que sí aparecerán contra PostgreSQL.
+simplificada con diferencias semÃ¡nticas. Para un proyecto con Flyway,
+JPA y consultas reales, esta diferencia es crÃ­tica: un test verde sobre
+H2 puede ocultar errores que sÃ­ aparecerÃ¡n contra PostgreSQL.
 
 La idea operativa es sencilla. El propio test declara una URL especial y
-el driver de Testcontainers interpreta esa URL como una instrucción para
+el driver de Testcontainers interpreta esa URL como una instrucciÃ³n para
 levantar un contenedor temporal:
 
 \begin{PropertiesCode}
@@ -3405,7 +3413,7 @@ spring.datasource.username=test
 spring.datasource.password=test
 \end{PropertiesCode}
 
-A partir de ahí, el ciclo es el siguiente:
+A partir de ahÃ­, el ciclo es el siguiente:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3413,7 +3421,7 @@ A partir de ahí, el ciclo es el siguiente:
 \item
   comienza el test
 \item
-  Testcontainers levanta un PostgreSQL efímero en Docker
+  Testcontainers levanta un PostgreSQL efÃ­mero en Docker
 \item
   Spring Boot arranca contra esa base real
 \item
@@ -3424,16 +3432,16 @@ A partir de ahí, el ciclo es el siguiente:
   al terminar, el contenedor se destruye
 \end{enumerate}
 
-Eso transforma la calidad de la validación: el test deja de ser una
-comprobación superficial y pasa a simular un trozo importante del
+Eso transforma la calidad de la validaciÃ³n: el test deja de ser una
+comprobaciÃ³n superficial y pasa a simular un trozo importante del
 runtime real. En cuanto el test necesita Docker para levantar ese
-contenedor efímero, la infraestructura de CI también tiene que
+contenedor efÃ­mero, la infraestructura de CI tambiÃ©n tiene que
 adaptarse. Por eso la fase \texttt{test} se ejecuta con
 \texttt{docker:dind} en la pipeline.
 
 \section{Fragmento real de la pipeline}\label{fragmento-real-de-la-pipeline}
 
-La parte principal de la pipeline quedó así:
+La parte principal de la pipeline quedÃ³ asÃ­:
 
 \begin{YamlCode}
 stages:
@@ -3461,21 +3469,21 @@ test:
     DOCKER_TLS_CERTDIR: ""
 \end{YamlCode}
 
-\section{Qué valida cada fase principal}\label{quuxe9-valida-cada-fase-principal}
+\section{QuÃ© valida cada fase principal}\label{quuxe9-valida-cada-fase-principal}
 
 \begin{itemize}
 \tightlist
 \item
   \texttt{build}: comprueba que el proyecto compila
 \item
-  \texttt{test}: ejecuta pruebas automáticas, incluyendo las apoyadas en
+  \texttt{test}: ejecuta pruebas automÃ¡ticas, incluyendo las apoyadas en
   Testcontainers
 \item
   \texttt{package}: empaqueta los microservicios como artefactos Java
 \item
   \texttt{validate\_helm}: verifica sintaxis y render de los charts Helm
 \item
-  \texttt{image}: construye y publica imágenes en el registry
+  \texttt{image}: construye y publica imÃ¡genes en el registry
 \item
   \texttt{deploy}: despliega manualmente el commit versionado en
   Minikube
@@ -3484,10 +3492,10 @@ test:
 \section{Evidencia visual de la pipeline en verde}\label{evidencia-visual-de-la-pipeline-en-verde}
 
 La siguiente captura muestra la pipeline en estado satisfactorio, con los
-jobs principales de validación y despliegue completados. Esta evidencia
-es importante porque demuestra que la automatización no se quedó en un
-pipeline teórico: compiló, testó, validó charts, construyó imágenes y
-ejecutó el despliegue.
+jobs principales de validaciÃ³n y despliegue completados. Esta evidencia
+es importante porque demuestra que la automatizaciÃ³n no se quedÃ³ en un
+pipeline teÃ³rico: compilÃ³, testÃ³, validÃ³ charts, construyÃ³ imÃ¡genes y
+ejecutÃ³ el despliegue.
 
 \begin{figure}[H]
 \centering
@@ -3495,11 +3503,11 @@ ejecutó el despliegue.
   \includegraphics[width=\textwidth]{assets/gitlab/52-gitlab-pipeline-ci-green.png}%
 }{%
   \fbox{\parbox{0.92\textwidth}{%
-  \textbf{Falta la imagen real:} colocar aquí
+  \textbf{Falta la imagen real:} colocar aquÃ­
   \texttt{assets/gitlab/52-gitlab-pipeline-ci-green.png}.%
   }}%
 }
-\caption{Pipeline del proyecto en GitLab con los stages de \texttt{build}, \texttt{test}, \texttt{package}, \texttt{validate\_helm}, construcción de imágenes y \texttt{deploy\_minikube} completados correctamente.}
+\caption{Pipeline del proyecto en GitLab con los stages de \texttt{build}, \texttt{test}, \texttt{package}, \texttt{validate\_helm}, construcciÃ³n de imÃ¡genes y \texttt{deploy\_minikube} completados correctamente.}
 \label{fig:gitlab-pipeline-green}
 \end{figure}
 
@@ -3508,15 +3516,15 @@ ejecutó el despliegue.
 \chapter{CD real con Container Registry y deploy por
 SHA}\label{cd-real-con-container-registry-y-deploy-por-sha}
 
-\section{Qué significa CD en este laboratorio}\label{quuxe9-significa-cd-en-este-laboratorio}
+\section{QuÃ© significa CD en este laboratorio}\label{quuxe9-significa-cd-en-este-laboratorio}
 
-Hasta este punto del informe ya existía una CI completa: el código se
-compilaba, se ejecutaban tests, se validaban charts y se obtenía una
-pipeline fiable. Sin embargo, todavía faltaba una pregunta clave: \emph{¿cómo
-se convierte exactamente un commit en una versión desplegada en el
-clúster?}
+Hasta este punto del informe ya existÃ­a una CI completa: el cÃ³digo se
+compilaba, se ejecutaban tests, se validaban charts y se obtenÃ­a una
+pipeline fiable. Sin embargo, todavÃ­a faltaba una pregunta clave: \emph{Â¿cÃ³mo
+se convierte exactamente un commit en una versiÃ³n desplegada en el
+clÃºster?}
 
-Ahí entra la parte de CD. En este documento, CD se entiende como
+AhÃ­ entra la parte de CD. En este documento, CD se entiende como
 \emph{Continuous Delivery} con despliegue controlado. Es decir, cada
 commit que supera la pipeline queda convertido en una imagen versionada
 y lista para desplegarse, aunque el paso final de despliegue se mantenga
@@ -3527,27 +3535,27 @@ La diferencia con la CI es importante:
 \begin{itemize}
 \tightlist
 \item
-  la \textbf{CI} responde a la pregunta ``¿el cambio es válido?'
+  la \textbf{CI} responde a la pregunta ``Â¿el cambio es vÃ¡lido?'
 \item
-  la \textbf{CD} responde a la pregunta ``¿qué artefacto exacto se
-despliega y cómo llega al clúster?'
+  la \textbf{CD} responde a la pregunta ``Â¿quÃ© artefacto exacto se
+despliega y cÃ³mo llega al clÃºster?'
 \end{itemize}
 
-En un entorno profesional, esta segunda parte es crítica. No basta con
-que el código compile; hace falta saber qué imagen concreta se ha
-publicado, qué tag la identifica, qué pipeline la generó y qué
-Deployment la está ejecutando.
+En un entorno profesional, esta segunda parte es crÃ­tica. No basta con
+que el cÃ³digo compile; hace falta saber quÃ© imagen concreta se ha
+publicado, quÃ© tag la identifica, quÃ© pipeline la generÃ³ y quÃ©
+Deployment la estÃ¡ ejecutando.
 
-\section{De imágenes locales a registry
+\section{De imÃ¡genes locales a registry
 privado}\label{de-imuxe1genes-locales-a-registry-privado}
 
-Al principio el laboratorio funcionaba con imágenes construidas dentro
-de Minikube. Esto era útil para iterar rápido, pero no representaba una
+Al principio el laboratorio funcionaba con imÃ¡genes construidas dentro
+de Minikube. Esto era Ãºtil para iterar rÃ¡pido, pero no representaba una
 cadena de despliegue real. El siguiente paso fue usar el GitLab
-Container Registry como fuente oficial de imágenes.
+Container Registry como fuente oficial de imÃ¡genes.
 
 Ese cambio modifica por completo el modelo operativo. En lugar de que el
-clúster use una imagen ``que ya estaba allí', el proceso pasa a ser:
+clÃºster use una imagen ``que ya estaba allÃ­', el proceso pasa a ser:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3557,33 +3565,33 @@ clúster use una imagen ``que ya estaba allí', el proceso pasa a ser:
 \item
   la imagen se publica en el registry del proyecto
 \item
-  la imagen recibe uno o más tags
+  la imagen recibe uno o mÃ¡s tags
 \item
-  el job de despliegue le dice a Helm qué repositorio y qué tag usar
+  el job de despliegue le dice a Helm quÃ© repositorio y quÃ© tag usar
 \item
   Kubernetes descarga exactamente esa imagen desde el registry
 \end{enumerate}
 
-Este punto es fundamental porque introduce trazabilidad real entre código
+Este punto es fundamental porque introduce trazabilidad real entre cÃ³digo
 y runtime. El commit deja de ser un cambio abstracto en Git y pasa a
 quedar materializado como una imagen concreta almacenada en un registry.
 
-\section{Qué es un Container Registry y cómo
+\section{QuÃ© es un Container Registry y cÃ³mo
 funciona}\label{quuxe9-es-un-container-registry-y-cuxf3mo-funciona}
 
 Un \emph{Container Registry} es un servicio especializado en almacenar y
-servir imágenes de contenedor. Si GitLab actúa como repositorio del
-código fuente, el registry actúa como repositorio de las imágenes ya
+servir imÃ¡genes de contenedor. Si GitLab actÃºa como repositorio del
+cÃ³digo fuente, el registry actÃºa como repositorio de las imÃ¡genes ya
 construidas.
 
-El paralelismo didáctico es útil:
+El paralelismo didÃ¡ctico es Ãºtil:
 
 \begin{itemize}
 \tightlist
 \item
-  Git conserva commits, ramas y tags de código
+  Git conserva commits, ramas y tags de cÃ³digo
 \item
-  el registry conserva repositorios de imágenes y sus tags
+  el registry conserva repositorios de imÃ¡genes y sus tags
 \end{itemize}
 
 Cada microservicio del laboratorio termina teniendo su propio repositorio
@@ -3603,20 +3611,20 @@ este laboratorio se usaron dos ideas de tag:
 \begin{itemize}
 \tightlist
 \item
-  un tag mutable como \texttt{main}, útil para inspección manual
+  un tag mutable como \texttt{main}, Ãºtil para inspecciÃ³n manual
 \item
   un tag inmutable basado en el commit, por ejemplo
-  \texttt{910fd7f6}, útil para despliegue trazable
+  \texttt{910fd7f6}, Ãºtil para despliegue trazable
 \end{itemize}
 
-\section{Cómo se generan los tags y por qué se usa el SHA del commit}\label{cuxf3mo-se-generan-los-tags-y-por-quuxe9-se-usa-el-sha-del-commit}
+\section{CÃ³mo se generan los tags y por quÃ© se usa el SHA del commit}\label{cuxf3mo-se-generan-los-tags-y-por-quuxe9-se-usa-el-sha-del-commit}
 
-El objetivo no era solo construir imágenes, sino poder responder a esta
-pregunta: \emph{¿qué versión exacta está corriendo en Kubernetes?}
+El objetivo no era solo construir imÃ¡genes, sino poder responder a esta
+pregunta: \emph{Â¿quÃ© versiÃ³n exacta estÃ¡ corriendo en Kubernetes?}
 
 Para resolverlo, cada build publica la imagen con el valor de
-\texttt{CI\_COMMIT\_SHORT\_SHA}. Así, si el commit actual es
-\texttt{910fd7f6}, la imagen generada queda así:
+\texttt{CI\_COMMIT\_SHORT\_SHA}. AsÃ­, si el commit actual es
+\texttt{910fd7f6}, la imagen generada queda asÃ­:
 
 \begin{PlainCode}
 registry.192.168.49.2.nip.io/root/observability-project/user-service:910fd7f6
@@ -3631,21 +3639,21 @@ Esto tiene varias ventajas:
 \item
   se puede relacionar directamente con el commit de Git
 \item
-  el despliegue deja una huella fácil de auditar
+  el despliegue deja una huella fÃ¡cil de auditar
 \item
-  un rollback es más simple porque basta con volver a desplegar un SHA
+  un rollback es mÃ¡s simple porque basta con volver a desplegar un SHA
   anterior
 \end{itemize}
 
 En otras palabras, el tag por SHA convierte la imagen en una pieza
-versionada con semántica operativa real.
+versionada con semÃ¡ntica operativa real.
 
-\section{Build de imágenes con
+\section{Build de imÃ¡genes con
 Kaniko}\label{build-de-imuxe1genes-con-kaniko}
 
-Para construir imágenes dentro del clúster se eligió Kaniko. La razón
+Para construir imÃ¡genes dentro del clÃºster se eligiÃ³ Kaniko. La razÃ³n
 principal es que encaja mejor que Docker-in-Docker en un runner
-Kubernetes. Kaniko puede construir imágenes a partir de un
+Kubernetes. Kaniko puede construir imÃ¡genes a partir de un
 \texttt{Dockerfile} y publicarlas en un registry sin necesitar un daemon
 Docker tradicional dentro del job.
 
@@ -3667,11 +3675,11 @@ Ejemplo simplificado del template de build:
       --destination "${CI_REGISTRY_IMAGE}/${SERVICE}:main"
 \end{YamlCode}
 
-El job toma el código fuente, ejecuta el \texttt{Dockerfile}, construye
-la imagen y la empuja al registry con dos destinos. El más importante de
+El job toma el cÃ³digo fuente, ejecuta el \texttt{Dockerfile}, construye
+la imagen y la empuja al registry con dos destinos. El mÃ¡s importante de
 cara al despliegue es el SHA del commit.
 
-\section{Autenticación contra el registry desde
+\section{AutenticaciÃ³n contra el registry desde
 CI}\label{autenticaciuxf3n-contra-el-registry-desde-ci}
 
 Kaniko necesita autenticarse para hacer \texttt{push} al registry. Para
@@ -3682,7 +3690,7 @@ ello se genera un \texttt{config.json} de Docker dentro del job:
 - printf '{"auths":{"%s":{"username":"%s","password":"%s"}}}' "$CI_REGISTRY" "$CI_REGISTRY_USER" "$CI_REGISTRY_PASSWORD" > /kaniko/.docker/config.json
 \end{BashCode}
 
-\section{Qué representa este
+\section{QuÃ© representa este
 fragmento}\label{quuxe9-representa-este-fragmento}
 
 \begin{itemize}
@@ -3693,28 +3701,28 @@ fragmento}\label{quuxe9-representa-este-fragmento}
   \texttt{CI\_REGISTRY\_USER} y \texttt{CI\_REGISTRY\_PASSWORD}:
   credenciales inyectadas por GitLab CI
 \item
-  \texttt{/kaniko/.docker/config.json}: ubicación que Kaniko espera para
+  \texttt{/kaniko/.docker/config.json}: ubicaciÃ³n que Kaniko espera para
   autenticarse
 \end{itemize}
 
 Este fragmento traduce una idea muy simple: el job necesita credenciales
-válidas para poder publicar imágenes. Si esta autenticación falla, la
+vÃ¡lidas para poder publicar imÃ¡genes. Si esta autenticaciÃ³n falla, la
 pipeline puede compilar y testear, pero se rompe exactamente en el salto
-entre artefacto lógico e imagen distribuible.
+entre artefacto lÃ³gico e imagen distribuible.
 
-\section{Autenticación contra el registry desde
+\section{AutenticaciÃ³n contra el registry desde
 Kubernetes}\label{autenticaciuxf3n-contra-el-registry-desde-kubernetes}
 
-Una vez publicada la imagen, el clúster también necesita autenticarse
+Una vez publicada la imagen, el clÃºster tambiÃ©n necesita autenticarse
 para hacer \texttt{pull}. Para eso se usa un \texttt{imagePullSecret},
 que conceptualmente responde a esta idea:
 
 \begin{PlainCode}
-Kubernetes no puede descargar una imagen privada si no conoce credenciales válidas para el registry.
+Kubernetes no puede descargar una imagen privada si no conoce credenciales vÃ¡lidas para el registry.
 \end{PlainCode}
 
-Por eso en los charts se añadió soporte a \texttt{image.pullSecrets}, y
-en el namespace de despliegue se creó un secret del tipo
+Por eso en los charts se aÃ±adiÃ³ soporte a \texttt{image.pullSecrets}, y
+en el namespace de despliegue se creÃ³ un secret del tipo
 \texttt{docker-registry}.
 
 \begin{YamlCode}
@@ -3734,15 +3742,15 @@ imagePullSecrets:
 {{- end }}
 \end{YamlCode}
 
-Este cambio parece pequeño, pero conceptualmente es enorme. Es el punto
+Este cambio parece pequeÃ±o, pero conceptualmente es enorme. Es el punto
 en el que la infraestructura declarativa del chart aprende a consumir
-imágenes privadas provenientes del sistema de CI/CD.
+imÃ¡genes privadas provenientes del sistema de CI/CD.
 
-\section{Cómo se despliega realmente una imagen por
+\section{CÃ³mo se despliega realmente una imagen por
 SHA}\label{cuxf3mo-se-despliega-realmente-una-imagen-por-sha}
 
-El job \texttt{deploy\_minikube} quedó como job manual. Es una decisión
-sensata para laboratorio porque evita despliegues automáticos
+El job \texttt{deploy\_minikube} quedÃ³ como job manual. Es una decisiÃ³n
+sensata para laboratorio porque evita despliegues automÃ¡ticos
 accidentales y permite validar primero el artefacto construido.
 
 Ejemplo simplificado:
@@ -3767,27 +3775,27 @@ Este fragmento hace dos cosas muy importantes:
   pipeline
 \end{itemize}
 
-El efecto práctico es que Kubernetes no despliega ``la última
+El efecto prÃ¡ctico es que Kubernetes no despliega ``la Ãºltima
 imagen local', sino una imagen inmutable asociada a un commit concreto.
 
 \section{Ejemplos de resultado que produce este flujo}\label{ejemplos-de-resultado-que-produce-este-flujo}
 
 Si el commit activo es \texttt{910fd7f6}, dos salidas representativas del
-sistema serían estas:
+sistema serÃ­an estas:
 
 \begin{PlainCode}
 registry.192.168.49.2.nip.io/root/observability-project/user-service:910fd7f6
 registry.192.168.49.2.nip.io/root/observability-project/order-service:910fd7f6
 \end{PlainCode}
 
-Y en Kubernetes, el Deployment puede quedar reflejado así:
+Y en Kubernetes, el Deployment puede quedar reflejado asÃ­:
 
 \begin{PlainCode}
 NAME           IMAGE
 user-service   registry.192.168.49.2.nip.io/root/observability-project/user-service:910fd7f6
 \end{PlainCode}
 
-Esta es la demostración más clara de CD real: el commit, la pipeline, la
+Esta es la demostraciÃ³n mÃ¡s clara de CD real: el commit, la pipeline, la
 imagen y el deployment quedan unidos por el mismo identificador.
 
 \section{Problemas reales de esta
@@ -3801,16 +3809,16 @@ los problemas resueltos destacan:
 \item
   errores al construir el \texttt{config.json} de Kaniko
 \item
-  autenticación del registry contra GitLab web
+  autenticaciÃ³n del registry contra GitLab web
 \item
-  resolución DNS incorrecta dentro del clúster
+  resoluciÃ³n DNS incorrecta dentro del clÃºster
 \item
   necesidad de confiar en la CA del registry desde el nodo Minikube
 \item
   pods bloqueados en \texttt{ErrImageNeverPull}
 \end{itemize}
 
-Este bloque es muy valioso en una memoria didáctica porque enseña que el
+Este bloque es muy valioso en una memoria didÃ¡ctica porque enseÃ±a que el
 CD real tiene varias capas:
 
 \begin{enumerate}
@@ -3826,7 +3834,7 @@ CD real tiene varias capas:
   conseguir que el deployment haga rollout correctamente
 \end{enumerate}
 
-\section{Evidencias visuales recomendadas y cómo obtenerlas}\label{evidencias-visuales-recomendadas-y-cuxf3mo-obtenerlas}
+\section{Evidencias visuales recomendadas y cÃ³mo obtenerlas}\label{evidencias-visuales-recomendadas-y-cuxf3mo-obtenerlas}
 
 Para documentar esta fase de forma convincente se han incluido dos
 pruebas complementarias: una evidencia visual del Container Registry y
@@ -3836,8 +3844,8 @@ una evidencia textual del Deployment final consumido por Kubernetes.
 
 La siguiente captura muestra uno de los repositorios de imagen del
 proyecto dentro del GitLab Container Registry. En ella se aprecia que la
-pipeline no publica una única imagen genérica, sino varios tags
-asociados a la evolución del proyecto, incluyendo tags por SHA y el tag
+pipeline no publica una Ãºnica imagen genÃ©rica, sino varios tags
+asociados a la evoluciÃ³n del proyecto, incluyendo tags por SHA y el tag
 \texttt{main}.
 
 \begin{figure}[H]
@@ -3846,24 +3854,24 @@ asociados a la evolución del proyecto, incluyendo tags por SHA y el tag
   \includegraphics[width=\textwidth]{assets/gitlab/54-gitlab-container-registry.png}%
 }{%
   \fbox{\parbox{0.92\textwidth}{%
-  \textbf{Falta la imagen real:} colocar aquí
+  \textbf{Falta la imagen real:} colocar aquÃ­
   \texttt{assets/gitlab/54-gitlab-container-registry.png}.%
   }}%
 }
-\caption{Repositorio de imágenes en el GitLab Container Registry, con varios tags publicados por la pipeline para un microservicio del laboratorio.}
+\caption{Repositorio de imÃ¡genes en el GitLab Container Registry, con varios tags publicados por la pipeline para un microservicio del laboratorio.}
 \label{fig:gitlab-container-registry}
 \end{figure}
 
 Esta vista es relevante porque demuestra que la CD no termina en el
 build. La pipeline construye una imagen, la identifica con tags
-significativos y la deja disponible para que el clúster la consuma.
+significativos y la deja disponible para que el clÃºster la consuma.
 
 \subsection*{Deployment final consumido por Kubernetes}
 
-En lugar de añadir una segunda captura, se incluye la salida de terminal
+En lugar de aÃ±adir una segunda captura, se incluye la salida de terminal
 obtenida al consultar el Deployment del \texttt{user-service}. En esta
 memoria se ha normalizado el prefijo del repositorio a
-\texttt{observability} para mantener una nomenclatura homogénea en el
+\texttt{observability} para mantener una nomenclatura homogÃ©nea en el
 texto del documento.
 
 \begin{PowerShellCode}
@@ -3874,27 +3882,27 @@ user-service   observability/user-service:0.0.1-SNAPSHOT
 
 Esta evidencia sirve para explicar una idea muy importante: el estado
 final del Deployment puede consultarse directamente desde Kubernetes, y
-esa consulta permite verificar qué imagen exacta está declarada en el
-runtime. En una versión completamente orientada a SHA, esta misma salida
-podría mostrar un tag como \texttt{910fd7f6}; en cualquier caso, el
+esa consulta permite verificar quÃ© imagen exacta estÃ¡ declarada en el
+runtime. En una versiÃ³n completamente orientada a SHA, esta misma salida
+podrÃ­a mostrar un tag como \texttt{910fd7f6}; en cualquier caso, el
 principio es el mismo: el Deployment referencia una imagen concreta y
 visible para el operador.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\chapter{Decisiones de diseño y
+\chapter{Decisiones de diseÃ±o y
 trade-offs}\label{decisiones-de-diseuxf1o-y-trade-offs}
 
-Esta sección es importante porque transforma el documento de una simple
-narración de hechos en una memoria con criterio técnico. No basta con
-decir qué se hizo; también conviene explicar por qué se eligió una
+Esta secciÃ³n es importante porque transforma el documento de una simple
+narraciÃ³n de hechos en una memoria con criterio tÃ©cnico. No basta con
+decir quÃ© se hizo; tambiÃ©n conviene explicar por quÃ© se eligiÃ³ una
 alternativa y no otra.
 
 \section{Microservicios acoplados por HTTP frente a servicios
 aislados}\label{microservicios-acoplados-por-http-frente-a-servicios-aislados}
 
-Se eligió un flujo con dependencias HTTP reales entre servicios. La
-razón no fue puramente funcional, sino observacional.
+Se eligiÃ³ un flujo con dependencias HTTP reales entre servicios. La
+razÃ³n no fue puramente funcional, sino observacional.
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -3903,7 +3911,7 @@ razón no fue puramente funcional, sino observacional.
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
-Opción
+OpciÃ³n
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Ventaja
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -3914,19 +3922,19 @@ Inconveniente
 \bottomrule\noalign{}
 \endlastfoot
 Servicios aislados & simplicidad & menos valor para trazas y
-correlación \\
-Servicios con dependencias HTTP & más realismo y observabilidad
-distribuida & más complejidad operativa \\
+correlaciÃ³n \\
+Servicios con dependencias HTTP & mÃ¡s realismo y observabilidad
+distribuida & mÃ¡s complejidad operativa \\
 \end{longtable}
 }
 
-En este laboratorio interesaba más el valor didáctico de la segunda
-opción.
+En este laboratorio interesaba mÃ¡s el valor didÃ¡ctico de la segunda
+opciÃ³n.
 
-\section{PostgreSQL único con esquemas frente a méltiples
+\section{PostgreSQL Ãºnico con esquemas frente a mÃ©ltiples
 bases}\label{postgresql-uxfanico-con-esquemas-frente-a-muxe9ltiples-bases}
 
-Se eligió una única instancia PostgreSQL con varios esquemas.
+Se eligiÃ³ una Ãºnica instancia PostgreSQL con varios esquemas.
 
 Razones:
 
@@ -3935,9 +3943,9 @@ Razones:
 \item
   menos consumo de recursos en local
 \item
-  menos complejidad de operación
+  menos complejidad de operaciÃ³n
 \item
-  aislamiento lógico suficiente para laboratorio
+  aislamiento lÃ³gico suficiente para laboratorio
 \end{itemize}
 
 Trade-off:
@@ -3945,89 +3953,89 @@ Trade-off:
 \begin{itemize}
 \tightlist
 \item
-  no reproduce al cien por cien una separación completa por base de
+  no reproduce al cien por cien una separaciÃ³n completa por base de
   datos
 \item
-  sí reproduce suficientemente bien versionado, migraciones y
+  sÃ­ reproduce suficientemente bien versionado, migraciones y
   persistencia real
 \end{itemize}
 
 \section{Helm frente a manifiestos Kubernetes
 sueltos}\label{helm-frente-a-manifiestos-kubernetes-sueltos}
 
-Helm añade una capa más de complejidad que \texttt{kubectl\ apply}, pero
+Helm aÃ±ade una capa mÃ¡s de complejidad que \texttt{kubectl\ apply}, pero
 aporta ventajas decisivas:
 
 \begin{itemize}
 \tightlist
 \item
-  parametrización por entorno
+  parametrizaciÃ³n por entorno
 \item
   plantillas reutilizables
 \item
   despliegues repetibles
 \item
-  mejor integración con CI/CD
+  mejor integraciÃ³n con CI/CD
 \end{itemize}
 
-Para un proyecto con varios microservicios, Helm es una decisión
+Para un proyecto con varios microservicios, Helm es una decisiÃ³n
 razonable incluso en laboratorio.
 
 \section{OpenTelemetry solo para
 trazas}\label{opentelemetry-solo-para-trazas}
 
-Aunque OpenTelemetry puede participar en métricas y logs, en este
-laboratorio se decidió separar responsabilidades:
+Aunque OpenTelemetry puede participar en mÃ©tricas y logs, en este
+laboratorio se decidiÃ³ separar responsabilidades:
 
 \begin{itemize}
 \tightlist
 \item
   trazas -\textgreater{} OpenTelemetry
 \item
-  métricas -\textgreater{} Prometheus
+  mÃ©tricas -\textgreater{} Prometheus
 \item
   logs -\textgreater{} ECS JSON + Filebeat + Elasticsearch
 \end{itemize}
 
-La razón es didáctica y operativa:
+La razÃ³n es didÃ¡ctica y operativa:
 
 \begin{itemize}
 \tightlist
 \item
   simplifica el modelo mental
 \item
-  evita duplicidad de señales
+  evita duplicidad de seÃ±ales
 \item
-  permite enseñar mejor qué backend resuelve cada problema
+  permite enseÃ±ar mejor quÃ© backend resuelve cada problema
 \end{itemize}
 
-Esta decisión conviene explicarla con más detalle porque, a primera
-vista, podría parecer que el laboratorio está renunciando a una parte
+Esta decisiÃ³n conviene explicarla con mÃ¡s detalle porque, a primera
+vista, podrÃ­a parecer que el laboratorio estÃ¡ renunciando a una parte
 importante de OpenTelemetry. En realidad, lo que se hizo fue elegir un
-reparto de responsabilidades muy explícito para que cada señal
-observacional tuviera un camino fácil de razonar.
+reparto de responsabilidades muy explÃ­cito para que cada seÃ±al
+observacional tuviera un camino fÃ¡cil de razonar.
 
-\subsection{Qué significa exactamente separar señales}
+\subsection{QuÃ© significa exactamente separar seÃ±ales}
 \label{que-significa-exactamente-separar-senales}
 
-En este laboratorio una misma operación de negocio genera varios tipos de
+En este laboratorio una misma operaciÃ³n de negocio genera varios tipos de
 evidencia, pero cada evidencia toma un camino distinto porque responde a
-preguntas distintas. Si un usuario crea un pedido a través del gateway,
+preguntas distintas. Si un usuario crea un pedido a travÃ©s del gateway,
 lo que ocurre en segundo plano es algo parecido a esto:
 
 \begin{itemize}
 \tightlist
 \item
-  la petición HTTP genera una \emph{traza} y varios \emph{spans}, por lo
-  que esa señal se envía mediante OpenTelemetry y OTLP al Collector y,
-  desde ahí, a Jaeger
+  la peticiÃ³n HTTP genera una \emph{traza} y varios \emph{spans}, por lo
+  que esa seÃ±al se envÃ­a mediante OpenTelemetry y OTLP al Collector y,
+  desde ahÃ­, a Jaeger
 \item
-  esa misma petición incrementa contadores y latencias agregadas, por lo
-  que esa señal se expone en \texttt{/actuator/prometheus} y Prometheus la
+  esa misma peticiÃ³n incrementa contadores y latencias agregadas, por lo
+  que esa seÃ±al se expone en \texttt{/actuator/prometheus} y Prometheus la
   obtiene por \emph{scraping}
 \item
-  el procesamiento interno de la petición escribe eventos estructurados
-  en consola en formato ECS JSON, y Filebeat los reenvía a Elasticsearch
+  el procesamiento interno de la peticiÃ³n escribe eventos estructurados
+  en consola en formato ECS JSON, y Filebeat los reenvÃ­a a Elasticsearch
 \end{itemize}
 
 Esto permite contestar tres tipos de preguntas con tres herramientas
@@ -4036,19 +4044,19 @@ especializadas:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{trazas}: ``¿qué servicios participaron y en qué orden?''
+  \textbf{trazas}: ``Â¿quÃ© servicios participaron y en quÃ© orden?''
 \item
-  \textbf{métricas}: ``¿cuánto tarda de media y cuántas veces ocurre?''
+  \textbf{mÃ©tricas}: ``Â¿cuÃ¡nto tarda de media y cuÃ¡ntas veces ocurre?''
 \item
-  \textbf{logs}: ``¿qué pasó exactamente y con qué contexto?''
+  \textbf{logs}: ``Â¿quÃ© pasÃ³ exactamente y con quÃ© contexto?''
 \end{itemize}
 
 Ese reparto transforma el comportamiento del sistema de forma muy clara.
 El microservicio deja de verse como una caja negra que solo devuelve una
-respuesta HTTP y pasa a comportarse como una fuente de telemetría con
-varios planos de observación.
+respuesta HTTP y pasa a comportarse como una fuente de telemetrÃ­a con
+varios planos de observaciÃ³n.
 
-\subsection{Ejemplo práctico de una petición en este modelo}
+\subsection{Ejemplo prÃ¡ctico de una peticiÃ³n en este modelo}
 \label{ejemplo-practico-de-una-peticion-en-este-modelo}
 
 Si el cliente invoca \texttt{POST /api/orders}, el laboratorio obtiene al
@@ -4059,16 +4067,16 @@ menos tres resultados distintos:
 \item
   en Jaeger aparece una traza donde se ve \texttt{api-gateway},
   \texttt{order-service}, \texttt{user-service} y \texttt{product-service}
-  con su relación temporal
+  con su relaciÃ³n temporal
 \item
-  en Prometheus aumentan métricas como peticiones por segundo, latencia
+  en Prometheus aumentan mÃ©tricas como peticiones por segundo, latencia
   media o errores por servicio
 \item
   en Kibana aparecen eventos con \texttt{service.name}, \texttt{log.level},
   \texttt{message} y \texttt{trace\_id}
 \end{itemize}
 
-Un ejemplo simplificado del flujo sería:
+Un ejemplo simplificado del flujo serÃ­a:
 
 \begin{PlainCode}
 Cliente
@@ -4079,30 +4087,30 @@ Cliente
 
 Resultados observables:
   trazas -> OTel -> OTel Collector -> Jaeger
-  métricas -> /actuator/prometheus -> Prometheus
+  mÃ©tricas -> /actuator/prometheus -> Prometheus
   logs -> ECS JSON -> Filebeat -> Elasticsearch -> Kibana
 \end{PlainCode}
 
-\subsection{Qué se habría podido hacer con OpenTelemetry para más
-señales}\label{que-se-habria-podido-hacer-con-opentelemetry-para-mas-senales}
+\subsection{QuÃ© se habrÃ­a podido hacer con OpenTelemetry para mÃ¡s
+seÃ±ales}\label{que-se-habria-podido-hacer-con-opentelemetry-para-mas-senales}
 
-OpenTelemetry no está limitado a trazas. El estándar puede transportar
-también métricas y logs. Una arquitectura alternativa habría sido:
+OpenTelemetry no estÃ¡ limitado a trazas. El estÃ¡ndar puede transportar
+tambiÃ©n mÃ©tricas y logs. Una arquitectura alternativa habrÃ­a sido:
 
 \begin{itemize}
 \tightlist
 \item
   microservicios instrumentados con OpenTelemetry para trazas
 \item
-  exportación de métricas también por OTLP hacia un Collector
+  exportaciÃ³n de mÃ©tricas tambiÃ©n por OTLP hacia un Collector
 \item
-  el Collector reenviando esas métricas a Prometheus Remote Write, a otro
+  el Collector reenviando esas mÃ©tricas a Prometheus Remote Write, a otro
   backend compatible o incluso a OpenSearch
 \item
-  logs enriquecidos con atributos OpenTelemetry además del formato JSON
+  logs enriquecidos con atributos OpenTelemetry ademÃ¡s del formato JSON
 \end{itemize}
 
-Un ejemplo simplificado de exportación OTLP desde Spring Boot sería:
+Un ejemplo simplificado de exportaciÃ³n OTLP desde Spring Boot serÃ­a:
 
 \begin{PropertiesCode}
 otel.service.name=order-service
@@ -4112,27 +4120,27 @@ otel.metrics.exporter=otlp
 otel.logs.exporter=otlp
 \end{PropertiesCode}
 
-En ese modelo el microservicio no solo produciría spans, sino que
-delegaría en el ecosistema OpenTelemetry la entrega de varias señales. La
-ventaja es que la canalización queda más unificada. El inconveniente,
-especialmente en un laboratorio didáctico, es que la frontera entre
+En ese modelo el microservicio no solo producirÃ­a spans, sino que
+delegarÃ­a en el ecosistema OpenTelemetry la entrega de varias seÃ±ales. La
+ventaja es que la canalizaciÃ³n queda mÃ¡s unificada. El inconveniente,
+especialmente en un laboratorio didÃ¡ctico, es que la frontera entre
 responsabilidades se vuelve menos evidente.
 
-\subsection{Por qué en este laboratorio no se eligió ese
+\subsection{Por quÃ© en este laboratorio no se eligiÃ³ ese
 modelo}\label{por-que-en-este-laboratorio-no-se-eligio-ese-modelo}
 
 Si el objetivo principal del proyecto hubiera sido construir una capa de
-telemetría completamente unificada, habría tenido sentido empujar más
-señales por OpenTelemetry. Sin embargo, el objetivo principal de este
-laboratorio es pedagógico: entender qué problema resuelve cada pieza.
+telemetrÃ­a completamente unificada, habrÃ­a tenido sentido empujar mÃ¡s
+seÃ±ales por OpenTelemetry. Sin embargo, el objetivo principal de este
+laboratorio es pedagÃ³gico: entender quÃ© problema resuelve cada pieza.
 
-Por eso se buscó que cada backend tuviera un papel muy fácil de
+Por eso se buscÃ³ que cada backend tuviera un papel muy fÃ¡cil de
 explicar:
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Jaeger} recibe trazas distribuidas y permite ver la relación
+  \textbf{Jaeger} recibe trazas distribuidas y permite ver la relaciÃ³n
   temporal entre spans
 \item
   \textbf{Prometheus} recoge series temporales y responde bien a
@@ -4142,29 +4150,29 @@ explicar:
   estructurados, con filtros por servicio, severidad y \texttt{trace\_id}
 \end{itemize}
 
-Este reparto es especialmente útil para perfiles junior porque evita la
-sensación de que ``todo entra por el mismo tubo''. En una primera
-fase de aprendizaje suele ser más valioso entender bien tres caminos
-claros que abstraerlo todo detrás de una canalización única.
+Este reparto es especialmente Ãºtil para perfiles junior porque evita la
+sensaciÃ³n de que ``todo entra por el mismo tubo''. En una primera
+fase de aprendizaje suele ser mÃ¡s valioso entender bien tres caminos
+claros que abstraerlo todo detrÃ¡s de una canalizaciÃ³n Ãºnica.
 
-\subsection{Qué es OTLP y por qué aparece tanto en OpenTelemetry}
+\subsection{QuÃ© es OTLP y por quÃ© aparece tanto en OpenTelemetry}
 \label{que-es-otlp-y-por-que-aparece-tanto-en-opentelemetry}
 
-OTLP significa \emph{OpenTelemetry Protocol}. Es el protocolo estándar
-que define cómo se envían trazas, métricas y logs desde una librería o
+OTLP significa \emph{OpenTelemetry Protocol}. Es el protocolo estÃ¡ndar
+que define cÃ³mo se envÃ­an trazas, mÃ©tricas y logs desde una librerÃ­a o
 un agente hacia un Collector o hacia otro backend compatible.
 
-En la práctica, OTLP es importante porque:
+En la prÃ¡ctica, OTLP es importante porque:
 
 \begin{itemize}
 \tightlist
 \item
-  desacopla la instrumentación del destino final
+  desacopla la instrumentaciÃ³n del destino final
 \item
-  permite cambiar el backend sin reescribir la aplicación
+  permite cambiar el backend sin reescribir la aplicaciÃ³n
 \item
   facilita usar un Collector intermedio para enriquecer, filtrar o
-  reenviar señales
+  reenviar seÃ±ales
 \end{itemize}
 
 En este laboratorio OTLP se usa sobre todo para spans. El flujo mental
@@ -4178,16 +4186,16 @@ microservicio Spring Boot
   -> Jaeger
 \end{PlainCode}
 
-Si se decidiera usar OTLP también para métricas o logs, cambiaría el
-volumen de señales, la configuración del Collector y la necesidad de
-explicar con más detalle procesamiento, batching y exportadores
-múltiples.
+Si se decidiera usar OTLP tambiÃ©n para mÃ©tricas o logs, cambiarÃ­a el
+volumen de seÃ±ales, la configuraciÃ³n del Collector y la necesidad de
+explicar con mÃ¡s detalle procesamiento, batching y exportadores
+mÃºltiples.
 
-\subsection{Cómo habría sido una variante con OpenSearch}
+\subsection{CÃ³mo habrÃ­a sido una variante con OpenSearch}
 \label{como-habria-sido-una-variante-con-opensearch}
 
-Otra alternativa razonable habría sido sustituir Elasticsearch y Kibana
-por OpenSearch y OpenSearch Dashboards. Conceptualmente el flujo sería
+Otra alternativa razonable habrÃ­a sido sustituir Elasticsearch y Kibana
+por OpenSearch y OpenSearch Dashboards. Conceptualmente el flujo serÃ­a
 muy parecido:
 
 \begin{PlainCode}
@@ -4195,9 +4203,9 @@ microservicios -> logs JSON estructurados -> Filebeat / Fluent Bit
 -> OpenSearch -> OpenSearch Dashboards
 \end{PlainCode}
 
-Incluso podría combinarse con OpenTelemetry de forma más agresiva,
-utilizando el Collector para reenviar logs o métricas hacia un backend
-compatible. Un ejemplo conceptual de Collector para varias señales sería:
+Incluso podrÃ­a combinarse con OpenTelemetry de forma mÃ¡s agresiva,
+utilizando el Collector para reenviar logs o mÃ©tricas hacia un backend
+compatible. Un ejemplo conceptual de Collector para varias seÃ±ales serÃ­a:
 
 \begin{YamlCode}
 receivers:
@@ -4220,28 +4228,28 @@ service:
       exporters: [otlp/jaeger, debug]
 \end{YamlCode}
 
-Si el laboratorio hubiera ido por ese camino, lo que cambiaría de forma
-más visible sería:
+Si el laboratorio hubiera ido por ese camino, lo que cambiarÃ­a de forma
+mÃ¡s visible serÃ­a:
 
 \begin{itemize}
 \tightlist
 \item
-  el backend de logs y búsqueda
+  el backend de logs y bÃºsqueda
 \item
-  la interfaz de exploración de eventos
+  la interfaz de exploraciÃ³n de eventos
 \item
-  parte de las plantillas de índices, consultas y dashboards
+  parte de las plantillas de Ã­ndices, consultas y dashboards
 \item
-  la forma de explicar correlación entre logs y trazas
+  la forma de explicar correlaciÃ³n entre logs y trazas
 \end{itemize}
 
-En cambio, lo que \emph{no} cambiaría sería la necesidad de producir
-logs estructurados de calidad desde la aplicación.
+En cambio, lo que \emph{no} cambiarÃ­a serÃ­a la necesidad de producir
+logs estructurados de calidad desde la aplicaciÃ³n.
 
 \section{GitLab self-managed dentro de
 Minikube}\label{gitlab-self-managed-dentro-de-minikube}
 
-Esta decisión añade complejidad, pero también mucho valor formativo.
+Esta decisiÃ³n aÃ±ade complejidad, pero tambiÃ©n mucho valor formativo.
 
 Ventajas:
 
@@ -4262,16 +4270,16 @@ Costes:
 \item
   mayor consumo de recursos
 \item
-  más troubleshooting interno
+  mÃ¡s troubleshooting interno
 \item
-  más puntos de fallo que una solución SaaS
+  mÃ¡s puntos de fallo que una soluciÃ³n SaaS
 \end{itemize}
 
 \section{Runner en Kubernetes frente a runner en
 Windows}\label{runner-en-kubernetes-frente-a-runner-en-windows}
 
-Se probó conceptualmente la idea de runner en host, pero la mejor
-decisión para el laboratorio fue runner en Kubernetes.
+Se probÃ³ conceptualmente la idea de runner en host, pero la mejor
+decisiÃ³n para el laboratorio fue runner en Kubernetes.
 
 Ventajas:
 
@@ -4280,9 +4288,9 @@ Ventajas:
 \item
   menor dependencia del entorno local Windows
 \item
-  mejor integración con el clúster
+  mejor integraciÃ³n con el clÃºster
 \item
-  patrón más cercano a plataforma cloud-native
+  patrÃ³n mÃ¡s cercano a plataforma cloud-native
 \end{itemize}
 
 Inconvenientes:
@@ -4296,19 +4304,19 @@ Inconvenientes:
 \section{GitLab Container Registry frente a Harbor o
 Nexus}\label{gitlab-container-registry-frente-a-harbor-o-nexus}
 
-Para este laboratorio se eligió GitLab Container Registry porque:
+Para este laboratorio se eligiÃ³ GitLab Container Registry porque:
 
 \begin{itemize}
 \tightlist
 \item
-  ya existía GitLab
+  ya existÃ­a GitLab
 \item
-  la integración con CI es directa
+  la integraciÃ³n con CI es directa
 \item
   reduce piezas de infraestructura
 \end{itemize}
 
-Harbor o Nexus podrían tener sentido en otros contextos:
+Harbor o Nexus podrÃ­an tener sentido en otros contextos:
 
 \begin{itemize}
 \tightlist
@@ -4317,38 +4325,38 @@ Harbor o Nexus podrían tener sentido en otros contextos:
   plataforma
 \item
   Nexus, si el foco fuera repositorio universal de artefactos y no solo
-  imágenes
+  imÃ¡genes
 \end{itemize}
 
-\subsection{Qué es Harbor y en qué escenario tendría sentido}
+\subsection{QuÃ© es Harbor y en quÃ© escenario tendrÃ­a sentido}
 \label{que-es-harbor-y-en-que-escenario-tendria-sentido}
 
 Harbor es un registro de contenedores orientado a plataforma. Su foco no
 es ser un sistema completo de desarrollo como GitLab, sino especializarse
-en el gobierno de imágenes y artefactos OCI. En un entorno real suele
+en el gobierno de imÃ¡genes y artefactos OCI. En un entorno real suele
 tener sentido cuando el equipo quiere:
 
 \begin{itemize}
 \tightlist
 \item
-  separar el repositorio Git del registro de imágenes
+  separar el repositorio Git del registro de imÃ¡genes
 \item
-  gestionar políticas de seguridad, escaneos o replicación entre
+  gestionar polÃ­ticas de seguridad, escaneos o replicaciÃ³n entre
   entornos
 \item
-  usar un producto de plataforma común para varios equipos o varios
+  usar un producto de plataforma comÃºn para varios equipos o varios
   clusters
 \end{itemize}
 
-Si este laboratorio hubiera usado Harbor, la cadena CI/CD habría sido
-conceptualmente así:
+Si este laboratorio hubiera usado Harbor, la cadena CI/CD habrÃ­a sido
+conceptualmente asÃ­:
 
 \begin{PlainCode}
 GitLab -> GitLab Runner / Jenkins -> build de imagen -> push a Harbor
 -> Helm o Argo CD -> pull desde Harbor -> despliegue en Kubernetes
 \end{PlainCode}
 
-En Kubernetes, los cambios principales habrían sido:
+En Kubernetes, los cambios principales habrÃ­an sido:
 
 \begin{itemize}
 \tightlist
@@ -4361,7 +4369,7 @@ En Kubernetes, los cambios principales habrían sido:
   gestionar credenciales de push separadas del SCM
 \end{itemize}
 
-Un ejemplo de values habría sido:
+Un ejemplo de values habrÃ­a sido:
 
 \begin{YamlCode}
 image:
@@ -4372,12 +4380,12 @@ image:
     - name: harbor-registry-creds
 \end{YamlCode}
 
-\subsection{Qué es Nexus y por qué su papel sería distinto}
+\subsection{QuÃ© es Nexus y por quÃ© su papel serÃ­a distinto}
 \label{que-es-nexus-y-por-que-su-papel-seria-distinto}
 
-Nexus Repository tiene una orientación diferente. Aunque puede almacenar
-imágenes de contenedor, destaca sobre todo cuando una organización quiere
-un repositorio único de artefactos heterogéneos:
+Nexus Repository tiene una orientaciÃ³n diferente. Aunque puede almacenar
+imÃ¡genes de contenedor, destaca sobre todo cuando una organizaciÃ³n quiere
+un repositorio Ãºnico de artefactos heterogÃ©neos:
 
 \begin{itemize}
 \tightlist
@@ -4388,26 +4396,26 @@ un repositorio único de artefactos heterogéneos:
 \item
   paquetes PyPI
 \item
-  imágenes Docker u OCI
+  imÃ¡genes Docker u OCI
 \item
-  binarios y artefactos de distribución
+  binarios y artefactos de distribuciÃ³n
 \end{itemize}
 
-En un proyecto como este, Nexus habría tenido más sentido si el foco
-hubiera sido enseñar una cadena completa de gestión de artefactos, por
+En un proyecto como este, Nexus habrÃ­a tenido mÃ¡s sentido si el foco
+hubiera sido enseÃ±ar una cadena completa de gestiÃ³n de artefactos, por
 ejemplo:
 
 \begin{itemize}
 \tightlist
 \item
-  publicar librerías Java internas
+  publicar librerÃ­as Java internas
 \item
   cachear dependencias Maven
 \item
-  almacenar imágenes construidas por la pipeline
+  almacenar imÃ¡genes construidas por la pipeline
 \end{itemize}
 
-Un flujo conceptual con Nexus sería:
+Un flujo conceptual con Nexus serÃ­a:
 
 \begin{PlainCode}
 GitLab -> pipeline CI -> Maven package/deploy -> Nexus
@@ -4426,12 +4434,12 @@ Por tanto, Harbor y Nexus no son intercambiables de forma perfecta:
   artefactos
 \end{itemize}
 
-\subsection{Por qué GitLab Registry fue suficiente en este laboratorio}
+\subsection{Por quÃ© GitLab Registry fue suficiente en este laboratorio}
 \label{por-que-gitlab-registry-fue-suficiente-en-este-laboratorio}
 
-La elección de GitLab Container Registry no significa que Harbor o Nexus
+La elecciÃ³n de GitLab Container Registry no significa que Harbor o Nexus
 sean peores productos. Significa que, para este laboratorio, el
-equilibrio entre simplicidad y valor didáctico favorecía usar la pieza
+equilibrio entre simplicidad y valor didÃ¡ctico favorecÃ­a usar la pieza
 ya integrada en GitLab:
 
 \begin{itemize}
@@ -4439,40 +4447,40 @@ ya integrada en GitLab:
 \item
   menos componentes que desplegar
 \item
-  autenticación ya resuelta dentro de GitLab CI
+  autenticaciÃ³n ya resuelta dentro de GitLab CI
 \item
-  un flujo más corto para explicar build, push y deploy por SHA
+  un flujo mÃ¡s corto para explicar build, push y deploy por SHA
 \end{itemize}
 
-\section{Cómo encajarían Jenkins y Argo CD}
+\section{CÃ³mo encajarÃ­an Jenkins y Argo CD}
 \label{como-encajarian-jenkins-y-argo-cd}
 
-Una ampliación natural del laboratorio habría sido introducir Jenkins y
-Argo CD para aproximar más la arquitectura a entornos empresariales donde
+Una ampliaciÃ³n natural del laboratorio habrÃ­a sido introducir Jenkins y
+Argo CD para aproximar mÃ¡s la arquitectura a entornos empresariales donde
 CI y CD suelen desacoplarse.
 
-\subsection{Qué papel jugaría Jenkins}
+\subsection{QuÃ© papel jugarÃ­a Jenkins}
 \label{que-papel-jugaria-jenkins}
 
-Jenkins es un orquestador de automatización extremadamente flexible. En
-este laboratorio podría sustituir sobre todo la parte de ejecución de CI
+Jenkins es un orquestador de automatizaciÃ³n extremadamente flexible. En
+este laboratorio podrÃ­a sustituir sobre todo la parte de ejecuciÃ³n de CI
 que hoy resuelve GitLab CI:
 
 \begin{itemize}
 \tightlist
 \item
-  checkout del código
+  checkout del cÃ³digo
 \item
   build Maven
 \item
   tests
 \item
-  construcción de imágenes
+  construcciÃ³n de imÃ¡genes
 \item
   push al registry
 \end{itemize}
 
-El flujo quedaría, por ejemplo:
+El flujo quedarÃ­a, por ejemplo:
 
 \begin{PlainCode}
 GitLab (repositorio)
@@ -4480,10 +4488,10 @@ GitLab (repositorio)
   -> Jenkins pipeline
   -> build/test/package
   -> push a registry
-  -> actualización de manifiestos o values
+  -> actualizaciÃ³n de manifiestos o values
 \end{PlainCode}
 
-Un Jenkinsfile conceptual podría parecerse a:
+Un Jenkinsfile conceptual podrÃ­a parecerse a:
 
 \begin{PlainCode}
 pipeline {
@@ -4497,27 +4505,27 @@ pipeline {
 }
 \end{PlainCode}
 
-La ventaja de introducir Jenkins sería enseñar una herramienta muy común
-en industria. La desventaja sería aumentar bastante el número de piezas a
+La ventaja de introducir Jenkins serÃ­a enseÃ±ar una herramienta muy comÃºn
+en industria. La desventaja serÃ­a aumentar bastante el nÃºmero de piezas a
 operar en un laboratorio ya amplio.
 
-\subsection{Qué papel jugaría Argo CD}
+\subsection{QuÃ© papel jugarÃ­a Argo CD}
 \label{que-papel-jugaria-argo-cd}
 
-Argo CD pertenece al mundo GitOps. Su idea básica es que el estado
+Argo CD pertenece al mundo GitOps. Su idea bÃ¡sica es que el estado
 deseado del cluster se declara en Git, y Argo CD se encarga de compararlo
 continuamente con el estado real del cluster para sincronizar ambos.
 
-Si se introdujera en este proyecto, no sustituiría el repositorio Git ni
+Si se introdujera en este proyecto, no sustituirÃ­a el repositorio Git ni
 necesariamente el registry, sino la parte final del despliegue manual por
 Helm desde la pipeline.
 
-La arquitectura sería algo así:
+La arquitectura serÃ­a algo asÃ­:
 
 \begin{PlainCode}
-GitLab repo de aplicación -> CI construye imagen y publica tag
+GitLab repo de aplicaciÃ³n -> CI construye imagen y publica tag
 GitLab/Gitea repo de despliegue -> actualiza values con nuevo SHA
-Argo CD -> detecta cambio en Git -> aplica sincronización en Kubernetes
+Argo CD -> detecta cambio en Git -> aplica sincronizaciÃ³n en Kubernetes
 \end{PlainCode}
 
 Eso implica un cambio importante de modelo mental:
@@ -4530,7 +4538,7 @@ Eso implica un cambio importante de modelo mental:
   con Argo CD, la pipeline modifica Git y Argo CD reconcilia el cluster
 \end{itemize}
 
-\subsection{Qué sustituirían exactamente dentro del proyecto}
+\subsection{QuÃ© sustituirÃ­an exactamente dentro del proyecto}
 \label{que-sustituirian-exactamente-dentro-del-proyecto}
 
 En el laboratorio actual:
@@ -4548,23 +4556,23 @@ En una variante con Jenkins y Argo CD:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{GitLab} seguiría siendo el SCM
+  \textbf{GitLab} seguirÃ­a siendo el SCM
 \item
-  \textbf{Jenkins} sustituiría principalmente a GitLab CI como motor de
-  automatización
+  \textbf{Jenkins} sustituirÃ­a principalmente a GitLab CI como motor de
+  automatizaciÃ³n
 \item
-  \textbf{Argo CD} sustituiría la ejecución directa de deploy desde la
+  \textbf{Argo CD} sustituirÃ­a la ejecuciÃ³n directa de deploy desde la
   pipeline por un modelo GitOps
 \item
-  \textbf{Harbor o GitLab Registry} podrían seguir siendo el registro de
-  imágenes
+  \textbf{Harbor o GitLab Registry} podrÃ­an seguir siendo el registro de
+  imÃ¡genes
 \end{itemize}
 
-\subsection{Qué valor didáctico tendría esa variante}
+\subsection{QuÃ© valor didÃ¡ctico tendrÃ­a esa variante}
 \label{que-valor-didactico-tendria-esa-variante}
 
-Introducir Jenkins y Argo CD sería muy interesante para explicar una
-arquitectura más próxima a ciertos entornos corporativos:
+Introducir Jenkins y Argo CD serÃ­a muy interesante para explicar una
+arquitectura mÃ¡s prÃ³xima a ciertos entornos corporativos:
 
 \begin{itemize}
 \tightlist
@@ -4573,44 +4581,45 @@ arquitectura más próxima a ciertos entornos corporativos:
 \item
   registry desacoplado del repositorio Git
 \item
-  despliegue controlado por reconciliación GitOps
+  despliegue controlado por reconciliaciÃ³n GitOps
 \end{itemize}
 
-Sin embargo, también introduciría un coste claro:
+Sin embargo, tambiÃ©n introducirÃ­a un coste claro:
 
 \begin{itemize}
 \tightlist
 \item
-  más complejidad operativa
+  mÃ¡s complejidad operativa
 \item
-  más credenciales y webhooks
+  mÃ¡s credenciales y webhooks
 \item
-  más repositorios o ramas de despliegue
+  mÃ¡s repositorios o ramas de despliegue
 \item
-  más tiempo dedicado a integrar herramientas en lugar de estudiar las
-  señales observacionales
+  mÃ¡s tiempo dedicado a integrar herramientas en lugar de estudiar las
+  seÃ±ales observacionales
 \end{itemize}
 
-Por eso se consideró una buena línea de evolución del laboratorio, pero
-no una pieza imprescindible para la primera versión funcional.
+Por eso se considerÃ³ una buena lÃ­nea de evoluciÃ³n del laboratorio, pero
+no una pieza imprescindible para la primera versiÃ³n funcional.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 \chapter{Mensaje final del
 proyecto}\label{mensaje-final-del-proyecto}
 
-La idea central de este laboratorio puede resumirse así:
+La idea central de este laboratorio puede resumirse asÃ­:
 
 \begin{quote}
-construir una plataforma pequeña, pero suficientemente realista, para
+construir una plataforma pequeÃ±a, pero suficientemente realista, para
 aprender a desplegar, observar, diagnosticar y automatizar
 microservicios de forma integral.
 \end{quote}
 
-Ese objetivo se ha cumplido. El siguiente paso ya no es ``tener más
-herramientas'', sino documentar bien lo construido, enseñarlo con
-claridad y defender técnicamente las decisiones tomadas.
+Ese objetivo se ha cumplido. El siguiente paso ya no es ``tener mÃ¡s
+herramientas'', sino documentar bien lo construido, enseÃ±arlo con
+claridad y defender tÃ©cnicamente las decisiones tomadas.
 
 \end{document}
+
 
 
 

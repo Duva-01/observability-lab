@@ -1,8 +1,8 @@
-lang: spanish
-title: "Laboratorio de Observabilidad y CI/CD para Microservicios con Kubernetes y GitLab"
-subtitle: "Diseño, implementación, observabilidad y automatización de una plataforma local didáctica orientada a perfiles junior DevOps"
-author: "Proyecto personal de ingeniería orientado a observabilidad y plataforma"
-date: ""
+﻿lang: spanish
+title: "Observability Lab"
+subtitle: "Laboratorio de observabilidad y CI/CD para microservicios con Kubernetes y GitLab"
+author: "David Martinez Diaz"
+date: "Abril 2026"
 documentclass: report
 classoption:
   - a4paper
